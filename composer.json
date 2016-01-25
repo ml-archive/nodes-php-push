@@ -1,0 +1,33 @@
+{
+    "name": "nodes/push",
+    "description": "Push manager made for Laravel",
+    "keywords": [
+        "nodes",
+        "push manager",
+        "push notifications",
+        "push messages",
+        "laravel"
+    ],
+    "license": "MIT",
+    "homepage": "http://nodesagency.com",
+    "authors": [
+        {
+            "name": "Morten Rugaard",
+            "email": "moru@nodes.dk",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "laravel/framework": "5.1.*||5.2.*",
+        "nodes/core": "^0.1",
+        "parse/php-sdk": "~1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nodes\\Push\\": "src/"
+        },
+        "files": [
+            "src/Support/Helpers/Push.php"
+        ]
+    }
+}
