@@ -227,6 +227,34 @@ class Parse implements NodesPushProviderContract
     }
 
     /**
+     * Set title of push notification (Android only)
+     *
+     * @author Morten Rugaard <moru@nodes.dk>
+     *
+     * @access public
+     * @param  string $title
+     * @return $this
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+    /**
+     * Retrieve title of push notification (Android only)
+     *
+     * @author Morten Rugaard <moru@nodes.dk>
+     *
+     * @access public
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
      * Set badge count
      *
      * @author Morten Rugaard <moru@nodes.dk>
@@ -462,6 +490,11 @@ class Parse implements NodesPushProviderContract
         // Add extra data to push notification
         if (!empty($this->getExtra())) {
             $data['extra'] = $this->getExtra();
+        }
+
+        // Set title of push notification (Android only)
+        if (!empty($this->getTitle())) {
+            $data['title'] = $this->getTitle();
         }
 
         // Set badge count of push notification

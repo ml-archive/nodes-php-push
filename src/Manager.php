@@ -116,6 +116,21 @@ class Manager
     }
 
     /**
+     * Set title of push message (Android only)
+     *
+     * @author Morten Rugaard <moru@nodes.dk>
+     *
+     * @access public
+     * @param  string $title
+     * @return $this
+     */
+    public function setTitle($title)
+    {
+        $this->provider->setTitle($title);
+        return $this;
+    }
+
+    /**
      * Set badge count
      *
      * @author Morten Rugaard <moru@nodes.dk>

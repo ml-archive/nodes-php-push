@@ -65,6 +65,17 @@ interface ProviderInterface
     public function addExtra(array $data);
 
     /**
+     * Set title of push notification (Android only)
+     *
+     * @author Morten Rugaard <moru@nodes.dk>
+     *
+     * @access public
+     * @param  string $title
+     * @return $this
+     */
+    public function setTitle($title);
+
+    /**
      * Set badge count
      *
      * @author Morten Rugaard <moru@nodes.dk>
