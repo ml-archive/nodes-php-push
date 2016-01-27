@@ -65,6 +65,13 @@ class Parse implements NodesPushProviderContract
     protected $extra = [];
 
     /**
+     * Title of push notification (Android only)
+     *
+     * @var string
+     */
+    protected $title = null;
+
+    /**
      * Badge count
      *
      * @var integer|null
