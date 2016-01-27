@@ -5,23 +5,28 @@ if (!function_exists('push_send')) {
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @param  string  $message
-     * @param  array   $channels
-     * @param  array   $extra
-     * @param  string  $sound
-     * @param  boolean $silent
-     * @param  boolean $contentAvailable
+     * @param  string   $message
+     * @param  array    $channels
+     * @param  \Closure $callback
      * @return mixed
      */
-    function push_send($message, $channels = [], $extra = [], $sound = 'default', $silent = false, $contentAvailable = false)
+    function push_send($message, $channels = [], \Closure $callback = null)
     {
-        return \NodesPush::setChannels($channels)
-                         ->setMessage($message)
-                         ->setExtra($extra)
-                         ->setSound($sound)
-                         ->setSilence($silent)
-                         ->setContentAvailable($contentAvailable)
-                         ->send();
+        // Retrieve push manager
+        $pushManager = app('nodes.push');
+
+        // Set channels and message of push notification
+        $pushManager->setChannels((array) $channels)
+                    ->setMessage($message);
+
+        // If we have a valid callback, we'll execute
+        // that given callback with the push manager as argument
+        if ($callback instanceof \Closure) {
+            call_user_func($callback, $pushManager);
+        }
+
+        // Send push notification
+        return $pushManager->send();
     }
 }
 
@@ -31,24 +36,33 @@ if (!function_exists('push_queue')) {
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @param  string  $message
-     * @param  array   $channels
-     * @param  array   $extra
-     * @param  string  $sound
-     * @param  boolean $silent
-     * @param  boolean $contentAvailable
-     * @param  string  $queue
+     * @param  string   $message
+     * @param  array    $channels
+     * @param  \Closure $callback
+     * @param  string   $queue
      * @return mixed
      */
-    function push_queue($message, $channels = [], $extra = [], $sound = null, $silent = false, $contentAvailable = false, $queue = null)
+    function push_queue($message, $channels = [], \Closure $callback, $queue = null)
     {
-        return \NodesPush::setQueueName($queue)
-                         ->setChannels($channels)
-                         ->setMessage($message)
-                         ->setExtra($extra)
-                         ->setSound($sound)
-                         ->setSilence($silent)
-                         ->setContentAvailable($contentAvailable)
-                         ->queue();
+        // Retrieve push manager
+        $pushManager = app('nodes.push');
+
+        // Set channels and message of push notification
+        $pushManager->setChannels((array) $channels)
+                    ->setMessage($message);
+
+        // Set name of queue, where we'll add the push notification to
+        if (!empty($queue)) {
+            $pushManager->setQueueName($queue);
+        }
+
+        // If we have a valid callback, we'll execute
+        // that given callback with the push manager as argument
+        if ($callback instanceof \Closure) {
+            call_user_func($callback, $pushManager);
+        }
+
+        // Queue push notification
+        return $pushManager->queue();
     }
 }
