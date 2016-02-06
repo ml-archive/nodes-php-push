@@ -1,7 +1,7 @@
 <?php
 namespace Nodes\Push;
 
-use Nodes\AbstractServiceProvider as NodesAbstractServiceProvider;
+use Nodes\AbstractServiceProvider;
 use Nodes\Push\Contracts\ProviderInterface as NodesPushProviderContract;
 
 /**
@@ -9,7 +9,7 @@ use Nodes\Push\Contracts\ProviderInterface as NodesPushProviderContract;
  *
  * @package Nodes\Push
  */
-class ServiceProvider extends NodesAbstractServiceProvider
+class ServiceProvider extends AbstractServiceProvider
 {
     /**
      * Package name
@@ -17,6 +17,24 @@ class ServiceProvider extends NodesAbstractServiceProvider
      * @var string
      */
     protected $package = 'push';
+
+    /**
+     * Facades to install
+     *
+     * @var array
+     */
+    protected $facades = [
+        'NodesPush' => \Nodes\Push\Support\Facades\Push::class
+    ];
+
+    /**
+     * Array of configs to copy
+     *
+     * @var array
+     */
+    protected $configs = [
+        'config/push.php' => 'config/nodes/push.php'
+    ];
 
     /**
      * Register the service provider
@@ -27,6 +45,22 @@ class ServiceProvider extends NodesAbstractServiceProvider
      * @return void
      */
     public function register()
+    {
+        parent::register();
+
+        $this->registerPushManager();
+
+    }
+
+    /**
+     * Register push manager
+     *
+     * @author Morten Rugaard <moru@nodes.dk>
+     *
+     * @access public
+     * @return void
+     */
+    public function registerPushManager()
     {
         $this->app->singleton('nodes.push', function ($app) {
             // Retrieve push provider
