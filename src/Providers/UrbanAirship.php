@@ -617,6 +617,20 @@ class UrbanAirship implements NodesPushProviderContract
     }
 
     /**
+     * Alias of setApplication()
+     *
+     * @author Morten Rugaard <moru@nodes.dk>
+     *
+     * @access public
+     * @param  string $appGroupName
+     * @return $this
+     */
+    public  function setApplicationGroup($appGroupName)
+    {
+        return $this->setApplication($appGroupName);
+    }
+
+    /**
      * Retrieve application credentials
      *
      * @author Morten Rugaard <moru@nodes.dk>
