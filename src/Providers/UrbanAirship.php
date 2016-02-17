@@ -265,6 +265,21 @@ class UrbanAirship implements NodesPushProviderContract
     }
 
     /**
+     * addAlias
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     *
+     * @access public
+     * @param string $alias
+     * @return $this
+     */
+    public function addAlias(string $alias)
+    {
+        $this->aliases[] = $alias;
+        return $this;
+    }
+
+    /**
      * Retrieve push aliases
      *
      * @author Morten Rugaard <moru@nodes.dk>
