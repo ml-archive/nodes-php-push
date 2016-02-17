@@ -42,7 +42,7 @@ if (!function_exists('push_queue')) {
      * @param  string   $queue
      * @return mixed
      */
-    function push_queue($message, $channels = [], \Closure $callback, $queue = null)
+    function push_queue($message, $channels = [], \Closure $callback = null, $queue = null)
     {
         // Retrieve push manager
         $pushManager = app('nodes.push');
