@@ -164,16 +164,6 @@ class UrbanAirship implements NodesPushProviderContract
 
         // Set default used app
         $this->useApp = $defaultApp;
-
-        // Initialize HTTP Client
-        $this->httpClient = new HttpClient([
-            'base_uri' => $this->url,
-            'headers' => [
-                'Accept' => sprintf('application/vnd.urbanairship+%s; version=%d;', $this->format, $this->version),
-                'Content-Type' => sprintf('application/%s', $this->format),
-            ],
-            'timeout' => 30
-        ]);
     }
 
     /**
@@ -728,7 +718,7 @@ class UrbanAirship implements NodesPushProviderContract
 
             try {
                 // Send request to Urban Airship
-                $response = $this->httpClient->post('/api/push', [
+                $response = $this->getHttpClient()->post('/api/push', [
                     'body' => json_encode($this->buildPushData()),
                     'auth' => [$credentials['app_key'], $credentials['master_secret']]
                 ]);
@@ -928,5 +918,29 @@ class UrbanAirship implements NodesPushProviderContract
         }
 
         return $android;
+    }
+
+    /**
+     * Retrieve HTTP client
+     *
+     * @author Morten Rugaard <moru@nodes.dk>
+     *
+     * @access public
+     * @return \GuzzleHttp\Client
+     */
+    public function getHttpClient()
+    {
+        if (!is_null($this->httpClient)) {
+            return $this->httpClient;
+        }
+
+        return $this->httpClient = new HttpClient([
+            'base_uri' => $this->url,
+            'headers' => [
+                'Accept' => sprintf('application/vnd.urbanairship+%s; version=%d;', $this->format, $this->version),
+                'Content-Type' => sprintf('application/%s', $this->format),
+            ],
+            'timeout' => 30
+        ]);
     }
 }
