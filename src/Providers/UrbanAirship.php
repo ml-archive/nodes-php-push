@@ -803,8 +803,11 @@ class UrbanAirship implements NodesPushProviderContract
         }
 
         // Add target aliases
+        // Add target aliases
         if (!empty($this->getAliases())) {
-            $audience['alias'] = $this->getAliases();
+            foreach ($this->getAliases() as $alias) {
+                $audience['alias'][] = (string) $alias;
+            }
         }
 
         return $audience;
