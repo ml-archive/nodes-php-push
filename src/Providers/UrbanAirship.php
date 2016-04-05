@@ -786,7 +786,7 @@ class UrbanAirship implements NodesPushProviderContract
         $data['audience'] = !empty($this->buildAudienceData()) ? $this->buildAudienceData() : 'all';
 
         // Set message
-        $data['notification']['alert'] = 'test';//$this->getMessage();
+        $data['notification']['alert'] = $this->getMessage();
 
         // Set iOS data
         if ($this->isDeviceTargeted('ios') && !empty($this->buildIOSData())) {
@@ -940,7 +940,6 @@ class UrbanAirship implements NodesPushProviderContract
 
         // Set extra data of push notification
         if (!empty($this->getExtra())) {
-            #$wns['badge']['value'] = 1;
             $wns['toast']['binding']['template'] = 'ToastText01';
             $wns['toast']['binding']['text'] = [
                 json_encode($this->getExtra())
