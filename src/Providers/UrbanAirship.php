@@ -798,6 +798,11 @@ class UrbanAirship implements NodesPushProviderContract
             $data['notification']['android'] = $this->buildAndroidData();
         }
 
+        // Set Windows data
+        if ($this->isDeviceTargeted('wns') && !empty($this->buildWnsData())) {
+            $data['notification']['wns'] = $this->buildWnsData();
+        }
+
         // Set device types
         $data['device_types'] = !empty($this->getDeviceTypes()) ? $this->getDeviceTypes() : 'all';
 
@@ -885,7 +890,7 @@ class UrbanAirship implements NodesPushProviderContract
      * @author Morten Rugaard <moru@nodes.dk>
      *
      * @access protected
-     * @return void
+     * @return array
      */
     protected function buildAndroidData()
     {
@@ -894,7 +899,7 @@ class UrbanAirship implements NodesPushProviderContract
 
         // Set title of push notification (Android only)
         if (!empty($this->getTitle())) {
-            $data['title'] = $this->getTitle();
+            $android['title'] = $this->getTitle();
         }
 
         // Set extra data of push notification
@@ -918,6 +923,29 @@ class UrbanAirship implements NodesPushProviderContract
         }
 
         return $android;
+    }
+
+    /**
+     * buildWnsData
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     *
+     * @access public
+     * @return array
+     */
+    protected function buildWnsData()
+    {
+        // Data container
+        $wns = [];
+
+        // Set extra data of push notification
+        if (!empty($this->getExtra())) {
+            $wns['toast']['binding']['template'] = 'ToastText01';
+            $wns['toast']['binding']['text'] = $this->message;
+            $wns['toast']['launch']= json_encode($this->extra);
+        }
+
+        return $wns;
     }
 
     /**
