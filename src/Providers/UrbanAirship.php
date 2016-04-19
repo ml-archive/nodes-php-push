@@ -941,9 +941,8 @@ class UrbanAirship implements NodesPushProviderContract
         // Set extra data of push notification
         if (!empty($this->getExtra())) {
             $wns['toast']['binding']['template'] = 'ToastText01';
-            $wns['toast']['binding']['text'] = [
-                json_encode($this->getExtra())
-            ];
+            $wns['toast']['binding']['text'] = $this->message;
+            $wns['toast']['launch']= json_encode($this->extra);
         }
 
         return $wns;
