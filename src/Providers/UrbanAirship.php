@@ -3,6 +3,7 @@ namespace Nodes\Push\Providers;
 
 use Exception;
 use GuzzleHttp\Client as HttpClient;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\MessageBag;
 use Nodes\Push\Contracts\ProviderInterface as NodesPushProviderContract;
 use Nodes\Push\Exceptions\ApplicationNotFoundException;
@@ -225,15 +226,15 @@ class UrbanAirship implements NodesPushProviderContract
     }
 
     /**
-     * setAlias
+     * Set alias
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
      * @access public
-     * @param string $alias
+     * @param  string $alias
      * @return $this
      */
-    public function setAlias(string $alias)
+    public function setAlias($alias)
     {
         $this->aliases = [$alias];
         return $this;
@@ -255,15 +256,15 @@ class UrbanAirship implements NodesPushProviderContract
     }
 
     /**
-     * addAlias
+     * Add alias
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
      * @access public
-     * @param string $alias
+     * @param  string $alias
      * @return $this
      */
-    public function addAlias(string $alias)
+    public function addAlias($alias)
     {
         $this->aliases[] = $alias;
         return $this;
@@ -716,6 +717,12 @@ class UrbanAirship implements NodesPushProviderContract
                 continue;
             }
 
+            // If credentials are invalid
+            // we'll skip the app and move on.
+            if (!$this->validateCredentials($appName, $credentials)) {
+                continue;
+            }
+
             try {
                 // Send request to Urban Airship
                 $response = $this->getHttpClient()->post('/api/push', [
@@ -946,6 +953,28 @@ class UrbanAirship implements NodesPushProviderContract
         }
 
         return $wns;
+    }
+
+    /**
+     * Validate push application credentials
+     *
+     * @author Morten Rugaard <moru@nodes.dk>
+     *
+     * @access protetected
+     * @param  string $appName
+     * @param  array  $credentials
+     * @return boolean
+     */
+    protected function validateCredentials($appName, array $credentials)
+    {
+        // If one or more required credentials are missing
+        // we'll have to "invalidate" that app and notify about it in our logs
+        if (empty($credentials['app_key']) || empty($credentials['app_secret']) || empty($credentials['master_secret'])) {
+            Log::error(sprintf('Invalid credentials for Push application [%s]', $appName));
+            return false;
+        }
+
+        return true;
     }
 
     /**
