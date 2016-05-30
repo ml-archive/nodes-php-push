@@ -6,7 +6,8 @@
         "push manager",
         "push notifications",
         "push messages",
-        "laravel"
+        "laravel",
+        "urban airship"
     ],
     "license": "MIT",
     "homepage": "http://nodesagency.com",
