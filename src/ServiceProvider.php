@@ -12,29 +12,19 @@ use Nodes\Push\Contracts\ProviderInterface as NodesPushProviderContract;
 class ServiceProvider extends AbstractServiceProvider
 {
     /**
-     * Package name
+     * Boot the service provider
      *
-     * @var string
+     * @author Morten Rugaard <moru@nodes.dk>
+     *
+     * @access public
+     * @return void
      */
-    protected $package = 'push';
+    public function boot()
+    {
+        parent::boot();
 
-    /**
-     * Facades to install
-     *
-     * @var array
-     */
-    protected $facades = [
-        'NodesPush' => \Nodes\Push\Support\Facades\Push::class
-    ];
-
-    /**
-     * Array of configs to copy
-     *
-     * @var array
-     */
-    protected $configs = [
-        'config/push.php' => 'config/nodes/push.php'
-    ];
+        $this->publishGroups();
+    }
 
     /**
      * Register the service provider
@@ -46,10 +36,23 @@ class ServiceProvider extends AbstractServiceProvider
      */
     public function register()
     {
-        parent::register();
-
         $this->registerPushManager();
+    }
 
+    /**
+     * Register publish groups
+     *
+     * @author Morten Rugaard <moru@nodes.dk>
+     *
+     * @access protected
+     * @return void
+     */
+    protected function publishGroups()
+    {
+        // Config files
+        $this->publishes([
+            __DIR__ . '/../config/push.php' => config_path('nodes/push.php'),
+        ], 'config');
     }
 
     /**
