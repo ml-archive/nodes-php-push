@@ -36,8 +36,6 @@ class ServiceProvider extends AbstractServiceProvider
      */
     public function register()
     {
-        parent::register();
-
         $this->registerPushManager();
     }
 
