@@ -64,27 +64,17 @@ interface ProviderInterface
      */
     public function addExtra(array $data);
 
-    /**
-     * Set title of push notification (Android only)
-     *
-     * @author Morten Rugaard <moru@nodes.dk>
-     *
-     * @access public
-     * @param  string $title
-     * @return $this
-     */
-    public function setTitle($title);
 
     /**
-     * Set badge count
+     * setBadge
      *
-     * @author Morten Rugaard <moru@nodes.dk>
+     * @author Casper Rasmussen <cr@nodes.dk>
      *
      * @access public
-     * @param  integer
+     * @param $badge
      * @return $this
      */
-    public function setBadgeCount($count);
+    public function setBadge($badge);
 
     /**
      * Set sound of push notification
@@ -131,7 +121,7 @@ interface ProviderInterface
      * @param  string $app
      * @return $this
      */
-    public function setApplication($app);
+    public function setAppGroup($app);
 
     /**
      * Send push message
@@ -152,5 +142,5 @@ interface ProviderInterface
      * @return bool
      * @throws TODO
      */
-    public function enqueue();
+    public function sendAsync();
 }
