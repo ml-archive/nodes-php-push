@@ -3,6 +3,7 @@ namespace Nodes\Push;
 
 use Nodes\AbstractServiceProvider;
 use Nodes\Push\Contracts\ProviderInterface as NodesPushProviderContract;
+use Nodes\Push\Exceptions\InvalidPushProviderException;
 
 /**
  * Class ServiceProvider
@@ -15,14 +16,11 @@ class ServiceProvider extends AbstractServiceProvider
      * Boot the service provider
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     *
      * @access public
      * @return void
      */
     public function boot()
     {
-        parent::boot();
-
         $this->publishGroups();
     }
 
@@ -30,7 +28,6 @@ class ServiceProvider extends AbstractServiceProvider
      * Register the service provider
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     *
      * @access public
      * @return void
      */
@@ -43,7 +40,6 @@ class ServiceProvider extends AbstractServiceProvider
      * Register publish groups
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     *
      * @access protected
      * @return void
      */
@@ -59,25 +55,24 @@ class ServiceProvider extends AbstractServiceProvider
      * Register push manager
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     *
      * @access public
      * @return void
      */
     public function registerPushManager()
     {
-        $this->app->singleton('nodes.push', function ($app) {
+        $this->app->singleton('nodes.push', function() {
             // Retrieve push provider
             $provider = prepare_config_instance(config('nodes.push.provider'));
 
             // Validate push provider
             if (!$provider instanceof NodesPushProviderContract) {
-                throw new Exception('Invalid Push Provider. Not implementing Push contract.');
+                throw new InvalidPushProviderException($provider);
             }
 
             return new Manager($provider);
         });
 
-        $this->app->bind(Manager::class, function ($app) {
+        $this->app->bind(Manager::class, function($app) {
             return $app['nodes.push'];
         });
     }
@@ -86,7 +81,6 @@ class ServiceProvider extends AbstractServiceProvider
      * Get the services provided by the provider
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     *
      * @access public
      * @return array
      */

@@ -23,6 +23,10 @@
         "nodes/core": "^1.0",
         "parse/php-sdk": "~1.0"
     },
+    "require-dev" : {
+        "phpunit/phpunit": "^5.4",
+        "orchestra/testbench": "~3.0"
+    },
     "autoload": {
         "psr-4": {
             "Nodes\\Push\\": "src/"

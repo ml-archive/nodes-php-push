@@ -11,19 +11,14 @@ use Nodes\Exceptions\Exception as NodesException;
 class SendPushFailedException extends NodesException
 {
     /**
-     * Exception constructor
+     * SendPushFailedException constructor
      *
-     * @author Morten Rugaard <moru@nodes.dk>
-     *
+     * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
-     * @param  string  $message   Error message
-     * @param  integer $code      Error code
-     * @param  array   $headers   List of headers
-     * @param  boolean $report    Wether or not exception should be reported
-     * @param  string  $severity  Options: "fatal", "error", "warning", "info"
+     * @param string $message
      */
-    public function __construct($message, $code = 500, $headers = [], $report = false, $severity = 'error')
+    public function __construct($message)
     {
-        parent::__construct($message, $code, $headers, $report, $severity);
+        parent::__construct($message, 500);
     }
 }

@@ -143,25 +143,19 @@ class UrbanAirship implements NodesPushProviderContract
      */
     protected $expiry = null;
 
-    /**
-     * UrbanAirship constructor
-     *
-     * @author Morten Rugaard <moru@nodes.dk>
-     *
-     * @access public
-     * @param  array  $appGroups
-     * @param  string $defaultApp
-     * @throws \Nodes\Push\Exceptions\ApplicationNotFoundException
-     */
-    public function __construct(array $appGroups = [], $defaultApp = null)
-    {
-        // Set Urban Airship app gorups
-        $this->appGroups = $appGroups;
 
-        // Set default Urban Airship app
-        if (!array_key_exists($defaultApp, $this->appGroups)) {
-            throw new ApplicationNotFoundException('Default application not found in list of registered Urban Airship app groups');
-        }
+    public function __construct(array $config = [])
+    {
+
+//
+//        // Set Urban Airship app gorups
+//        $this->appGroups = $appGroups;
+//
+//        // Set default Urban Airship app
+//        if (!array_key_exists($defaultApp, $this->appGroups)) {
+//            throw new ApplicationNotFoundException(sprintf('Default app [%s] was not found in list of '))
+//            throw new ApplicationNotFoundException('Default application not found in list of registered Urban Airship app groups');
+//        }
 
         // Set default used app
         $this->useApp = $defaultApp;
