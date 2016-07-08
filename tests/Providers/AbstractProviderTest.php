@@ -15,6 +15,24 @@ class AbstractProviderTest extends Orchestra\Testbench\TestCase
         ];
     }
 
+    public function testIosContentAvailableError()
+    {
+        $abstractProvider = $this->getProvider();
+        $this->expectException(\Throwable::class);
+        $abstractProvider->setIosContentAvailable([]);
+    }
+
+    public function testIosContentAvailableSuccess()
+    {
+        $abstractProvider = $this->getProvider();
+        $abstractProvider->setIosContentAvailable(true);
+
+        $this->assertSame(true, $abstractProvider->isIosContentAvailable());
+
+        $abstractProvider->setIosContentAvailable(false);
+        $this->assertSame(false, $abstractProvider->isIosContentAvailable());
+    }
+
     public function testSetSoundError()
     {
         $abstractProvider = $this->getProvider();

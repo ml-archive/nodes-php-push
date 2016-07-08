@@ -146,11 +146,24 @@ interface ProviderInterface
      */
     public function getSound();
 
-//
-//    ///////////////////////////////////////
+    /**
+     * setIosContentAvailable, iOS-8 feature to sent push notifications without they go in notification center
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @param bool $iosContentAvailable
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function setIosContentAvailable(bool $iosContentAvailable) : ProviderInterface;
 
-//    public function setSound($sound);
-
+    /**
+     * isIosContentAvailable
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return bool
+     */
+    public function isIosContentAvailable() : bool;
 //
 //    /**
 //     * Set Content-Available state (iOS only)

@@ -54,6 +54,11 @@ abstract class AbstractProvider implements ProviderInterface
     protected $sound;
 
     /**
+     * @var bool
+     */
+    protected $iosContentAvailable = false;
+
+    /**
      * AbstractProvider constructor
      *
      * @author Casper Rasmussen <cr@nodes.dk>
@@ -306,5 +311,32 @@ abstract class AbstractProvider implements ProviderInterface
     public function getSound()
     {
         return $this->sound;
+    }
+
+    /**
+     * setIosContentAvailable
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @param bool $iosContentAvailable
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function setIosContentAvailable(bool $iosContentAvailable) : ProviderInterface
+    {
+        $this->iosContentAvailable = $iosContentAvailable;
+
+        return $this;
+    }
+
+    /**
+     * isIosContentAvailable
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return bool
+     */
+    public function isIosContentAvailable() : bool
+    {
+        return $this->iosContentAvailable;
     }
 }
