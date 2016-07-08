@@ -12,6 +12,13 @@ class UrbanAirshipV3Test extends Orchestra\Testbench\TestCase
         ];
     }
 
+    public function testSetBadgeSuccess() {
+        $urbanAirshipV3 = $this->getProvider();
+        $urbanAirshipV3->setMessage('message');
+
+        $this->assertSame('message', $urbanAirshipV3->getMessage());
+    }
+
     public function testSetMessageError() {
         $urbanAirshipV3 = $this->getProvider();
         $this->expectException(\Throwable::class);

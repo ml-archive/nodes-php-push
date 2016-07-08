@@ -53,7 +53,6 @@ interface ProviderInterface
      * getChannels for segmented push
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     *
      * @access public
      * @return array
      */
@@ -74,16 +73,15 @@ interface ProviderInterface
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
-     * @return string
+     * @return string|null
      */
-    public function getMessage() : string;
+    public function getMessage();
 
     /**
      * setExtra, the payload of the push
      * Remember there is limits for size of push
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     *
      * @access pu
      * @param array $extra
      * @return \Nodes\Push\Contracts\ProviderInterface
@@ -95,11 +93,30 @@ interface ProviderInterface
      * getExtra
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     *
      * @access public
      * @return array
      */
     public function getExtra() : array;
+
+    /**
+     * setBadge
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @param mixed $badge
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     * @throws \Nodes\Push\Exceptions\InvalidArgumentException
+     */
+    public function setBadge($badge) : ProviderInterface;
+
+    /**
+     * getBadge
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return null|int|string
+     */
+    public function getBadge();
 //
 //    ///////////////////////////////////////
 

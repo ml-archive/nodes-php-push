@@ -44,6 +44,11 @@ abstract class AbstractProvider implements ProviderInterface
     private $extra = [];
 
     /**
+     * @var null|int|string
+     */
+    private $badge;
+
+    /**
      * AbstractProvider constructor
      *
      * @author Casper Rasmussen <cr@nodes.dk>
@@ -182,9 +187,9 @@ abstract class AbstractProvider implements ProviderInterface
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
-     * @return string
+     * @return string|null
      */
-    public function getMessage() : string
+    public function getMessage()
     {
         return $this->message;
     }
@@ -202,12 +207,8 @@ abstract class AbstractProvider implements ProviderInterface
     {
         // Make sure channels are strings
         foreach ($extra as $key => $value) {
-            if (is_array($value)) {
-                throw new InvalidArgumentException(sprintf('Extra key [%s] was an array', $key));
-            }
-
-            if (is_object($value)) {
-                throw new InvalidArgumentException(sprintf('Extra key [%s] was an object', $key));
+            if (!is_scalar($value)) {
+                throw new InvalidArgumentException(sprintf('Extra key [%s] was an array/object', $key));
             }
         }
 
@@ -226,5 +227,38 @@ abstract class AbstractProvider implements ProviderInterface
     public function getExtra() : array
     {
         return $this->extra;
+    }
+
+    /**
+     * setBadge
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     *
+     * @access public
+     * @param mixed $badge
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     * @throws \Nodes\Push\Exceptions\InvalidArgumentException
+     */
+    public function setBadge($badge) : ProviderInterface
+    {
+        if (!is_scalar($badge)) {
+            throw new InvalidArgumentException('The passed badge was an array/object');
+        }
+
+        $this->badge = $badge;
+
+        return $this;
+    }
+
+    /**
+     * getBadge
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return null|int|string
+     */
+    public function getBadge()
+    {
+        return $this->badge;
     }
 }

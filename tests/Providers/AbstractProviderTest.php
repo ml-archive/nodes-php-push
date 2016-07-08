@@ -15,33 +15,65 @@ class AbstractProviderTest extends Orchestra\Testbench\TestCase
         ];
     }
 
-    public function testSetExtraErrorObject() {
+    public function testSetBadgeError()
+    {
+        $urbanAirshipV3 = $this->getProvider();
+        $this->expectException(InvalidArgumentException::class);
+        $urbanAirshipV3->setBadge([]);
+
+        $this->expectException(InvalidArgumentException::class);
+        $urbanAirshipV3->setBadge($urbanAirshipV3);
+    }
+
+    /**
+     * @dataProvider setBadgeSuccessProviderSuccess
+     */
+    public function testSetBadgeSuccess($a, $b, $expect)
+    {
+        $urbanAirshipV3 = $this->getProvider();
+        $urbanAirshipV3->setBadge($a);
+        $this->assertSame($a, $urbanAirshipV3->getBadge());
+    }
+
+    public function setBadgeSuccessProviderSuccess()
+    {
+        return [
+            [1, 0, true],
+            ['1', 0, true],
+            ['auto', 0, true],
+        ];
+    }
+
+    public function testSetExtraErrorObject()
+    {
         $abstractProvider = $this->getProvider();
         $this->expectException(InvalidArgumentException::class);
         $extra = [
             'key' => [
-                'key2' => $abstractProvider
-            ]
+                'key2' => $abstractProvider,
+            ],
         ];
 
         $abstractProvider->setExtra($extra);
     }
 
-    public function testSetExtraErrorArray() {
+    public function testSetExtraErrorArray()
+    {
         $abstractProvider = $this->getProvider();
         $this->expectException(InvalidArgumentException::class);
         $extra = [
             'key' => [
-                'key2' => 'value'
-            ]
+                'key2' => 'value',
+            ],
         ];
 
         $abstractProvider->setExtra($extra);
     }
 
-    public function testSetExtra() {
+    public function testSetExtra()
+    {
         $extra = [
-            'key' => uniqid()
+            'key' => uniqid(),
         ];
 
         $abstractProvider = $this->getProvider();
@@ -50,26 +82,30 @@ class AbstractProviderTest extends Orchestra\Testbench\TestCase
         $this->assertSame($extra, $abstractProvider->getExtra());
     }
 
-    public function testSetMessageError() {
+    public function testSetMessageError()
+    {
         $abstractProvider = $this->getProvider();
         $this->expectException(\Throwable::class);
         $abstractProvider->setMessage(['channel']);
     }
 
-    public function testSetMessageSuccess() {
+    public function testSetMessageSuccess()
+    {
         $abstractProvider = $this->getProvider();
         $abstractProvider->setMessage('message');
 
         $this->assertSame('message', $abstractProvider->getMessage());
     }
 
-    public function testSetChannelError() {
+    public function testSetChannelError()
+    {
         $abstractProvider = $this->getProvider();
         $this->expectException(\Throwable::class);
         $abstractProvider->setChannel(['channel']);
     }
 
-    public function testSetChannelSuccess() {
+    public function testSetChannelSuccess()
+    {
         $abstractProvider = $this->getProvider();
         $abstractProvider->setChannel('channel');
 
@@ -84,7 +120,8 @@ class AbstractProviderTest extends Orchestra\Testbench\TestCase
         $abstractProvider->setChannels([$abstractProvider]);
     }
 
-    public function testSetChannelsSuccess() {
+    public function testSetChannelsSuccess()
+    {
         $abstractProvider = $this->getProvider();
         $abstractProvider->setChannels(['channel', 1, 1.21]);
 
@@ -94,13 +131,15 @@ class AbstractProviderTest extends Orchestra\Testbench\TestCase
         $this->assertSame('1.21', $channels[2]);
     }
 
-    public function testSetApplicationError() {
+    public function testSetApplicationError()
+    {
         $abstractProvider = $this->getProvider();
         $this->expectException(ApplicationNotFoundException::class);
         $abstractProvider->setAppGroup('default-app-group-not-found');
     }
 
-    public function testSetApplicationSuccess() {
+    public function testSetApplicationSuccess()
+    {
         $appGroup = 'default-app-group';
         $abstractProvider = $this->getProvider();
         $abstractProvider->setAppGroup($appGroup);
@@ -216,6 +255,6 @@ class AbstractProviderTest extends Orchestra\Testbench\TestCase
     }
 }
 
-class AbstractProviderTester extends AbstractProvider {
-
+class AbstractProviderTester extends AbstractProvider
+{
 }
