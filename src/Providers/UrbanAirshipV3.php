@@ -15,7 +15,6 @@ class UrbanAirshipV3 extends AbstractProvider
      * setBadge
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     *
      * @access public
      * @param int|string $badge
      * @return \Nodes\Push\Contracts\ProviderInterface
@@ -24,11 +23,11 @@ class UrbanAirshipV3 extends AbstractProvider
     public function setBadge($badge) : ProviderInterface
     {
         // Convert to int, if badge does not start with +/-, since int means setting the value
-        if(is_numeric($badge) && !starts_with($badge, '-') && !starts_with($badge, '+')) {
+        if (is_numeric($badge) && !starts_with($badge, '-') && !starts_with($badge, '+')) {
             $badge = intval($badge);
         }
 
-        if(is_int($badge) && $badge < 0) {
+        if (is_int($badge) && $badge < 0) {
             throw new InvalidArgumentException('Bagde was set to minus integer, either set 0 or as string fx "-5');
         }
 
@@ -41,4 +40,28 @@ class UrbanAirshipV3 extends AbstractProvider
         return $this;
     }
 
+    /**
+     * setExtra
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @param array $extra
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     * @throws \Nodes\Push\Exceptions\InvalidArgumentException
+     */
+    public function setExtra(array $extra) : ProviderInterface
+    {
+        $protectedUAKeys = [
+            'from',
+            'collapse_key',
+        ];
+
+        foreach ($extra as $key => $value) {
+            if (in_array($key, $protectedUAKeys)) {
+                throw new InvalidArgumentException(sprintf('The used key [%s] in extra is protected by UA', $key));
+            }
+        }
+
+        return parent::setExtra($extra);
+    }
 }

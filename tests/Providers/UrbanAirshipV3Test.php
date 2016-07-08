@@ -13,6 +13,16 @@ class UrbanAirshipV3Test extends Orchestra\Testbench\TestCase
         ];
     }
 
+    public function testSetExtraError()
+    {
+        $urbanAirshipV3 = $this->getProvider();
+        $this->expectException(InvalidArgumentException::class);
+        $urbanAirshipV3->setExtra(['from' => 'test']);
+
+        $this->expectException(InvalidArgumentException::class);
+        $urbanAirshipV3->setBadge('no supported');
+    }
+
     public function testSetBadgeError()
     {
         $urbanAirshipV3 = $this->getProvider();
