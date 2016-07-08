@@ -2,17 +2,6 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Environment
-    |--------------------------------------------------------------------------
-    |
-    | Used by some providers to determine if push should send to
-    | a production app or a testing app.
-    |
-    */
-    'live' => env('PARSE_LIVE', true),
-
-    /*
-    |--------------------------------------------------------------------------
     | Queue
     |--------------------------------------------------------------------------
     |
@@ -38,40 +27,6 @@ return [
             config('nodes.push.urban-airship.default')
         );
     },
-
-    /*
-    |--------------------------------------------------------------------------
-    | Parse applications
-    |--------------------------------------------------------------------------
-    |
-    | Credentials can be found at Parse.com under your app's settings.
-    |
-    */
-    'parse' => [
-
-        /*
-        |--------------------------------------------------------------------------
-        | Test application credentials
-        |--------------------------------------------------------------------------
-        */
-        'development' => [
-            'app_id' => env('PARSE_DEV_APP_ID'),
-            'rest_key' => env('PARSE_DEV_REST_KEY'),
-            'master_key' => env('PARSE_DEV_MASTER_KEY')
-        ],
-
-        /*
-        |--------------------------------------------------------------------------
-        | Live application credientials
-        |--------------------------------------------------------------------------
-        */
-        'live' => [
-            'app_id' => null,
-            'rest_key' => null,
-            'master_key' => null
-        ]
-    ],
-
     /*
     |--------------------------------------------------------------------------
     | Urban Airship applications
@@ -87,7 +42,7 @@ return [
         | Default app group
         |--------------------------------------------------------------------------
         */
-        'default' => 'nodes',
+        'default' => 'application',
 
         /*
         |--------------------------------------------------------------------------
@@ -116,8 +71,8 @@ return [
             | Nodes test app
             |--------------------------------------------------------------------------
             */
-            'nodes' => [
-                'development' => [
+            'application' => [
+                'app1' => [
                     'app_key' => env('URBAN_AIRSHIP_DEV_APP_KEY'),
                     'app_secret' => env('URBAN_AIRSHIP_DEV_APP_SECRET'),
                     'master_secret' => env('URBAN_AIRSHIP_DEV_MASTER_SECRET'),
@@ -125,7 +80,7 @@ return [
 
                 // Example of another app in an "app group"
                 /*
-                'production' => [
+                'app2' => [
                     'app_key' => null,
                     'app_secret' => null,
                     'master_secret' => null,

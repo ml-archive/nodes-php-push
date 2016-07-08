@@ -2,7 +2,6 @@
 namespace Nodes\Push\Jobs;
 
 use App\Jobs\Job;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Nodes\Push\Contracts\ProviderInterface as NodesPushProviderContract;
 
@@ -11,7 +10,7 @@ use Nodes\Push\Contracts\ProviderInterface as NodesPushProviderContract;
  *
  * @package Nodes\Push\Jobs
  */
-class QueuePushNotification extends Job implements SelfHandling, ShouldQueue
+class QueuePushNotification extends Job implements ShouldQueue
 {
     /**
      * Push provider
@@ -24,7 +23,6 @@ class QueuePushNotification extends Job implements SelfHandling, ShouldQueue
      * QueuePushNotification constructor
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     *
      * @access public
      * @param  \Nodes\Push\Contracts\ProviderInterface $provider
      */
@@ -37,8 +35,7 @@ class QueuePushNotification extends Job implements SelfHandling, ShouldQueue
      * Handle job
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     *
-     * @access åibæoc
+     * @access public
      * @return void
      */
     public function handle()

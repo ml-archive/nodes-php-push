@@ -142,4 +142,15 @@ interface ProviderInterface
      * @return boolean
      */
     public function send();
+
+    /**
+     * enqueue
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     *
+     * @access public
+     * @return bool
+     * @throws TODO
+     */
+    public function enqueue();
 }

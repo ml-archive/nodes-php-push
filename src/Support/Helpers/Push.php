@@ -1,23 +1,24 @@
 <?php
+use Nodes\Push\Contracts\ProviderInterface;
+
 if (!function_exists('push_send')) {
     /**
-     * Sned push notification
+     * push_send
      *
-     * @author Morten Rugaard <moru@nodes.dk>
-     *
-     * @param  string   $message
-     * @param  array    $channels
-     * @param  \Closure $callback
-     * @return mixed
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @param               $message
+     * @param \Closure|null $callback
+     * @return bool
      */
-    function push_send($message, $channels = [], \Closure $callback = null)
+    function push_send($message, \Closure $callback = null)
     {
         // Retrieve push manager
+        /** @var ProviderInterface $pushManager */
         $pushManager = app('nodes.push');
 
         // Set channels and message of push notification
-        $pushManager->setChannels((array) $channels)
-                    ->setMessage($message);
+        $pushManager->setMessage($message);
 
         // If we have a valid callback, we'll execute
         // that given callback with the push manager as argument
@@ -32,29 +33,22 @@ if (!function_exists('push_send')) {
 
 if (!function_exists('push_queue')) {
     /**
-     * Sned push notification via queue
+     * push_queue
      *
-     * @author Morten Rugaard <moru@nodes.dk>
-     *
-     * @param  string   $message
-     * @param  array    $channels
-     * @param  \Closure $callback
-     * @param  string   $queue
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @param               $message
+     * @param \Closure|null $callback
      * @return mixed
      */
-    function push_queue($message, $channels = [], \Closure $callback = null, $queue = null)
+    function push_queue($message, \Closure $callback = null)
     {
         // Retrieve push manager
+        /** @var ProviderInterface $pushManager */
         $pushManager = app('nodes.push');
 
         // Set channels and message of push notification
-        $pushManager->setChannels((array) $channels)
-                    ->setMessage($message);
-
-        // Set name of queue, where we'll add the push notification to
-        if (!empty($queue)) {
-            $pushManager->setQueueName($queue);
-        }
+        $pushManager->setMessage($message);
 
         // If we have a valid callback, we'll execute
         // that given callback with the push manager as argument
