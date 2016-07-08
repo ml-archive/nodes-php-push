@@ -14,6 +14,19 @@ class UrbanAirshipV3Test extends Orchestra\Testbench\TestCase
         ];
     }
 
+    public function testSetApplicationError() {
+        $urbanAirshipV3 = $this->getProvider();
+        $this->expectException(ApplicationNotFoundException::class);
+        $urbanAirshipV3->setAppGroup('default-app-group-not-found');
+    }
+
+    public function testSetApplicationSuccess() {
+        $appGroup = 'default-app-group';
+        $urbanAirshipV3 = $this->getProvider();
+        $urbanAirshipV3->setAppGroup($appGroup);
+        $this->assertSame($appGroup, $urbanAirshipV3->getAppGroup());
+    }
+
     public function testInitProvideDefaultAppGroupDoesNotExist()
     {
         $this->expectException(ApplicationNotFoundException::class);
@@ -36,7 +49,7 @@ class UrbanAirshipV3Test extends Orchestra\Testbench\TestCase
         $this->expectException(ConfigErrorException::class);
         new UrbanAirshipV3([
             'default-app-group' => 'default-app-group',
-            'app-groups'        => 'string'
+            'app-groups'        => 'string',
         ]);
     }
 
@@ -50,19 +63,7 @@ class UrbanAirshipV3Test extends Orchestra\Testbench\TestCase
 
     public function testInitProviderSuccess()
     {
-        $urbanAirshipV3 = new UrbanAirshipV3([
-            'default-app-group' => 'default-app-group',
-            'app-groups'        => [
-                'default-app-group' => [
-                    'app-1' => [
-                        'app_key'       => 'app-key',
-                        'app_secret'    => 'app-secret',
-                        'master_secret' => 'master-secret',
-                    ],
-                ],
-            ],
-        ]);
-
+        $urbanAirshipV3 = $this->getProvider();
         $this->assertInstanceOf(UrbanAirshipV3::class, $urbanAirshipV3);
     }
 
@@ -87,7 +88,7 @@ class UrbanAirshipV3Test extends Orchestra\Testbench\TestCase
     {
         $this->expectException(ConfigErrorException::class);
         new UrbanAirshipV3([
-            'app-groups'        => [
+            'app-groups' => [
                 'default-app-group' => [
                     'app-1' => [
                         'app_key'       => 'app-key',
@@ -104,8 +105,24 @@ class UrbanAirshipV3Test extends Orchestra\Testbench\TestCase
         $this->expectException(ConfigErrorException::class);
         new UrbanAirshipV3([
             'default-app-group' => [
-                'Not a string'
+                'Not a string',
             ],
+            'app-groups'        => [
+                'default-app-group' => [
+                    'app-1' => [
+                        'app_key'       => 'app-key',
+                        'app_secret'    => 'app-secret',
+                        'master_secret' => 'master-secret',
+                    ],
+                ],
+            ],
+        ]);
+    }
+
+    private function getProvider()
+    {
+        return new UrbanAirshipV3([
+            'default-app-group' => 'default-app-group',
             'app-groups'        => [
                 'default-app-group' => [
                     'app-1' => [

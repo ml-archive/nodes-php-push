@@ -60,15 +60,41 @@ abstract class AbstractProvider implements ProviderInterface
         $this->appGroups = $config['app-groups'];
 
         if (!array_key_exists($this->defaultAppGroup, $config['app-groups'])) {
-            throw new ApplicationNotFoundException(sprintf('Default app [%s] was not found in list of of app-groups',
+            throw new ApplicationNotFoundException(sprintf('default-app-group [%s] was not found in list of of app-groups',
                 $this->defaultAppGroup));
         }
     }
 
-    public function setAppGroup($appGroup) {
-        if (!array_key_exists($this->defaultAppGroup, $appGroup)) {
-            throw new ApplicationNotFoundException(sprintf('Default app [%s] was not found in list of of app-groups',
+    /**
+     * set the app group which should be used
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @param string $appGroup
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     * @throws \Nodes\Push\Exceptions\ApplicationNotFoundException
+     */
+    public function setAppGroup(string $appGroup) : ProviderInterface
+    {
+        if (!array_key_exists($appGroup, $this->appGroups)) {
+            throw new ApplicationNotFoundException(sprintf('Passed app group [%s] was not found in list of of app-groups',
                 $this->defaultAppGroup));
         }
+
+        $this->appGroup = $appGroup;
+
+        return $this;
+    }
+
+    /**
+     * getAppGroup
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return string
+     */
+    public function getAppGroup() : string
+    {
+        return $this->appGroup;
     }
 }
