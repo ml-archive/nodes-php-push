@@ -4,6 +4,7 @@ namespace Nodes\Push\Providers;
 use Nodes\Push\Contracts\ProviderInterface;
 use Nodes\Push\Exceptions\ApplicationNotFoundException;
 use Nodes\Push\Exceptions\ConfigErrorException;
+use Nodes\Push\Exceptions\InvalidArgumentException;
 
 /**
  * Class AbstractProvider
@@ -26,6 +27,21 @@ abstract class AbstractProvider implements ProviderInterface
      * @var array
      */
     private $appGroups;
+
+    /**
+     * @var array
+     */
+    private $channels = [];
+
+    /**
+     * @var string|null
+     */
+    private $message;
+
+    /**
+     * @var array
+     */
+    private $extra = [];
 
     /**
      * AbstractProvider constructor
@@ -77,7 +93,7 @@ abstract class AbstractProvider implements ProviderInterface
     public function setAppGroup(string $appGroup) : ProviderInterface
     {
         if (!array_key_exists($appGroup, $this->appGroups)) {
-            throw new ApplicationNotFoundException(sprintf('Passed app group [%s] was not found in list of of app-groups',
+            throw new ApplicationNotFoundException(sprintf('The passed appGroup [%s] was not found in list of of app-groups',
                 $this->defaultAppGroup));
         }
 
@@ -96,5 +112,119 @@ abstract class AbstractProvider implements ProviderInterface
     public function getAppGroup() : string
     {
         return $this->appGroup;
+    }
+
+    /**
+     * setChannels
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @param array $channels
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     * @throws \Throwable
+     */
+    public function setChannels(array $channels) : ProviderInterface
+    {
+        // Make sure channels are strings
+        foreach ($channels as &$channel) {
+            $channel = strval($channel);
+        }
+
+        $this->channels = $channels;
+
+        return $this;
+    }
+
+    /**
+     * setChannel
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @param string $channel
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function setChannel(string $channel) : ProviderInterface
+    {
+        $this->channels = [$channel];
+
+        return $this;
+    }
+
+    /**
+     * getChannels
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return array
+     */
+    public function getChannels() : array
+    {
+        return $this->channels;
+    }
+
+    /**
+     * setMessage
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @param string $message
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function setMessage(string $message) : ProviderInterface
+    {
+        $this->message = $message;
+
+        return $this;
+    }
+
+    /**
+     * getMessage
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return string
+     */
+    public function getMessage() : string
+    {
+        return $this->message;
+    }
+
+    /**
+     * setExtra
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @param array $extra
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     * @throws \Nodes\Push\Exceptions\InvalidArgumentException
+     */
+    public function setExtra(array $extra) : ProviderInterface
+    {
+        // Make sure channels are strings
+        foreach ($extra as $key => $value) {
+            if (is_array($value)) {
+                throw new InvalidArgumentException(sprintf('Extra key [%s] was an array', $key));
+            }
+
+            if (is_object($value)) {
+                throw new InvalidArgumentException(sprintf('Extra key [%s] was an object', $key));
+            }
+        }
+
+        $this->extra = $extra;
+
+        return $this;
+    }
+
+    /**
+     * getExtra
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return array
+     */
+    public function getExtra() : array
+    {
+        return $this->extra;
     }
 }

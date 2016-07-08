@@ -28,57 +28,81 @@ interface ProviderInterface
      */
     public function getAppGroup() : string;
 
+    /**
+     * setChannels for segmented push, this will override
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @param array $channels
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     * @throws \Throwable
+     */
+    public function setChannels(array $channels) : ProviderInterface;
+
+    /**
+     * setChannel for segmented push, this will override
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @param string $channel
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function setChannel(string $channel) : ProviderInterface;
+
+    /**
+     * getChannels for segmented push
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     *
+     * @access public
+     * @return array
+     */
+    public function getChannels() : array;
+
+    /**
+     * setMessage, which will be in notification center/title of the push notification
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @param string $message
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function setMessage(string $message) : ProviderInterface;
+
+    /**
+     * getMessage
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return string
+     */
+    public function getMessage() : string;
+
+    /**
+     * setExtra, the payload of the push
+     * Remember there is limits for size of push
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     *
+     * @access pu
+     * @param array $extra
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     * @throws \Nodes\Push\Exceptions\InvalidArgumentException
+     */
+    public function setExtra(array $extra) : ProviderInterface;
+
+    /**
+     * getExtra
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     *
+     * @access public
+     * @return array
+     */
+    public function getExtra() : array;
 //
 //    ///////////////////////////////////////
-//    /**
-//     * Set push channels
-//     *
-//     * @author Morten Rugaard <moru@nodes.dk>
-//     * @access public
-//     * @param  array $channels
-//     * @return $this
-//     */
-//    public function setChannels(array $channels);
-//
-//    /**
-//     * Add additional channels to existing array of channels
-//     *
-//     * @author Morten Rugaard <moru@nodes.dk>
-//     * @access public
-//     * @param  array $channels
-//     * @return $this
-//     */
-//    public function addChannels(array $channels);
-//
-//    /**
-//     * Set text of push message
-//     *
-//     * @author Morten Rugaard <moru@nodes.dk>
-//     * @access public
-//     * @param  string $message
-//     * @return $this
-//     */
-//    public function setMessage($message);
-//
-//    /**
-//     * Set extra data
-//     *
-//     * @author Morten Rugaard <moru@nodes.dk>
-//     * @access public
-//     * @param  array $data
-//     * @return $this
-//     */
-//    public function setExtra(array $data);
-//
-//    /**
-//     * Add additional data to existing array of extra data
-//     *
-//     * @author Morten Rugaard <moru@nodes.dk>
-//     * @access public
-//     * @param  array $data
-//     * @return $this
-//     */
-//    public function addExtra(array $data);
+
 //
 //    /**
 //     * setBadge
