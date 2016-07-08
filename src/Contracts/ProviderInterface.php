@@ -117,39 +117,40 @@ interface ProviderInterface
      * @return null|int|string
      */
     public function getBadge();
+
+    /**
+     * setSound
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @param string $sound
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function setSound(string $sound) : ProviderInterface;
+
+    /**
+     * removeSound
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function removeSound() : ProviderInterface;
+
+    /**
+     * getSound
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return string|null
+     */
+    public function getSound();
+
 //
 //    ///////////////////////////////////////
 
-//
-//    /**
-//     * setBadge
-//     *
-//     * @author Casper Rasmussen <cr@nodes.dk>
-//     * @access public
-//     * @param $badge
-//     * @return $this
-//     */
-//    public function setBadge($badge);
-//
-//    /**
-//     * Set sound of push notification
-//     *
-//     * @author Morten Rugaard <moru@nodes.dk>
-//     * @access public
-//     * @param  string $sound
-//     * @return $this
-//     */
 //    public function setSound($sound);
-//
-//    /**
-//     * Set push message as silent
-//     *
-//     * @author Morten Rugaard <moru@nodes.dk>
-//     * @access public
-//     * @param  boolean $silent
-//     * @return $this
-//     */
-//    public function setSilence($silent);
+
 //
 //    /**
 //     * Set Content-Available state (iOS only)

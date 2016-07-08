@@ -29,7 +29,7 @@ class UrbanAirshipV3 extends AbstractProvider
         }
 
         if(is_int($badge) && $badge < 0) {
-            throw new InvalidArgumentException('Bagde was set to minus integer, either set 0 or as string "-5');
+            throw new InvalidArgumentException('Bagde was set to minus integer, either set 0 or as string fx "-5');
         }
 
         if (!is_int($badge) && $badge != 'auto' && !is_numeric($badge)) {

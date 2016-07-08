@@ -49,6 +49,11 @@ abstract class AbstractProvider implements ProviderInterface
     protected $badge;
 
     /**
+     * @var string|null
+     */
+    protected $sound;
+
+    /**
      * AbstractProvider constructor
      *
      * @author Casper Rasmussen <cr@nodes.dk>
@@ -233,7 +238,6 @@ abstract class AbstractProvider implements ProviderInterface
      * setBadge
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     *
      * @access public
      * @param mixed $badge
      * @return \Nodes\Push\Contracts\ProviderInterface
@@ -260,5 +264,47 @@ abstract class AbstractProvider implements ProviderInterface
     public function getBadge()
     {
         return $this->badge;
+    }
+
+    /**
+     * setSound, this custom sound string will be passed specific for ios and in extras for android,
+     * the sound needs to be registered in the apps
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @param string $sound
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function setSound(string $sound) : ProviderInterface
+    {
+        $this->sound = $sound;
+
+        return $this;
+    }
+
+    /**
+     * removeSound, clear the custom sound
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function removeSound() : ProviderInterface
+    {
+        $this->sound = null;
+
+        return $this;
+    }
+
+    /**
+     * getSound
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return null|string
+     */
+    public function getSound()
+    {
+        return $this->sound;
     }
 }

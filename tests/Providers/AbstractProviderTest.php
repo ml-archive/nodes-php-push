@@ -15,6 +15,32 @@ class AbstractProviderTest extends Orchestra\Testbench\TestCase
         ];
     }
 
+    public function testSetSoundError()
+    {
+        $abstractProvider = $this->getProvider();
+        $this->expectException(\Throwable::class);
+        $abstractProvider->setSound(['sound']);
+    }
+
+    public function testRemoveSoundSuccess()
+    {
+        $abstractProvider = $this->getProvider();
+        $abstractProvider->setSound('sound');
+
+        $this->assertSame('sound', $abstractProvider->getSound());
+
+        $abstractProvider->removeSound();
+        $this->assertSame(null, $abstractProvider->getSound());
+    }
+
+    public function testSetSoundSuccess()
+    {
+        $abstractProvider = $this->getProvider();
+        $abstractProvider->setSound('sound');
+
+        $this->assertSame('sound', $abstractProvider->getSound());
+    }
+
     public function testSetBadgeError()
     {
         $urbanAirshipV3 = $this->getProvider();
