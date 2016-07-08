@@ -1,5 +1,6 @@
 <?php
 
+use Nodes\Push\Exceptions\InvalidArgumentException;
 use Nodes\Push\Providers\UrbanAirshipV3;
 use Nodes\Push\ServiceProvider;
 
@@ -12,24 +13,37 @@ class UrbanAirshipV3Test extends Orchestra\Testbench\TestCase
         ];
     }
 
-    public function testSetBadgeSuccess() {
+    public function testSetBadgeError()
+    {
         $urbanAirshipV3 = $this->getProvider();
-        $urbanAirshipV3->setMessage('message');
+        $this->expectException(InvalidArgumentException::class);
+        $urbanAirshipV3->setBadge(-12);
 
-        $this->assertSame('message', $urbanAirshipV3->getMessage());
+        $this->expectException(InvalidArgumentException::class);
+        $urbanAirshipV3->setBadge('no supported');
     }
 
-    public function testSetMessageError() {
+    /**
+     * @dataProvider setBadgeSuccessProviderSuccess
+     */
+    public function testSetBadgeSuccess($a, $b, $expect)
+    {
         $urbanAirshipV3 = $this->getProvider();
-        $this->expectException(\Throwable::class);
-        $urbanAirshipV3->setMessage(['channel']);
+        $urbanAirshipV3->setBadge($a);
+        $this->assertSame($b, $urbanAirshipV3->getBadge());
     }
 
-    public function testSetMessageSuccess() {
-        $urbanAirshipV3 = $this->getProvider();
-        $urbanAirshipV3->setMessage('message');
-
-        $this->assertSame('message', $urbanAirshipV3->getMessage());
+    public function setBadgeSuccessProviderSuccess()
+    {
+        return [
+            [1, 1, true],
+            ['1', 1, true],
+            ['+1', '+1', true],
+            ['-12', '-12', true],
+            ['+5', '+5', true],
+            [50, 50, true],
+            ['auto', 'auto', true],
+        ];
     }
 
     private function getProvider()

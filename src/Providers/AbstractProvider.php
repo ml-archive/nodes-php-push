@@ -16,37 +16,37 @@ abstract class AbstractProvider implements ProviderInterface
     /**
      * @var string
      */
-    private $defaultAppGroup;
+    protected $defaultAppGroup;
 
     /**
      * @var string
      */
-    private $appGroup;
+    protected $appGroup;
 
     /**
      * @var array
      */
-    private $appGroups;
+    protected $appGroups;
 
     /**
      * @var array
      */
-    private $channels = [];
+    protected $channels = [];
 
     /**
      * @var string|null
      */
-    private $message;
+    protected $message;
 
     /**
      * @var array
      */
-    private $extra = [];
+    protected $extra = [];
 
     /**
      * @var null|int|string
      */
-    private $badge;
+    protected $badge;
 
     /**
      * AbstractProvider constructor
