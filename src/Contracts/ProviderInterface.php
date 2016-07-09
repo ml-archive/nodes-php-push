@@ -3,8 +3,6 @@ declare (strict_types = 1);
 
 namespace Nodes\Push\Contracts;
 
-use GuzzleHttp\Promise\Promise;
-
 /**
  * Interface ProviderInterface
  *
@@ -14,14 +12,14 @@ use GuzzleHttp\Promise\Promise;
 interface ProviderInterface
 {
     /**
-     * setAppGroup
+     * setAppGroup, pick the app group to send pushes
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
-     * @param string $app
+     * @param string $appGroup
      * @return \Nodes\Push\Contracts\ProviderInterface
      */
-    public function setAppGroup(string $app) : ProviderInterface;
+    public function setAppGroup(string $appGroup) : ProviderInterface;
 
     /**
      * getAppGroup
@@ -33,7 +31,7 @@ interface ProviderInterface
     public function getAppGroup() : string;
 
     /**
-     * setChannels for segmented push, this will override
+     * setChannels for segmented push, this will override current channels
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
@@ -61,6 +59,38 @@ interface ProviderInterface
      * @return array
      */
     public function getChannels() : array;
+
+    /**
+     * setAliases, for segmented push
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     *
+     * @access public
+     * @param array $aliases
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function setAliases(array $aliases) : ProviderInterface;
+
+    /**
+     * setAlias, for segmented push
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     *
+     * @access public
+     * @param string $alias
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function setAlias(string $alias) : ProviderInterface;
+
+    /**
+     * getAliases, for segmented push
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     *
+     * @access public
+     * @return array
+     */
+    public function getAliases() : array;
 
     /**
      * setMessage, which will be in notification center/title of the push notification

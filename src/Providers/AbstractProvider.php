@@ -123,7 +123,7 @@ abstract class AbstractProvider implements ProviderInterface
     }
 
     /**
-     * set the app group which should be used
+     * set the app group which should be used to send pushes
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
@@ -157,6 +157,7 @@ abstract class AbstractProvider implements ProviderInterface
 
     /**
      * setChannels, for segmented push
+     * This will override current channels
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
