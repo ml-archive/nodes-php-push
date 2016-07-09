@@ -217,7 +217,7 @@ class UrbanAirshipV3 extends AbstractProvider
      * @access public
      * @return \GuzzleHttp\Client
      */
-    public function getHttpClient()
+    public function getHttpClient() : HttpClient
     {
         if (!is_null($this->httpClient)) {
             return $this->httpClient;
@@ -240,7 +240,7 @@ class UrbanAirshipV3 extends AbstractProvider
      * @access protected
      * @return array
      */
-    protected function buildPushData()
+    protected function buildPushData() : array
     {
         // Data container
         $data = [];
@@ -279,7 +279,7 @@ class UrbanAirshipV3 extends AbstractProvider
      * @access protected
      * @return array
      */
-    protected function buildAudienceData()
+    protected function buildAudienceData() : array
     {
         // Data container
         $audience = [];
@@ -306,7 +306,7 @@ class UrbanAirshipV3 extends AbstractProvider
      * @access protected
      * @return array
      */
-    protected function buildIOSData()
+    protected function buildIOSData() : array
     {
         // Data container
         $ios = [];
@@ -341,7 +341,7 @@ class UrbanAirshipV3 extends AbstractProvider
      * @access protected
      * @return array
      */
-    protected function buildAndroidData()
+    protected function buildAndroidData() : array
     {
         // Data container
         $android = [];
@@ -371,7 +371,7 @@ class UrbanAirshipV3 extends AbstractProvider
      * @access public
      * @return array
      */
-    protected function buildWnsData()
+    protected function buildWnsData() : array
     {
         // Data container
         $wns = [];
