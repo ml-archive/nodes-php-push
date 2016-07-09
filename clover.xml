@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1468071532">
-  <project timestamp="1468071532">
+<coverage generated="1468073578">
+  <project timestamp="1468073578">
     <file name="/var/www/alarmeringsapp/htdocs/vendor/nodes/push/tests/Providers/AbstractProviderTest.php">
       <class name="AbstractProviderTest" namespace="global">
         <metrics complexity="32" methods="32" coveredmethods="14" conditionals="0" coveredconditionals="0" statements="137" coveredstatements="117" elements="169" coveredelements="131"/>
