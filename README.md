@@ -93,30 +93,29 @@ push()->setMessage('test')
 
 ### Function on provider used to send push
 ```
-
-public function setMessage(string $message) : ProviderInterface;
-public function setExtra(array $extra) : ProviderInterface;
+// Add data to push
+setMessage(string $message) : ProviderInterface; // Message (Required)
+setExtra(array $extra) : ProviderInterface; // Array of key/value (int, float, bool, string)
 
 // Segment push for userId / userIds
-public function setAlias(string $alias) : ProviderInterface;
-public function setAliases(array $aliases) : ProviderInterface;
+setAlias(string $alias) : ProviderInterface;
+setAliases(array $aliases) : ProviderInterface;
 
 // Segment push for channels, like "weekend_news" or "daily_news"
-public function setChannels(array $channels) : ProviderInterface;
-public function setChannel(string $channel) : ProviderInterface;
+setChannels(array $channels) : ProviderInterface;
+setChannel(string $channel) : ProviderInterface;
 
 // Send push, before this is executed nothing will get send
-public function send() : array; //In request, return array of results from provider
-public function sendAsync() : array; // Async, return array of promises if callback is needed
+send() : array; //In request, return array of results from provider
+sendAsync() : array; // Async, return array of promises if callback is needed
 
 // Advanced configs
-public function setIOSBadge($iOSBadge) : ProviderInterface; //Controll badge on iOS app icon
-public function setSound(string $sound) : ProviderInterface; // Custom sound
-public function removeSound() : ProviderInterface; // Remove custom sound
-public function setIosContentAvailable(bool $iosContentAvailable) : ProviderInterface; // Should not go in notification center
-public function setAndroidData(array $androidData) : ProviderInterface; // Add more extra for android only, android can handle 8 times more data in push than iOS
-public function setAppGroup(string $appGroup) : ProviderInterface; // Change your default-app-group in run time. Handy for white labeling
-
+setIOSBadge($iOSBadge) : ProviderInterface; //Controll badge on iOS app icon
+setSound(string $sound) : ProviderInterface; // Custom sound
+removeSound() : ProviderInterface; // Remove custom sound
+setIosContentAvailable(bool $iosContentAvailable) : ProviderInterface; // Should not go in notification center
+setAndroidData(array $androidData) : ProviderInterface; // Add more extra for android only, android can handle 8 times more data in push than iOS
+setAppGroup(string $appGroup) : ProviderInterface; // Change your default-app-group in run time. Handy for white labeling
 ```
 
 ## 🏆 Credits
