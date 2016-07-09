@@ -64,7 +64,6 @@ interface ProviderInterface
      * setAliases, for segmented push
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     *
      * @access public
      * @param array $aliases
      * @return \Nodes\Push\Contracts\ProviderInterface
@@ -75,7 +74,6 @@ interface ProviderInterface
      * setAlias, for segmented push
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     *
      * @access public
      * @param string $alias
      * @return \Nodes\Push\Contracts\ProviderInterface
@@ -86,7 +84,6 @@ interface ProviderInterface
      * getAliases, for segmented push
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     *
      * @access public
      * @return array
      */
@@ -246,4 +243,13 @@ interface ProviderInterface
      * @return array
      */
     public function getAndroidData() : array;
+
+    /**
+     * getInstance
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function getInstance() : ProviderInterface;
 }

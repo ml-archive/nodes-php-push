@@ -29,7 +29,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Nodes\\Push\\": "src/"
+            "Nodes\\Push\\": "src/",
+            "Nodes\\Push\\Tests\\": "tests/"
         },
         "files": [
             "src/Support/Helpers/Push.php"

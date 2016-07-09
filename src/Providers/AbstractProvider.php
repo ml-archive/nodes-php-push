@@ -17,48 +17,56 @@ abstract class AbstractProvider implements ProviderInterface
 {
     /**
      * Fallback app group if nothing is set
+     *
      * @var string
      */
     protected $defaultAppGroup;
 
     /**
      * App group set, will be used instead of fallback
+     *
      * @var string
      */
     protected $appGroup;
 
     /**
      * List of all app groups
+     *
      * @var array
      */
     protected $appGroups;
 
     /**
      * Channels for segmented push
+     *
      * @var array
      */
     protected $channels = [];
 
     /**
      * Aliases for segmented push
+     *
      * @var array
      */
     protected $aliases = [];
 
     /**
      * The message which will be shown in the push notification
+     *
      * @var string|null
      */
     protected $message;
 
     /**
      * A map of key/value which will be passed in the push
+     *
      * @var array
      */
     protected $extra = [];
 
     /**
      * A var to control the badge on app icon
+     *
      * @var null|int|string
      */
     protected $iOSBadge;
@@ -305,7 +313,6 @@ abstract class AbstractProvider implements ProviderInterface
      * validateExtra
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     *
      * @access protected
      * @param array $extra
      * @return void
@@ -472,5 +479,17 @@ abstract class AbstractProvider implements ProviderInterface
     public function isIosContentAvailable() : bool
     {
         return $this->iosContentAvailable;
+    }
+
+    /**
+     * getInstance
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function getInstance() : ProviderInterface
+    {
+        return $this;
     }
 }
