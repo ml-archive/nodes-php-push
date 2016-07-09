@@ -17,6 +17,149 @@ class UrbanAirshipV3Test extends Orchestra\Testbench\TestCase
         ];
     }
 
+    public function testGetRequestDataExtra()
+    {
+        $urbanAirshipV3 = $this->getProvider();
+
+        $extra = [
+            uniqid() => uniqid(),
+            uniqid() => uniqid(),
+        ];
+
+        $urbanAirshipV3->setExtra($extra);
+        $requestData = $urbanAirshipV3->getRequestData();
+        $this->assertSame([
+            'audience'     => 'all',
+            'notification' => [
+                'alert' => null,
+                'ios' => [
+                    'extra' => $extra
+                ],
+                'android' => [
+                    'extra' => $extra
+                ],
+                'wns' => [
+                    'toast' => [
+                        'binding' => [
+                            'template' => 'ToastText01',
+                            'text' => null
+                        ],
+                        'launch' => json_encode($extra)
+                    ]
+                ]
+            ],
+            'device_types' => 'all',
+        ], $requestData);
+    }
+
+    public function testGetRequestDataSound()
+    {
+        $urbanAirshipV3 = $this->getProvider();
+
+        $sound = uniqid();
+        $urbanAirshipV3->setSound($sound);
+        $requestData = $urbanAirshipV3->getRequestData();
+        $this->assertSame([
+            'audience'     => 'all',
+            'notification' => [
+                'alert' => null,
+                'ios' => [
+                    'sound' => $sound
+                ],
+                'android' => [
+                    'extra' => [
+                        'sound' => $sound
+                    ]
+                ]
+            ],
+            'device_types' => 'all',
+        ], $requestData);
+    }
+
+    public function testGetRequestDataContentAvailable()
+    {
+        $urbanAirshipV3 = $this->getProvider();
+
+        $urbanAirshipV3->setIosContentAvailable(true);
+        $requestData = $urbanAirshipV3->getRequestData();
+        $this->assertSame([
+            'audience'     => 'all',
+            'notification' => [
+                'alert' => null,
+                'ios' => [
+                    'content-available' => true
+                ]
+            ],
+            'device_types' => 'all',
+        ], $requestData);
+    }
+
+    public function testGetRequestDataChannel()
+    {
+        $urbanAirshipV3 = $this->getProvider();
+        $channel = uniqid();
+        $urbanAirshipV3->setChannel($channel);
+        $requestData = $urbanAirshipV3->getRequestData();
+        $this->assertSame([
+            'audience'     => [
+                'tag' => [
+                    $channel
+                ]
+            ],
+            'notification' => [
+                'alert' => null,
+            ],
+            'device_types' => 'all',
+        ], $requestData);
+    }
+
+    public function testGetRequestDataAlias()
+    {
+        $urbanAirshipV3 = $this->getProvider();
+        $alias = uniqid();
+        $urbanAirshipV3->setAlias($alias);
+        $requestData = $urbanAirshipV3->getRequestData();
+        $this->assertSame([
+            'audience'     => [
+                'alias' => [
+                    $alias
+                ]
+            ],
+            'notification' => [
+                'alert' => null,
+            ],
+            'device_types' => 'all',
+        ], $requestData);
+    }
+
+    public function testGetRequestDataMessage()
+    {
+        $urbanAirshipV3 = $this->getProvider();
+        $message = uniqid();
+        $urbanAirshipV3->setMessage($message);
+        $requestData = $urbanAirshipV3->getRequestData();
+        $this->assertSame([
+            'audience'     => 'all',
+            'notification' => [
+                'alert' => strval($message),
+            ],
+            'device_types' => 'all',
+        ], $requestData);
+    }
+
+    public function testGetRequestDataEmpty()
+    {
+        $urbanAirshipV3 = $this->getProvider();
+        $requestData = $urbanAirshipV3->getRequestData();
+        $this->assertSame([
+            'audience'     => 'all',
+            'notification' => [
+                'alert' => null,
+            ],
+            'device_types' => 'all',
+        ], $requestData);
+    }
+
     public function testSendAsync()
     {
         $urbanAirshipV3 = $this->getProvider();

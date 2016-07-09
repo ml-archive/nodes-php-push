@@ -188,4 +188,13 @@ interface ProviderInterface
      * @return array
      */
     public function sendAsync() : array;
+
+    /**
+     * getRequestData, for debugging retrieve the request data
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return array
+     */
+    public function getRequestData() : array;
 }

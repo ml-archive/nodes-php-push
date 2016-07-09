@@ -344,4 +344,9 @@ class AbstractProviderTester extends AbstractProvider
     {
         throw new \Exception('Feature not supported', 500);
     }
+
+    public function getRequestData() : array
+    {
+        throw new \Exception('Feature not supported', 500);
+    }
 }

@@ -69,10 +69,10 @@ class ServiceProvider extends AbstractServiceProvider
                 throw new InvalidPushProviderException($provider);
             }
 
-            return new Manager($provider);
+            return $provider;
         });
 
-        $this->app->bind(Manager::class, function($app) {
+        $this->app->bind(NodesPushProviderContract::class, function($app) {
             return $app['nodes.push'];
         });
     }

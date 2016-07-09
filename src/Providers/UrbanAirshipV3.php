@@ -165,7 +165,7 @@ class UrbanAirshipV3 extends AbstractProvider
             }
 
             // Send request to Urban Airship
-            $promises[] =$this->getHttpClient()->postAsync('/api/push', [
+            $promises[] = $this->getHttpClient()->postAsync('/api/push', [
                 'body' => json_encode($this->buildPushData()),
                 'auth' => [$credentials['app_key'], $credentials['master_secret']],
             ]);
@@ -384,5 +384,17 @@ class UrbanAirshipV3 extends AbstractProvider
         }
 
         return $wns;
+    }
+
+    /**
+     * getRequestData, for debugging retrieve the request data
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return array
+     */
+    public function getRequestData() : array
+    {
+        return $this->buildPushData();
     }
 }
