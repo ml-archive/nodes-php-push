@@ -1,6 +1,10 @@
 <?php
 
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\Promise;
+use GuzzleHttp\Psr7\Response;
 use Nodes\Push\Exceptions\InvalidArgumentException;
+use Nodes\Push\Exceptions\MissingArgumentException;
 use Nodes\Push\Providers\UrbanAirshipV3;
 use Nodes\Push\ServiceProvider;
 
@@ -13,9 +17,42 @@ class UrbanAirshipV3Test extends Orchestra\Testbench\TestCase
         ];
     }
 
-    public function testSend() {
-        $urbanAirshipV3 = $this->getProvider()->setMessage('update');
+    public function testSendAsync()
+    {
+        $urbanAirshipV3 = $this->getProvider();
+        $urbanAirshipV3->setMessage('testSendAsync');
+        $promises = $urbanAirshipV3->sendAsync();
+        /** @var Promise $promise */
+        $promise = $promises[0];
+        $promise->then(function(Response $response) {
+            $result = json_decode($response->getBody()->getContents(), true);
+            $this->assertTrue($result[0]['ok']);
+        }, function(RequestException $requestException) {
+            $this->assertTrue(false);
+        });
+        $promise->wait();
+    }
+
+    public function testSendAsyncNoMessage()
+    {
+        $urbanAirshipV3 = $this->getProvider();
+        $this->expectException(MissingArgumentException::class);
+        $urbanAirshipV3->sendAsync();
+    }
+
+    public function testSendNoMessage()
+    {
+        $urbanAirshipV3 = $this->getProvider();
+        $this->expectException(MissingArgumentException::class);
+        $urbanAirshipV3->send();
+    }
+
+    public function testSend()
+    {
+        $urbanAirshipV3 = $this->getProvider();
+        $urbanAirshipV3->setMessage('testSend');
         $result = $urbanAirshipV3->send();
+        $this->assertTrue($result[0]['ok']);
     }
 
     public function testSetExtraError()
@@ -68,8 +105,8 @@ class UrbanAirshipV3Test extends Orchestra\Testbench\TestCase
             'app-groups'        => [
                 'default-app-group' => [
                     'app-1' => [
-                        'app_key' => env('URBAN_AIRSHIP_APP_KEY'),
-                        'app_secret' => env('URBAN_AIRSHIP_APP_SECRET'),
+                        'app_key'       => env('URBAN_AIRSHIP_APP_KEY'),
+                        'app_secret'    => env('URBAN_AIRSHIP_APP_SECRET'),
                         'master_secret' => env('URBAN_AIRSHIP_MASTER_SECRET'),
                     ],
                 ],

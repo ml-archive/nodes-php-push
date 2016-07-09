@@ -1,7 +1,11 @@
 <?php
+declare (strict_types = 1);
+
 namespace Nodes\Push\Providers;
 
 use GuzzleHttp\Client as HttpClient;
+use GuzzleHttp\Exception\ClientException;
+use Illuminate\Support\MessageBag;
 use Nodes\Push\Contracts\ProviderInterface;
 use Nodes\Push\Exceptions\InvalidArgumentException;
 use Nodes\Push\Exceptions\MissingArgumentException;
@@ -75,6 +79,15 @@ class UrbanAirshipV3 extends AbstractProvider
         return parent::setExtra($extra);
     }
 
+    /**
+     * send
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return array
+     * @throws \Nodes\Push\Exceptions\MissingArgumentException
+     * @throws \Nodes\Push\Exceptions\SendPushFailedException
+     */
     public function send() : array
     {
         $this->validateBeforePush();
@@ -104,18 +117,61 @@ class UrbanAirshipV3 extends AbstractProvider
                 }
 
                 // Decode response
-                $content = json_decode($response->getBody(), true);
+                $content = json_decode($response->getBody()->getContents(), true);
 
                 // Handle potential errors
-                if (empty($content)) {
-                    throw (new SendPushFailedException(sprintf('[%s] Could not send push message. Reason: %s', $appName, $content->error), $content->error_code))->setErrors(new MessageBag($content->details));
+                if (empty($content['ok']) || !$content['ok']) {
+                    throw (new SendPushFailedException(sprintf('[%s] Could not send push message. Reason: %s', $appName, $content->error), $content->error_code))->setErrors(new MessageBag($content['details']));
                 }
+
+                $results[] = $content;
+            } catch (ClientException $e) {
+                if ($e->hasResponse()) {
+                    $content = json_decode($e->getResponse()->getBody()->getContents(), true);
+                } else {
+                    $content = [];
+                }
+                throw (new SendPushFailedException(sprintf('[%s] Could not send push message. Reason: %s', $appName, $e->getMessage())))->setErrors(new MessageBag($content['details']));
             } catch (\Throwable $e) {
                 throw new SendPushFailedException(sprintf('[%s] Could not send push message. Reason: %s', $appName, $e->getMessage()));
             }
         }
 
         return $results;
+    }
+
+    /**
+     * sendAsync
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return array GuzzleHttp\Promise\Promise
+     * @throws \Nodes\Push\Exceptions\MissingArgumentException
+     */
+    public function sendAsync() : array
+    {
+        $this->validateBeforePush();
+
+        $promises = [];
+
+        // Loop through all apps in selected application group
+        // and try and send the push message to each app.
+        foreach ($applications = $this->appGroups[$this->appGroup] as $appName => $credentials) {
+
+            // Skip empty credentials
+            if ($this->emptyCredentials($credentials)) {
+                $results[$appName] = 'skipped - empty credentials';
+                continue;
+            }
+
+            // Send request to Urban Airship
+            $promises[] =$this->getHttpClient()->postAsync('/api/push', [
+                'body' => json_encode($this->buildPushData()),
+                'auth' => [$credentials['app_key'], $credentials['master_secret']],
+            ]);
+        }
+
+        return $promises;
     }
 
     /**
@@ -129,7 +185,7 @@ class UrbanAirshipV3 extends AbstractProvider
     protected function validateBeforePush()
     {
         if (!$this->getMessage()) {
-            throw new MissingArgumentException('You have to setMessage() before sending');
+            throw new MissingArgumentException('You have to setMessage() before sending push');
         }
     }
 
@@ -161,8 +217,7 @@ class UrbanAirshipV3 extends AbstractProvider
      * @access public
      * @return \GuzzleHttp\Client
      */
-    public
-    function getHttpClient()
+    public function getHttpClient()
     {
         if (!is_null($this->httpClient)) {
             return $this->httpClient;

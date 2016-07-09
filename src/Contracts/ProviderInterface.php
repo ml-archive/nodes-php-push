@@ -1,5 +1,9 @@
 <?php
+declare (strict_types = 1);
+
 namespace Nodes\Push\Contracts;
+
+use GuzzleHttp\Promise\Promise;
 
 /**
  * Interface ProviderInterface
@@ -165,24 +169,23 @@ interface ProviderInterface
      */
     public function isIosContentAvailable() : bool;
 
-    public function send();
-//
-//    /**
-//     * Send push message
-//     *
-//     * @author Morten Rugaard <moru@nodes.dk>
-//     * @access public
-//     * @return boolean
-//     */
+    /**
+     * send
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return array
+     * @throws \Nodes\Push\Exceptions\MissingArgumentException
+     * @throws \Nodes\Push\Exceptions\SendPushFailedException
+     */
+    public function send() : array;
 
-//
-//    /**
-//     * enqueue
-//     *
-//     * @author Casper Rasmussen <cr@nodes.dk>
-//     * @access public
-//     * @return bool
-//     * @throws TODO
-//     */
-//    public function sendAsync();
+    /**
+     * sendAsync
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return array
+     */
+    public function sendAsync() : array;
 }

@@ -1,4 +1,6 @@
 <?php
+declare (strict_types = 1);
+
 namespace Nodes\Push\Providers;
 
 use Nodes\Push\Contracts\ProviderInterface;

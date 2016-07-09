@@ -335,7 +335,12 @@ class AbstractProviderTest extends Orchestra\Testbench\TestCase
 
 class AbstractProviderTester extends AbstractProvider
 {
-    public function send()
+    public function send() : array
+    {
+        throw new \Exception('Feature not supported', 500);
+    }
+
+    public function sendAsync() : array
     {
         throw new \Exception('Feature not supported', 500);
     }
