@@ -12,7 +12,7 @@ return [
     |
     */
     'provider' => function() {
-        return new \Nodes\Push\Providers\UrbanAirship(
+        return new \Nodes\Push\Providers\UrbanAirshipV3(
             config('nodes.push.urban-airship')
         );
     },

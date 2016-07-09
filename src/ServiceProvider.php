@@ -1,7 +1,7 @@
 <?php
 namespace Nodes\Push;
 
-use Nodes\AbstractServiceProvider;
+use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 use Nodes\Push\Contracts\ProviderInterface as NodesPushProviderContract;
 use Nodes\Push\Exceptions\InvalidPushProviderException;
 
@@ -10,7 +10,7 @@ use Nodes\Push\Exceptions\InvalidPushProviderException;
  *
  * @package Nodes\Push
  */
-class ServiceProvider extends AbstractServiceProvider
+class ServiceProvider extends IlluminateServiceProvider
 {
     /**
      * Boot the service provider
@@ -33,7 +33,7 @@ class ServiceProvider extends AbstractServiceProvider
      */
     public function register()
     {
-        $this->registerPushManager();
+        $this->registerPushProvider();
     }
 
     /**
@@ -52,13 +52,13 @@ class ServiceProvider extends AbstractServiceProvider
     }
 
     /**
-     * Register push manager
+     * registerPushProvider
      *
-     * @author Morten Rugaard <moru@nodes.dk>
-     * @access public
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access protected
      * @return void
      */
-    public function registerPushManager()
+    protected function registerPushProvider()
     {
         $this->app->singleton('nodes.push', function() {
             // Retrieve push provider
@@ -76,16 +76,16 @@ class ServiceProvider extends AbstractServiceProvider
             return $app['nodes.push'];
         });
     }
-
-    /**
-     * Get the services provided by the provider
-     *
-     * @author Morten Rugaard <moru@nodes.dk>
-     * @access public
-     * @return array
-     */
-    public function provides()
-    {
-        return ['nodes.push'];
-    }
+//
+//    /**
+//     * Get the services provided by the provider
+//     *
+//     * @author Morten Rugaard <moru@nodes.dk>
+//     * @access public
+//     * @return array
+//     */
+//    public function provides()
+//    {
+//        return ['nodes.push'];
+//    }
 }

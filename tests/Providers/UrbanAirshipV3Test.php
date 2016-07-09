@@ -188,7 +188,7 @@ class UrbanAirshipV3Test extends Orchestra\Testbench\TestCase
         $promise = $promises[0];
         $promise->then(function(Response $response) {
             $result = json_decode($response->getBody()->getContents(), true);
-            $this->assertTrue($result[0]['ok']);
+            $this->assertTrue(!empty($result[0]['ok']) && $result[0]['ok']);
         }, function(RequestException $requestException) {
             $this->assertTrue(false);
         });
@@ -223,7 +223,7 @@ class UrbanAirshipV3Test extends Orchestra\Testbench\TestCase
         $urbanAirshipV3->setMessage($message);
         $result = $urbanAirshipV3->send();
 
-        $this->assertTrue($result[0]['ok']);
+        $this->assertTrue(!empty($result[0]['ok']) && $result[0]['ok']);
     }
 
     public function testAndroidDataSend()
@@ -240,7 +240,7 @@ class UrbanAirshipV3Test extends Orchestra\Testbench\TestCase
             'updated_at' => Carbon::now()->toDateTimeString(),
         ]);
         $result = $urbanAirshipV3->send();
-        $this->assertTrue($result[0]['ok']);
+        $this->assertTrue(!empty($result[0]['ok']) && $result[0]['ok']);
     }
 
     public function testSend()
@@ -248,7 +248,7 @@ class UrbanAirshipV3Test extends Orchestra\Testbench\TestCase
         $urbanAirshipV3 = $this->getProvider();
         $urbanAirshipV3->setMessage('nodes/push php package - unittest - ' . __METHOD__);
         $result = $urbanAirshipV3->send();
-        $this->assertTrue($result[0]['ok']);
+        $this->assertTrue(!empty($result[0]['ok']) && $result[0]['ok']);
     }
 
     public function testSetExtraError()

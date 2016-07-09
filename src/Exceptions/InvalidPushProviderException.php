@@ -19,7 +19,16 @@ class InvalidPushProviderException extends NodesException
      */
     public function __construct($object)
     {
-        $message = sprintf('The push provider used [%s] is not an instance of ProviderInstance', get_class($object));
+        if(is_object($object)) {
+            $provider = get_class($object);
+        }
+        else if(empty($object)) {
+            $provider = 'NULL';
+        }
+        else {
+            $provider = $object;
+        }
+        $message = sprintf('The push provider used [%s] is not an instance of ProviderInstance', $provider);
         parent::__construct($message, 500);
     }
 }
