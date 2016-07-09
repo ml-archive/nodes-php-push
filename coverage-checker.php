@@ -4,14 +4,14 @@ $inputFile  = $argv[1];
 $percentage = min(100, max(0, (int) $argv[2]));
 
 if (!file_exists($inputFile)) {
-    throw new InvalidArgumentException('Invalid input file provided');
+    throw new \InvalidArgumentException('Invalid input file provided');
 }
 
 if (!$percentage) {
-    throw new InvalidArgumentException('An integer checked percentage must be given as second parameter');
+    throw new \InvalidArgumentException('An integer checked percentage must be given as second parameter');
 }
 
-$xml             = new SimpleXMLElement(file_get_contents($inputFile));
+$xml             = new \SimpleXMLElement(file_get_contents($inputFile));
 $metrics         = $xml->xpath('//metrics');
 $totalElements   = 0;
 $checkedElements = 0;
