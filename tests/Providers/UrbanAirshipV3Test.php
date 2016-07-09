@@ -31,6 +31,8 @@ class UrbanAirshipV3Test extends Orchestra\Testbench\TestCase
             $this->assertTrue(false);
         });
         $promise->wait();
+
+        $this->assertTrue(true);
     }
 
     public function testSendAsyncNoMessage()
