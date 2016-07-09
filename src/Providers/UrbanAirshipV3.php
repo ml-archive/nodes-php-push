@@ -26,7 +26,9 @@ class UrbanAirshipV3 extends AbstractProvider
     protected $httpClient;
 
     /**
-     * setBadge
+     * setBadge, badge is the small red icon on the app in the launcher.
+     * The badge can be controlled by using this function
+     *
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
@@ -55,7 +57,9 @@ class UrbanAirshipV3 extends AbstractProvider
     }
 
     /**
-     * setExtra
+     * setExtra, extra is a map of key /value which can be passed to mobile
+     * There is a hard limit on how big a push notification can be, specially for ios
+     * Consider not putting too much in here, and consider using setAndroidData if you want to send more to android
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
@@ -132,7 +136,7 @@ class UrbanAirshipV3 extends AbstractProvider
         foreach ($applications = $this->appGroups[$this->appGroup] as $appName => $credentials) {
 
             // Skip empty credentials
-            if ($this->emptyCredentials($credentials)) {
+            if ($this->hasEmptyCredentials($credentials)) {
                 $results[$appName] = 'skipped - empty credentials';
                 continue;
             }
@@ -193,7 +197,7 @@ class UrbanAirshipV3 extends AbstractProvider
         foreach ($applications = $this->appGroups[$this->appGroup] as $appName => $credentials) {
 
             // Skip empty credentials
-            if ($this->emptyCredentials($credentials)) {
+            if ($this->hasEmptyCredentials($credentials)) {
                 $results[$appName] = 'skipped - empty credentials';
                 continue;
             }
@@ -224,14 +228,14 @@ class UrbanAirshipV3 extends AbstractProvider
     }
 
     /**
-     * emptyCredentials
+     * hasEmptyCredentials
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
      * @param array $credentials
      * @return bool
      */
-    protected function emptyCredentials(array $credentials) : bool
+    protected function hasEmptyCredentials(array $credentials) : bool
     {
         // If one or more required credentials are missing
         // we'll have to "invalidate" that app and notify about it in our logs
@@ -248,10 +252,10 @@ class UrbanAirshipV3 extends AbstractProvider
      * Retrieve HTTP client
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     * @access public
+     * @access protected
      * @return \GuzzleHttp\Client
      */
-    public function getHttpClient() : HttpClient
+    protected function getHttpClient() : HttpClient
     {
         if (!is_null($this->httpClient)) {
             return $this->httpClient;

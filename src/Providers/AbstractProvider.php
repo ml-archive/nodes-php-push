@@ -16,47 +16,55 @@ use Nodes\Push\Exceptions\InvalidArgumentException;
 abstract class AbstractProvider implements ProviderInterface
 {
     /**
+     * Fallback app group if nothing is set
      * @var string
      */
     protected $defaultAppGroup;
 
     /**
+     * App group set, will be used instead of fallback
      * @var string
      */
     protected $appGroup;
 
     /**
+     * List of all app groups
      * @var array
      */
     protected $appGroups;
 
     /**
+     * Channels for segmented push
      * @var array
      */
     protected $channels = [];
 
     /**
+     * Aliases for segmented push
      * @var array
      */
     protected $aliases = [];
 
     /**
+     * The message which will be shown in the push notification
      * @var string|null
      */
     protected $message;
 
     /**
+     * A map of key/value which will be passed in the push
      * @var array
      */
     protected $extra = [];
 
     /**
+     * A var to control the badge on app icon
      * @var null|int|string
      */
     protected $iOSBadge;
 
     /**
-     * Custom sounds
+     * Custom sound
      *
      * @var string|null
      */
@@ -148,7 +156,7 @@ abstract class AbstractProvider implements ProviderInterface
     }
 
     /**
-     * setChannels
+     * setChannels, for segmented push
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
@@ -169,7 +177,7 @@ abstract class AbstractProvider implements ProviderInterface
     }
 
     /**
-     * setChannel
+     * setChannel, for segmented push
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
@@ -197,7 +205,7 @@ abstract class AbstractProvider implements ProviderInterface
 
     /**
      * setAliases,
-     * Aliases are typically used as userId
+     * Aliases are typically used as userId for segmented push
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
@@ -219,7 +227,7 @@ abstract class AbstractProvider implements ProviderInterface
 
     /**
      * setAlias,
-     * Aliases are typically used as userId
+     * Aliases are typically used as userId for segmented push
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
@@ -246,7 +254,7 @@ abstract class AbstractProvider implements ProviderInterface
     }
 
     /**
-     * setMessage
+     * setMessage, the message which will be shown in the push notification
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
@@ -273,7 +281,9 @@ abstract class AbstractProvider implements ProviderInterface
     }
 
     /**
-     * setExtra
+     * setExtra, extra is a map of key /value which can be passed to mobile
+     * There is a hard limit on how big a push notification can be, specially for ios
+     * Consider not putting too much in here, and consider using setAndroidData if you want to send more to android
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
@@ -290,6 +300,16 @@ abstract class AbstractProvider implements ProviderInterface
         return $this;
     }
 
+    /**
+     * validateExtra
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     *
+     * @access protected
+     * @param array $extra
+     * @return void
+     * @throws \Nodes\Push\Exceptions\InvalidArgumentException
+     */
     protected function validateExtra(array $extra)
     {
         $protectedKeys = [
@@ -310,7 +330,8 @@ abstract class AbstractProvider implements ProviderInterface
     }
 
     /**
-     * setAndroidData
+     * setAndroidData, since android can handle 4kb while ios only have 0.5kb
+     * Note this will override keys in extra, if same keys are passed
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
@@ -352,7 +373,7 @@ abstract class AbstractProvider implements ProviderInterface
     }
 
     /**
-     * setIOSBadge
+     * setIOSBadge, badge is the small count on the app icon
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
@@ -426,7 +447,7 @@ abstract class AbstractProvider implements ProviderInterface
     }
 
     /**
-     * setIosContentAvailable
+     * setIosContentAvailable, silent push notifications, will not appear in notification center on ios
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
