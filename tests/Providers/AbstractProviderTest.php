@@ -15,6 +15,40 @@ class AbstractProviderTest extends Orchestra\Testbench\TestCase
         ];
     }
 
+    public function testSetAliasError()
+    {
+        $abstractProvider = $this->getProvider();
+        $this->expectException(\Throwable::class);
+        $abstractProvider->setAlias(['channel']);
+    }
+
+    public function testSetAliasSuccess()
+    {
+        $abstractProvider = $this->getProvider();
+        $abstractProvider->setAlias('alias');
+
+        $aliases = $abstractProvider->getAliases();
+        $this->assertSame('alias', $aliases[0]);
+    }
+
+    public function testSetAliasesFail()
+    {
+        $abstractProvider = $this->getProvider();
+        $this->expectException(\Throwable::class);
+        $abstractProvider->setAliases([$abstractProvider]);
+    }
+
+    public function testSetAliasesSuccess()
+    {
+        $abstractProvider = $this->getProvider();
+        $abstractProvider->setAliases(['alias', 1, 1.21]);
+
+        $aliases = $abstractProvider->getAliases();
+        $this->assertSame('alias', $aliases[0]);
+        $this->assertSame('1', $aliases[1]);
+        $this->assertSame('1.21', $aliases[2]);
+    }
+
     public function testIosContentAvailableError()
     {
         $abstractProvider = $this->getProvider();
@@ -301,4 +335,8 @@ class AbstractProviderTest extends Orchestra\Testbench\TestCase
 
 class AbstractProviderTester extends AbstractProvider
 {
+    public function send()
+    {
+        throw new \Exception('Feature not supported', 500);
+    }
 }

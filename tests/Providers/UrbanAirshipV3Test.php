@@ -13,6 +13,11 @@ class UrbanAirshipV3Test extends Orchestra\Testbench\TestCase
         ];
     }
 
+    public function testSend() {
+        $urbanAirshipV3 = $this->getProvider()->setMessage('update');
+        $result = $urbanAirshipV3->send();
+    }
+
     public function testSetExtraError()
     {
         $urbanAirshipV3 = $this->getProvider();
@@ -63,9 +68,9 @@ class UrbanAirshipV3Test extends Orchestra\Testbench\TestCase
             'app-groups'        => [
                 'default-app-group' => [
                     'app-1' => [
-                        'app_key'       => 'app-key',
-                        'app_secret'    => 'app-secret',
-                        'master_secret' => 'master-secret',
+                        'app_key' => env('URBAN_AIRSHIP_APP_KEY'),
+                        'app_secret' => env('URBAN_AIRSHIP_APP_SECRET'),
+                        'master_secret' => env('URBAN_AIRSHIP_MASTER_SECRET'),
                     ],
                 ],
             ],

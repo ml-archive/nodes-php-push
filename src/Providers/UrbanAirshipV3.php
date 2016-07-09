@@ -1,8 +1,11 @@
 <?php
 namespace Nodes\Push\Providers;
 
+use GuzzleHttp\Client as HttpClient;
 use Nodes\Push\Contracts\ProviderInterface;
 use Nodes\Push\Exceptions\InvalidArgumentException;
+use Nodes\Push\Exceptions\MissingArgumentException;
+use Nodes\Push\Exceptions\SendPushFailedException;
 
 /**
  * Class UrbanAirship
@@ -11,6 +14,13 @@ use Nodes\Push\Exceptions\InvalidArgumentException;
  */
 class UrbanAirshipV3 extends AbstractProvider
 {
+    /**
+     * Guzzle HTTP Client
+     *
+     * @var \GuzzleHttp\Client
+     */
+    protected $httpClient;
+
     /**
      * setBadge
      *
@@ -63,5 +73,261 @@ class UrbanAirshipV3 extends AbstractProvider
         }
 
         return parent::setExtra($extra);
+    }
+
+    public function send() : array
+    {
+        $this->validateBeforePush();
+
+        $results = [];
+
+        // Loop through all apps in selected application group
+        // and try and send the push message to each app.
+        foreach ($applications = $this->appGroups[$this->appGroup] as $appName => $credentials) {
+
+            // Skip empty credentials
+            if ($this->emptyCredentials($credentials)) {
+                $results[$appName] = 'skipped - empty credentials';
+                continue;
+            }
+
+            try {
+                // Send request to Urban Airship
+                $response = $this->getHttpClient()->post('/api/push', [
+                    'body' => json_encode($this->buildPushData()),
+                    'auth' => [$credentials['app_key'], $credentials['master_secret']],
+                ]);
+
+                // Validate response by looking at the received status code
+                if (!in_array($response->getStatusCode(), [200, 201, 202])) {
+                    throw new SendPushFailedException(sprintf('[%s] Could not send push message. Status code received: %d %s', $appName, $response->getStatusCode(), $response->getReasonPhrase()));
+                }
+
+                // Decode response
+                $content = json_decode($response->getBody(), true);
+
+                // Handle potential errors
+                if (empty($content)) {
+                    throw (new SendPushFailedException(sprintf('[%s] Could not send push message. Reason: %s', $appName, $content->error), $content->error_code))->setErrors(new MessageBag($content->details));
+                }
+            } catch (\Throwable $e) {
+                throw new SendPushFailedException(sprintf('[%s] Could not send push message. Reason: %s', $appName, $e->getMessage()));
+            }
+        }
+
+        return $results;
+    }
+
+    /**
+     * validateBeforePush
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return void
+     * @throws \Nodes\Push\Exceptions\MissingArgumentException
+     */
+    protected function validateBeforePush()
+    {
+        if (!$this->getMessage()) {
+            throw new MissingArgumentException('You have to setMessage() before sending');
+        }
+    }
+
+    /**
+     * emptyCredentials
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @param array $credentials
+     * @return bool
+     */
+    protected function emptyCredentials(array $credentials) : bool
+    {
+        // If one or more required credentials are missing
+        // we'll have to "invalidate" that app and notify about it in our logs
+        if (empty($credentials['app_key']) || empty($credentials['app_secret']) ||
+            empty($credentials['master_secret'])
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Retrieve HTTP client
+     *
+     * @author Morten Rugaard <moru@nodes.dk>
+     * @access public
+     * @return \GuzzleHttp\Client
+     */
+    public
+    function getHttpClient()
+    {
+        if (!is_null($this->httpClient)) {
+            return $this->httpClient;
+        }
+
+        return $this->httpClient = new HttpClient([
+            'base_uri' => 'https://go.urbanairship.com',
+            'headers'  => [
+                'Accept'       => sprintf('application/vnd.urbanairship+json; version=3;'),
+                'Content-Type' => sprintf('application/json'),
+            ],
+            'timeout'  => 30,
+        ]);
+    }
+
+    /**
+     * Build push data array
+     *
+     * @author Morten Rugaard <moru@nodes.dk>
+     * @access protected
+     * @return array
+     */
+    protected function buildPushData()
+    {
+        // Data container
+        $data = [];
+
+        // Set audience
+        $data['audience'] = !empty($this->buildAudienceData()) ? $this->buildAudienceData() : 'all';
+
+        // Set message
+        $data['notification']['alert'] = $this->getMessage();
+
+        // Set iOS data
+        if (!empty($this->buildIOSData())) {
+            $data['notification']['ios'] = $this->buildIOSData();
+        }
+
+        // Set Android data
+        if (!empty($this->buildAndroidData())) {
+            $data['notification']['android'] = $this->buildAndroidData();
+        }
+
+        // Set Windows data
+        if (!empty($this->buildWnsData())) {
+            $data['notification']['wns'] = $this->buildWnsData();
+        }
+
+        // Set device types
+        $data['device_types'] = 'all';
+
+        return $data;
+    }
+
+    /**
+     * Build audience data array
+     *
+     * @author Morten Rugaard <moru@nodes.dk>
+     * @access protected
+     * @return array
+     */
+    protected function buildAudienceData()
+    {
+        // Data container
+        $audience = [];
+
+        // Add target channnels
+        if (!empty($this->getChannels())) {
+            $audience['tag'] = $this->getChannels();
+        }
+
+        // Add target aliases
+        if (!empty($this->getAliases())) {
+            foreach ($this->getAliases() as $alias) {
+                $audience['alias'][] = $alias;
+            }
+        }
+
+        return $audience;
+    }
+
+    /**
+     * Build iOS data array
+     *
+     * @author Morten Rugaard <moru@nodes.dk>
+     * @access protected
+     * @return array
+     */
+    protected function buildIOSData()
+    {
+        // Data container
+        $ios = [];
+
+        // Set extra data for push notification
+        if (!empty($this->getExtra())) {
+            $ios['extra'] = $this->getExtra();
+        }
+
+        // Set badge count for push notification
+        if (!is_null($this->getBadge())) {
+            $ios['badge'] = $this->getBadge();
+        }
+
+        // Set sound of push notification
+        if (!is_null($this->getSound())) {
+            $ios['sound'] = $this->getSound();
+        }
+
+        // Set Content-Available for push notification
+        if ($this->isIosContentAvailable()) {
+            $ios['content-available'] = $this->isIosContentAvailable();
+        }
+
+        return $ios;
+    }
+
+    /**
+     * Build Android data array
+     *
+     * @author Morten Rugaard <moru@nodes.dk>
+     * @access protected
+     * @return array
+     */
+    protected function buildAndroidData()
+    {
+        // Data container
+        $android = [];
+
+        // Set extra data of push notification
+        if (!empty($this->getExtra())) {
+            $android['extra'] = $this->getExtra();
+        }
+
+        // Set badge of push notification
+        if (!is_null($this->getBadge())) {
+            $android['extra']['badge'] = $this->getBadge();
+        }
+
+        // Set sound of push notification
+        if (!is_null($this->getSound())) {
+            $android['extra']['sound'] = $this->getSound();
+        }
+
+        return $android;
+    }
+
+    /**
+     * buildWnsData
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return array
+     */
+    protected function buildWnsData()
+    {
+        // Data container
+        $wns = [];
+
+        // Set extra data of push notification
+        if (!empty($this->getExtra())) {
+            $wns['toast']['binding']['template'] = 'ToastText01';
+            $wns['toast']['binding']['text'] = $this->message;
+            $wns['toast']['launch'] = json_encode($this->extra);
+        }
+
+        return $wns;
     }
 }

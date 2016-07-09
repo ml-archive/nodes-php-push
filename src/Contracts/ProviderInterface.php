@@ -164,16 +164,8 @@ interface ProviderInterface
      * @return bool
      */
     public function isIosContentAvailable() : bool;
-//
-//    /**
-//     * Set Content-Available state (iOS only)
-//     *
-//     * @author Morten Rugaard <moru@nodes.dk>
-//     * @access public
-//     * @param  boolean $availability
-//     * @return $this
-//     */
-//    public function setContentAvailable($availability);
+
+    public function send();
 //
 //    /**
 //     * Send push message
@@ -182,7 +174,7 @@ interface ProviderInterface
 //     * @access public
 //     * @return boolean
 //     */
-//    public function send();
+
 //
 //    /**
 //     * enqueue

@@ -68,9 +68,9 @@ return [
             */
             'default-app-group' => [
                 'app-1' => [
-                    'app_key' => env('URBAN_AIRSHIP_DEV_APP_KEY'),
-                    'app_secret' => env('URBAN_AIRSHIP_DEV_APP_SECRET'),
-                    'master_secret' => env('URBAN_AIRSHIP_DEV_MASTER_SECRET'),
+                    'app_key' => env('URBAN_AIRSHIP_APP_KEY'),
+                    'app_secret' => env('URBAN_AIRSHIP_APP_SECRET'),
+                    'master_secret' => env('URBAN_AIRSHIP_MASTER_SECRET'),
                 ],
 
                 // Example of another app in an "app group"

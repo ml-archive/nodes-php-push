@@ -34,6 +34,11 @@ abstract class AbstractProvider implements ProviderInterface
     protected $channels = [];
 
     /**
+     * @var array
+     */
+    protected $aliases = [];
+
+    /**
      * @var string|null
      */
     protected $message;
@@ -175,6 +180,56 @@ abstract class AbstractProvider implements ProviderInterface
     public function getChannels() : array
     {
         return $this->channels;
+    }
+
+    /**
+     * setAliases,
+     * Aliases are typically used as userId
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @param array $aliases
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     * @throws \Throwable
+     */
+    public function setAliases(array $aliases) : ProviderInterface
+    {
+        // Make sure channels are strings
+        foreach ($aliases as &$alias) {
+            $alias = strval($alias);
+        }
+
+        $this->aliases = $aliases;
+
+        return $this;
+    }
+
+    /**
+     * setAlias,
+     * Aliases are typically used as userId
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @param string $alias
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function setAlias(string $alias) : ProviderInterface
+    {
+        $this->aliases = [$alias];
+
+        return $this;
+    }
+
+    /**
+     * getAliases
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return array
+     */
+    public function getAliases() : array
+    {
+        return $this->aliases;
     }
 
     /**
