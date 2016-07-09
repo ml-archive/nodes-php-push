@@ -21,6 +21,10 @@ foreach ($metrics as $metric) {
     $checkedElements += (int) $metric['coveredelements'];
 }
 
+if($totalElements == 0) {
+    echo 'Code coverage has no elements ' . PHP_EOL;
+    exit(1);
+}
 $coverage = ($checkedElements / $totalElements) * 100;
 
 if ($coverage < $percentage) {
