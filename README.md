@@ -110,7 +110,7 @@ send() : array; //In request, return array of results from provider
 sendAsync() : array; // Async, return array of promises if callback is needed
 
 // Advanced configs
-setIOSBadge($iOSBadge) : ProviderInterface; //Controll badge on iOS app icon
+setIOSBadge($iOSBadge) : ProviderInterface; //Control badge on iOS app icon
 setSound(string $sound) : ProviderInterface; // Custom sound
 removeSound() : ProviderInterface; // Remove custom sound
 setIosContentAvailable(bool $iosContentAvailable) : ProviderInterface; // Should not go in notification center
