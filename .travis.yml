@@ -23,3 +23,6 @@ install:
 script:
   - vendor/bin/phpunit
   - php coverage-checker.php clover.xml 75
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
