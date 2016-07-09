@@ -27,6 +27,7 @@ To install this package you will need:
 * Laravel 5.2+
 * PHP 7.0+
 
+
 You must then modify your `composer.json` file and run `composer update` to include the latest version of the package in your project.
 
 ```json

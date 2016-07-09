@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Psr7\Response;
@@ -17,6 +18,24 @@ class UrbanAirshipV3Test extends Orchestra\Testbench\TestCase
         ];
     }
 
+    public function testGetRequestDataIOSBadge()
+    {
+        $urbanAirshipV3 = $this->getProvider();
+
+        $urbanAirshipV3->setIOSBadge('+1');
+        $requestData = $urbanAirshipV3->getRequestData();
+        $this->assertSame([
+            'audience'     => 'all',
+            'notification' => [
+                'alert' => null,
+                'ios'   => [
+                    'badge' => '+1',
+                ],
+            ],
+            'device_types' => 'all',
+        ], $requestData);
+    }
+
     public function testGetRequestDataExtra()
     {
         $urbanAirshipV3 = $this->getProvider();
@@ -31,22 +50,22 @@ class UrbanAirshipV3Test extends Orchestra\Testbench\TestCase
         $this->assertSame([
             'audience'     => 'all',
             'notification' => [
-                'alert' => null,
-                'ios' => [
-                    'extra' => $extra
+                'alert'   => null,
+                'ios'     => [
+                    'extra' => $extra,
                 ],
                 'android' => [
-                    'extra' => $extra
+                    'extra' => $extra,
                 ],
-                'wns' => [
+                'wns'     => [
                     'toast' => [
                         'binding' => [
                             'template' => 'ToastText01',
-                            'text' => null
+                            'text'     => null,
                         ],
-                        'launch' => json_encode($extra)
-                    ]
-                ]
+                        'launch'  => json_encode($extra),
+                    ],
+                ],
             ],
             'device_types' => 'all',
         ], $requestData);
@@ -62,15 +81,15 @@ class UrbanAirshipV3Test extends Orchestra\Testbench\TestCase
         $this->assertSame([
             'audience'     => 'all',
             'notification' => [
-                'alert' => null,
-                'ios' => [
-                    'sound' => $sound
+                'alert'   => null,
+                'ios'     => [
+                    'sound' => $sound,
                 ],
                 'android' => [
                     'extra' => [
-                        'sound' => $sound
-                    ]
-                ]
+                        'sound' => $sound,
+                    ],
+                ],
             ],
             'device_types' => 'all',
         ], $requestData);
@@ -86,9 +105,9 @@ class UrbanAirshipV3Test extends Orchestra\Testbench\TestCase
             'audience'     => 'all',
             'notification' => [
                 'alert' => null,
-                'ios' => [
-                    'content-available' => true
-                ]
+                'ios'   => [
+                    'content-available' => true,
+                ],
             ],
             'device_types' => 'all',
         ], $requestData);
@@ -103,8 +122,8 @@ class UrbanAirshipV3Test extends Orchestra\Testbench\TestCase
         $this->assertSame([
             'audience'     => [
                 'tag' => [
-                    $channel
-                ]
+                    $channel,
+                ],
             ],
             'notification' => [
                 'alert' => null,
@@ -122,8 +141,8 @@ class UrbanAirshipV3Test extends Orchestra\Testbench\TestCase
         $this->assertSame([
             'audience'     => [
                 'alias' => [
-                    $alias
-                ]
+                    $alias,
+                ],
             ],
             'notification' => [
                 'alert' => null,
@@ -163,7 +182,7 @@ class UrbanAirshipV3Test extends Orchestra\Testbench\TestCase
     public function testSendAsync()
     {
         $urbanAirshipV3 = $this->getProvider();
-        $urbanAirshipV3->setMessage('testSendAsync');
+        $urbanAirshipV3->setMessage('nodes/push php package - unittest - testSendAsync');
         $promises = $urbanAirshipV3->sendAsync();
         /** @var Promise $promise */
         $promise = $promises[0];
@@ -192,10 +211,42 @@ class UrbanAirshipV3Test extends Orchestra\Testbench\TestCase
         $urbanAirshipV3->send();
     }
 
+    public function testTooLongMessage()
+    {
+        $urbanAirshipV3 = $this->getProvider();
+        $message = 'nodes/push php package - unittest - ' . __METHOD__;
+
+        for ($i = 0; $i < 1000; $i++) {
+            $message .= uniqid();
+        }
+
+        $urbanAirshipV3->setMessage($message);
+        $result = $urbanAirshipV3->send();
+
+        $this->assertTrue($result[0]['ok']);
+    }
+
+    public function testAndroidDataSend()
+    {
+        $urbanAirshipV3 = $this->getProvider();
+        $urbanAirshipV3->setMessage('nodes/push php package - unittest - ' . __METHOD__);
+        $urbanAirshipV3->setExtra([
+            'type' => 'created',
+        ]);
+        $urbanAirshipV3->setAndroidData([
+            'id'         => 1,
+            'name'       => 'test',
+            'created_at' => Carbon::now()->toDateTimeString(),
+            'updated_at' => Carbon::now()->toDateTimeString(),
+        ]);
+        $result = $urbanAirshipV3->send();
+        $this->assertTrue($result[0]['ok']);
+    }
+
     public function testSend()
     {
         $urbanAirshipV3 = $this->getProvider();
-        $urbanAirshipV3->setMessage('testSend');
+        $urbanAirshipV3->setMessage('nodes/push php package - unittest - ' . __METHOD__);
         $result = $urbanAirshipV3->send();
         $this->assertTrue($result[0]['ok']);
     }
@@ -207,30 +258,30 @@ class UrbanAirshipV3Test extends Orchestra\Testbench\TestCase
         $urbanAirshipV3->setExtra(['from' => 'test']);
 
         $this->expectException(InvalidArgumentException::class);
-        $urbanAirshipV3->setBadge('no supported');
+        $urbanAirshipV3->setIOSBadge('no supported');
     }
 
     public function testSetBadgeError()
     {
         $urbanAirshipV3 = $this->getProvider();
         $this->expectException(InvalidArgumentException::class);
-        $urbanAirshipV3->setBadge(-12);
+        $urbanAirshipV3->setIOSBadge(-12);
 
         $this->expectException(InvalidArgumentException::class);
-        $urbanAirshipV3->setBadge('no supported');
+        $urbanAirshipV3->setIOSBadge('no supported');
     }
 
     /**
-     * @dataProvider setBadgeSuccessProviderSuccess
+     * @dataProvider setIOSBadgeSuccessProviderSuccess
      */
-    public function testSetBadgeSuccess($a, $b, $expect)
+    public function testIOSSetBadgeSuccess($a, $b, $expect)
     {
         $urbanAirshipV3 = $this->getProvider();
-        $urbanAirshipV3->setBadge($a);
-        $this->assertSame($b, $urbanAirshipV3->getBadge());
+        $urbanAirshipV3->setIOSBadge($a);
+        $this->assertSame($b, $urbanAirshipV3->getIOSBadge());
     }
 
-    public function setBadgeSuccessProviderSuccess()
+    public function setIOSBadgeSuccessProviderSuccess()
     {
         return [
             [1, 1, true],

@@ -103,24 +103,24 @@ interface ProviderInterface
     public function getExtra() : array;
 
     /**
-     * setBadge
+     * setIOSBadge
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
-     * @param mixed $badge
+     * @param string|int|null $iOSBadge
      * @return \Nodes\Push\Contracts\ProviderInterface
      * @throws \Nodes\Push\Exceptions\InvalidArgumentException
      */
-    public function setBadge($badge) : ProviderInterface;
+    public function setIOSBadge($iOSBadge) : ProviderInterface;
 
     /**
-     * getBadge
+     * getIOSBadge
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
      * @return null|int|string
      */
-    public function getBadge();
+    public function getIOSBadge();
 
     /**
      * setSound
@@ -197,4 +197,23 @@ interface ProviderInterface
      * @return array
      */
     public function getRequestData() : array;
+
+    /**
+     * setAndroidData, since android push messages can handle 4kb where ios is 0.5kb
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @param array $androidData
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function setAndroidData(array $androidData) : ProviderInterface;
+
+    /**
+     * getAndroidData
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return array
+     */
+    public function getAndroidData() : array;
 }

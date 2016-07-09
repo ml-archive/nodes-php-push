@@ -53,17 +53,28 @@ abstract class AbstractProvider implements ProviderInterface
     /**
      * @var null|int|string
      */
-    protected $badge;
+    protected $iOSBadge;
 
     /**
+     * Custom sounds
+     *
      * @var string|null
      */
     protected $sound;
 
     /**
+     * Silent push notifications for iOS
+     *
      * @var bool
      */
     protected $iosContentAvailable = false;
+
+    /**
+     * Data just added for android in extra
+     *
+     * @var array
+     */
+    protected $androidData = [];
 
     /**
      * AbstractProvider constructor
@@ -272,16 +283,60 @@ abstract class AbstractProvider implements ProviderInterface
      */
     public function setExtra(array $extra) : ProviderInterface
     {
+        $this->validateExtra($extra);
+
+        $this->extra = $extra;
+
+        return $this;
+    }
+
+    protected function validateExtra(array $extra)
+    {
+        $protectedKeys = [
+            'sound',
+            'data',
+        ];
+
         // Make sure channels are strings
         foreach ($extra as $key => $value) {
             if (!is_scalar($value)) {
                 throw new InvalidArgumentException(sprintf('Extra key [%s] was an array/object', $key));
             }
-        }
 
-        $this->extra = $extra;
+            if (in_array($key, $protectedKeys)) {
+                throw new InvalidArgumentException(sprintf('The used key [%s] in extra is protected by package', $key));
+            }
+        }
+    }
+
+    /**
+     * setAndroidData
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @param array $androidData
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     * @throws \Nodes\Push\Exceptions\InvalidArgumentException
+     */
+    public function setAndroidData(array $androidData) : ProviderInterface
+    {
+        $this->validateExtra($androidData);
+
+        $this->androidData = $androidData;
 
         return $this;
+    }
+
+    /**
+     * getAndroidData
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return array
+     */
+    public function getAndroidData() : array
+    {
+        return $this->androidData;
     }
 
     /**
@@ -297,21 +352,21 @@ abstract class AbstractProvider implements ProviderInterface
     }
 
     /**
-     * setBadge
+     * setIOSBadge
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
-     * @param mixed $badge
+     * @param string|int|null $iOSBadge
      * @return \Nodes\Push\Contracts\ProviderInterface
      * @throws \Nodes\Push\Exceptions\InvalidArgumentException
      */
-    public function setBadge($badge) : ProviderInterface
+    public function setIOSBadge($iOSBadge) : ProviderInterface
     {
-        if (!is_scalar($badge)) {
+        if (!is_scalar($iOSBadge)) {
             throw new InvalidArgumentException('The passed badge was an array/object');
         }
 
-        $this->badge = $badge;
+        $this->iOSBadge = $iOSBadge;
 
         return $this;
     }
@@ -323,9 +378,9 @@ abstract class AbstractProvider implements ProviderInterface
      * @access public
      * @return null|int|string
      */
-    public function getBadge()
+    public function getIOSBadge()
     {
-        return $this->badge;
+        return $this->iOSBadge;
     }
 
     /**

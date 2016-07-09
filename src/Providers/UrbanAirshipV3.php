@@ -30,26 +30,26 @@ class UrbanAirshipV3 extends AbstractProvider
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
-     * @param int|string $badge
+     * @param int|string $iOSBadge
      * @return \Nodes\Push\Contracts\ProviderInterface
      * @throws \Nodes\Push\Exceptions\InvalidArgumentException
      */
-    public function setBadge($badge) : ProviderInterface
+    public function setIOSBadge($iOSBadge) : ProviderInterface
     {
         // Convert to int, if badge does not start with +/-, since int means setting the value
-        if (is_numeric($badge) && !starts_with($badge, '-') && !starts_with($badge, '+')) {
-            $badge = intval($badge);
+        if (is_numeric($iOSBadge) && !starts_with($iOSBadge, '-') && !starts_with($iOSBadge, '+')) {
+            $iOSBadge = intval($iOSBadge);
         }
 
-        if (is_int($badge) && $badge < 0) {
+        if (is_int($iOSBadge) && $iOSBadge < 0) {
             throw new InvalidArgumentException('Bagde was set to minus integer, either set 0 or as string fx "-5');
         }
 
-        if (!is_int($badge) && $badge != 'auto' && !is_numeric($badge)) {
+        if (!is_int($iOSBadge) && $iOSBadge != 'auto' && !is_numeric($iOSBadge)) {
             throw new InvalidArgumentException('The passed badge is not supported');
         }
 
-        $this->badge = $badge;
+        $this->iOSBadge = $iOSBadge;
 
         return $this;
     }
@@ -65,6 +65,39 @@ class UrbanAirshipV3 extends AbstractProvider
      */
     public function setExtra(array $extra) : ProviderInterface
     {
+        $this->validateExtra($extra);
+
+        return parent::setExtra($extra);
+    }
+
+    /**
+     * setAndroidData, since android can handle 4kb while ios only have 0.5kb
+     * Note this will override keys in extra, if same keys are passed
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @param array $androidData
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     * @throws \Nodes\Push\Exceptions\InvalidArgumentException
+     */
+    public function setAndroidData(array $androidData) : ProviderInterface
+    {
+        $this->validateExtra($androidData);
+
+        return parent::setAndroidData($androidData);
+    }
+
+    /**
+     * validateExtra
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @param array $extra
+     * @return void
+     * @throws \Nodes\Push\Exceptions\InvalidArgumentException
+     */
+    protected function validateExtra(array $extra)
+    {
         $protectedUAKeys = [
             'from',
             'collapse_key',
@@ -76,11 +109,11 @@ class UrbanAirshipV3 extends AbstractProvider
             }
         }
 
-        return parent::setExtra($extra);
+        parent::validateExtra($extra);
     }
 
     /**
-     * send
+     * send push notification in request
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
@@ -141,7 +174,8 @@ class UrbanAirshipV3 extends AbstractProvider
     }
 
     /**
-     * sendAsync
+     * sendAsync, send push notification async
+     * Promises will be returned in array, which can be used for callback
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
@@ -317,8 +351,8 @@ class UrbanAirshipV3 extends AbstractProvider
         }
 
         // Set badge count for push notification
-        if (!is_null($this->getBadge())) {
-            $ios['badge'] = $this->getBadge();
+        if (!is_null($this->getIOSBadge())) {
+            $ios['badge'] = $this->getIOSBadge();
         }
 
         // Set sound of push notification
@@ -351,9 +385,13 @@ class UrbanAirshipV3 extends AbstractProvider
             $android['extra'] = $this->getExtra();
         }
 
-        // Set badge of push notification
-        if (!is_null($this->getBadge())) {
-            $android['extra']['badge'] = $this->getBadge();
+        // Add android data
+        if (!empty($this->androidData)) {
+            if (empty($android['extra'])) {
+                $android['extra'] = $this->androidData;
+            } else {
+                $android['extra'] = array_merge($android['extra'], $this->androidData);
+            }
         }
 
         // Set sound of push notification
@@ -396,5 +434,23 @@ class UrbanAirshipV3 extends AbstractProvider
     public function getRequestData() : array
     {
         return $this->buildPushData();
+    }
+
+    /**
+     * setMessage
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @param string $message
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function setMessage(string $message) : ProviderInterface
+    {
+        // Max strlen is 254
+        if (strlen($message) > 254) {
+            $message = substr($message, 0, 251) . '...';
+        }
+
+        return parent::setMessage($message);
     }
 }

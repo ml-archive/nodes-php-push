@@ -93,27 +93,27 @@ class AbstractProviderTest extends Orchestra\Testbench\TestCase
         $this->assertSame('sound', $abstractProvider->getSound());
     }
 
-    public function testSetBadgeError()
+    public function testSetIOSBadgeError()
     {
         $urbanAirshipV3 = $this->getProvider();
         $this->expectException(InvalidArgumentException::class);
-        $urbanAirshipV3->setBadge([]);
+        $urbanAirshipV3->setIOSBadge([]);
 
         $this->expectException(InvalidArgumentException::class);
-        $urbanAirshipV3->setBadge($urbanAirshipV3);
+        $urbanAirshipV3->setIOSBadge($urbanAirshipV3);
     }
 
     /**
-     * @dataProvider setBadgeSuccessProviderSuccess
+     * @dataProvider setIOSBadgeSuccessProviderSuccess
      */
-    public function testSetBadgeSuccess($a, $b, $expect)
+    public function testSetIOSBadgeSuccess($a, $b, $expect)
     {
         $urbanAirshipV3 = $this->getProvider();
-        $urbanAirshipV3->setBadge($a);
-        $this->assertSame($a, $urbanAirshipV3->getBadge());
+        $urbanAirshipV3->setIOSBadge($a);
+        $this->assertSame($a, $urbanAirshipV3->getIOSBadge());
     }
 
-    public function setBadgeSuccessProviderSuccess()
+    public function setIOSBadgeSuccessProviderSuccess()
     {
         return [
             [1, 0, true],
