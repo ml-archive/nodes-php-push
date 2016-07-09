@@ -2,27 +2,6 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Environment
-    |--------------------------------------------------------------------------
-    |
-    | Used by some providers to determine if push should send to
-    | a production app or a testing app.
-    |
-    */
-    'live' => env('PARSE_LIVE', true),
-
-    /*
-    |--------------------------------------------------------------------------
-    | Queue
-    |--------------------------------------------------------------------------
-    |
-    | Name of queue to send push notifications from
-    |
-    */
-    'queue' => null,
-
-    /*
-    |--------------------------------------------------------------------------
     | Provider
     |--------------------------------------------------------------------------
     |
@@ -32,45 +11,11 @@ return [
     | that all the required methods has been implemented
     |
     */
-    'provider' => function($app) {
-        return new \Nodes\Push\Providers\UrbanAirship(
-            config('nodes.push.urban-airship.apps'),
-            config('nodes.push.urban-airship.default')
+    'provider' => function() {
+        return new \Nodes\Push\Providers\UrbanAirshipV3(
+            config('nodes.push.urban-airship')
         );
     },
-
-    /*
-    |--------------------------------------------------------------------------
-    | Parse applications
-    |--------------------------------------------------------------------------
-    |
-    | Credentials can be found at Parse.com under your app's settings.
-    |
-    */
-    'parse' => [
-
-        /*
-        |--------------------------------------------------------------------------
-        | Test application credentials
-        |--------------------------------------------------------------------------
-        */
-        'development' => [
-            'app_id' => env('PARSE_DEV_APP_ID'),
-            'rest_key' => env('PARSE_DEV_REST_KEY'),
-            'master_key' => env('PARSE_DEV_MASTER_KEY')
-        ],
-
-        /*
-        |--------------------------------------------------------------------------
-        | Live application credientials
-        |--------------------------------------------------------------------------
-        */
-        'live' => [
-            'app_id' => null,
-            'rest_key' => null,
-            'master_key' => null
-        ]
-    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -81,21 +26,24 @@ return [
     |
     */
     'urban-airship' => [
-
         /*
         |--------------------------------------------------------------------------
         | Default app group
         |--------------------------------------------------------------------------
         */
-        'default' => 'nodes',
+        'default-app-group' => 'default-app-group',
 
         /*
         |--------------------------------------------------------------------------
         | App groups
         |--------------------------------------------------------------------------
+        | App groups can be used to change between a set of application, can be used
+        | if your backend have multiple white label mobile apps, if you only have one
+        | just set the default to that
         |
-        | Since Urban Airship can only have one certificate per app, most of the
-        | time, you'll have two apps, one for development and one for production.
+        |
+        | In some situations sending to multiple apps at the same time can be handy,
+        | Fx sending to several development apps from development/staging
         |
         | Therefore apps are split into "app groups". An app group can contain as
         | many apps as you like. But must all be in an associative array.
@@ -104,28 +52,30 @@ return [
         | take a "app group" and look through each array in that group and send
         | the push message to that app.
         |
+        | Empty keys will be ignored in an app will be ignored, no error will be thrown
+        |
         | All apps registered within an "app group" must contain three keys:
         | - app_key
         | - app_secret
         | - master_secret
         */
-        'apps' => [
+        'app-groups' => [
 
             /*
             |--------------------------------------------------------------------------
             | Nodes test app
             |--------------------------------------------------------------------------
             */
-            'nodes' => [
-                'development' => [
-                    'app_key' => env('URBAN_AIRSHIP_DEV_APP_KEY'),
-                    'app_secret' => env('URBAN_AIRSHIP_DEV_APP_SECRET'),
-                    'master_secret' => env('URBAN_AIRSHIP_DEV_MASTER_SECRET'),
+            'default-app-group' => [
+                'app-1' => [
+                    'app_key' => env('URBAN_AIRSHIP_APP_KEY'),
+                    'app_secret' => env('URBAN_AIRSHIP_APP_SECRET'),
+                    'master_secret' => env('URBAN_AIRSHIP_MASTER_SECRET'),
                 ],
 
                 // Example of another app in an "app group"
                 /*
-                'production' => [
+                'app-2' => [
                     'app_key' => null,
                     'app_secret' => null,
                     'master_secret' => null,

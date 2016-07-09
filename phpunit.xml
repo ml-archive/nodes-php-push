@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         beStrictAboutTestsThatDoNotTestAnything="true"
+         beStrictAboutOutputDuringTests="true"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         failOnRisky="true"
+         failOnWarning="true"
+         processIsolation="false"
+         stopOnError="false"
+         stopOnFailure="false"
+         syntaxCheck="true"
+         verbose="true"
+>
+    <php>
+        <env name="APP_KEY" value="AckfSECXIvnK5r28GVIWUAxmbBSjTsmF"/>
+        <env name="APP_NAME" value="test-app"/>
+        <env name="URBAN_AIRSHIP_APP_KEY" value="3N2QsetxRBGHokBion9tMg"/>
+        <env name="URBAN_AIRSHIP_APP_SECRET" value="Q7UrI_VRThGaQOaPXnUIQA"/>
+        <env name="URBAN_AIRSHIP_MASTER_SECRET" value="wuC9V2R9xO3SIQcfwBO-l3"/>
+    </php>
+    <testsuites>
+        <testsuite name="API Test Suite">
+            <directory suffix="Test.php">/tests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">/tests/</directory>
+        </whitelist>
+    </filter>
+    <logging>
+        <!-- and this is where your report will be written -->
+        <log type="coverage-clover" target="clover.xml"/>
+    </logging>
+</phpunit>
+

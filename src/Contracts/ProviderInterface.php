@@ -1,4 +1,6 @@
 <?php
+declare (strict_types = 1);
+
 namespace Nodes\Push\Contracts;
 
 /**
@@ -10,136 +12,244 @@ namespace Nodes\Push\Contracts;
 interface ProviderInterface
 {
     /**
-     * Set push channels
+     * setAppGroup, pick the app group to send pushes
      *
-     * @author Morten Rugaard <moru@nodes.dk>
-     *
+     * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
-     * @param  array $channels
-     * @return $this
+     * @param string $appGroup
+     * @return \Nodes\Push\Contracts\ProviderInterface
      */
-    public function setChannels(array $channels);
+    public function setAppGroup(string $appGroup) : ProviderInterface;
 
     /**
-     * Add additional channels to existing array of channels
+     * getAppGroup
      *
-     * @author Morten Rugaard <moru@nodes.dk>
-     *
+     * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
-     * @param  array $channels
-     * @return $this
+     * @return string
      */
-    public function addChannels(array $channels);
+    public function getAppGroup() : string;
 
     /**
-     * Set text of push message
+     * setChannels for segmented push, this will override current channels
      *
-     * @author Morten Rugaard <moru@nodes.dk>
-     *
+     * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
-     * @param  string $message
-     * @return $this
+     * @param array $channels
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     * @throws \Throwable
      */
-    public function setMessage($message);
+    public function setChannels(array $channels) : ProviderInterface;
 
     /**
-     * Set extra data
+     * setChannel for segmented push, this will override
      *
-     * @author Morten Rugaard <moru@nodes.dk>
-     *
+     * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
-     * @param  array $data
-     * @return $this
+     * @param string $channel
+     * @return \Nodes\Push\Contracts\ProviderInterface
      */
-    public function setExtra(array $data);
+    public function setChannel(string $channel) : ProviderInterface;
 
     /**
-     * Add additional data to existing array of extra data
+     * getChannels for segmented push
      *
-     * @author Morten Rugaard <moru@nodes.dk>
-     *
+     * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
-     * @param  array $data
-     * @return $this
+     * @return array
      */
-    public function addExtra(array $data);
+    public function getChannels() : array;
 
     /**
-     * Set title of push notification (Android only)
+     * setAliases, for segmented push
      *
-     * @author Morten Rugaard <moru@nodes.dk>
-     *
+     * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
-     * @param  string $title
-     * @return $this
+     * @param array $aliases
+     * @return \Nodes\Push\Contracts\ProviderInterface
      */
-    public function setTitle($title);
+    public function setAliases(array $aliases) : ProviderInterface;
 
     /**
-     * Set badge count
+     * setAlias, for segmented push
      *
-     * @author Morten Rugaard <moru@nodes.dk>
-     *
+     * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
-     * @param  integer
-     * @return $this
+     * @param string $alias
+     * @return \Nodes\Push\Contracts\ProviderInterface
      */
-    public function setBadgeCount($count);
+    public function setAlias(string $alias) : ProviderInterface;
 
     /**
-     * Set sound of push notification
+     * getAliases, for segmented push
      *
-     * @author Morten Rugaard <moru@nodes.dk>
-     *
+     * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
-     * @param  string $sound
-     * @return $this
+     * @return array
      */
-    public function setSound($sound);
+    public function getAliases() : array;
 
     /**
-     * Set push message as silent
+     * setMessage, which will be in notification center/title of the push notification
      *
-     * @author Morten Rugaard <moru@nodes.dk>
-     *
+     * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
-     * @param  boolean $silent
-     * @return $this
+     * @param string $message
+     * @return \Nodes\Push\Contracts\ProviderInterface
      */
-    public function setSilence($silent);
+    public function setMessage(string $message) : ProviderInterface;
 
     /**
-     * Set Content-Available state (iOS only)
+     * getMessage
      *
-     * @author Morten Rugaard <moru@nodes.dk>
-     *
+     * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
-     * @param  boolean $availability
-     * @return $this
+     * @return string|null
      */
-    public function setContentAvailable($availability);
+    public function getMessage();
 
     /**
-     * Set which application we should send the push notification from.
+     * setExtra, the payload of the push
+     * Remember there is limits for size of push
      *
-     * Name should correspond to the one the config file where
-     * the application's credentials is located.
-     *
-     * @author Morten Rugaard <moru@nodes.dk>
-     *
-     * @access public
-     * @param  string $app
-     * @return $this
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access pu
+     * @param array $extra
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     * @throws \Nodes\Push\Exceptions\InvalidArgumentException
      */
-    public function setApplication($app);
+    public function setExtra(array $extra) : ProviderInterface;
 
     /**
-     * Send push message
+     * getExtra
      *
-     * @author Morten Rugaard <moru@nodes.dk>
-     *
+     * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
-     * @return boolean
+     * @return array
      */
-    public function send();
+    public function getExtra() : array;
+
+    /**
+     * setIOSBadge
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @param string|int|null $iOSBadge
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     * @throws \Nodes\Push\Exceptions\InvalidArgumentException
+     */
+    public function setIOSBadge($iOSBadge) : ProviderInterface;
+
+    /**
+     * getIOSBadge
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return null|int|string
+     */
+    public function getIOSBadge();
+
+    /**
+     * setSound
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @param string $sound
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function setSound(string $sound) : ProviderInterface;
+
+    /**
+     * removeSound
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function removeSound() : ProviderInterface;
+
+    /**
+     * getSound
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return string|null
+     */
+    public function getSound();
+
+    /**
+     * setIosContentAvailable, iOS-8 feature to sent push notifications without they go in notification center
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @param bool $iosContentAvailable
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function setIosContentAvailable(bool $iosContentAvailable) : ProviderInterface;
+
+    /**
+     * isIosContentAvailable
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return bool
+     */
+    public function isIosContentAvailable() : bool;
+
+    /**
+     * send
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return array
+     * @throws \Nodes\Push\Exceptions\MissingArgumentException
+     * @throws \Nodes\Push\Exceptions\SendPushFailedException
+     */
+    public function send() : array;
+
+    /**
+     * sendAsync
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return array
+     */
+    public function sendAsync() : array;
+
+    /**
+     * getRequestData, for debugging retrieve the request data
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return array
+     */
+    public function getRequestData() : array;
+
+    /**
+     * setAndroidData, since android push messages can handle 4kb where ios is 0.5kb
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @param array $androidData
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function setAndroidData(array $androidData) : ProviderInterface;
+
+    /**
+     * getAndroidData
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return array
+     */
+    public function getAndroidData() : array;
+
+    /**
+     * getInstance
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function getInstance() : ProviderInterface;
 }
