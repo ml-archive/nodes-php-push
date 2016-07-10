@@ -7,6 +7,7 @@ use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Psr7\Response;
 use Nodes\Push\Exceptions\InvalidArgumentException;
 use Nodes\Push\Exceptions\MissingArgumentException;
+use Nodes\Push\Exceptions\SendPushFailedException;
 use Nodes\Push\ServiceProvider;
 use Nodes\Push\Tests\TestCase;
 
@@ -184,16 +185,11 @@ class UrbanAirshipV3Test extends TestCase
     {
         $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
         $urbanAirshipV3->setMessage('nodes/push php package - unittest - testSendAsync');
-        $promises = $urbanAirshipV3->sendAsync();
-        /** @var Promise $promise */
-        $promise = $promises[0];
-        $promise->then(function(Response $response) {
-            $result = json_decode($response->getBody()->getContents(), true);
-            $this->assertTrue(!empty($result[0]['ok']) && $result[0]['ok']);
-        }, function(RequestException $requestException) {
+        $urbanAirshipV3->sendAsync(function(array $results) {
+            $this->assertTrue(!empty($results[0]['ok']) && $results[0]['ok']);
+        }, function(SendPushFailedException $e) {
             $this->assertTrue(false);
         });
-        $promise->wait();
 
         $this->assertTrue(true);
     }

@@ -212,9 +212,11 @@ interface ProviderInterface
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      * @access public
-     * @return array
+     * @param callable|null $success
+     * @param callable|null $error
+     * @return void
      */
-    public function sendAsync() : array;
+    public function sendAsync(callable $success = null, callable $error = null);
 
     /**
      * getRequestData, for debugging retrieve the request data

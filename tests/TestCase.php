@@ -66,7 +66,7 @@ class AbstractProviderTester extends AbstractProvider
         throw new \Exception('Feature not supported', 500);
     }
 
-    public function sendAsync() : array
+    public function sendAsync(callable $success = null, callable $error = null)
     {
         throw new \Exception('Feature not supported', 500);
     }
