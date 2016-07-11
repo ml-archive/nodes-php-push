@@ -208,17 +208,6 @@ interface ProviderInterface
     public function send() : array;
 
     /**
-     * sendAsync
-     *
-     * @author Casper Rasmussen <cr@nodes.dk>
-     * @access public
-     * @param callable|null $success
-     * @param callable|null $error
-     * @return void
-     */
-    public function sendAsync(callable $success = null, callable $error = null);
-
-    /**
      * getRequestData, for debugging retrieve the request data
      *
      * @author Casper Rasmussen <cr@nodes.dk>

@@ -178,76 +178,6 @@ class UrbanAirshipV3 extends AbstractProvider
     }
 
     /**
-     * sendAsync
-     *
-     * @author Casper Rasmussen <cr@nodes.dk>
-     * @access public
-     * @param callable|null $success
-     * @param callable|null $error
-     * @return void
-     * @throws \Nodes\Push\Exceptions\MissingArgumentException
-     */
-    public function sendAsync(callable $success = null, callable $error = null)
-    {
-        $this->validateBeforePush();
-
-        #Todo when phthreads are installed
-        #(new AsyncTask($this))->run($success, $error);
-
-        $results = [];
-        // Loop through all apps in selected application group
-        // and try and send the push message to each app.
-        foreach ($applications = $this->appGroups[$this->appGroup] as $appName => $credentials) {
-
-            // Skip empty credentials
-            if ($this->hasEmptyCredentials($credentials)) {
-                $results[$appName] = 'skipped - empty credentials';
-                continue;
-            }
-
-            try {
-                // Send request to Urban Airship
-                $response = $this->getHttpClient()->post('/api/push', [
-                    'body' => json_encode($this->buildPushData()),
-                    'auth' => [$credentials['app_key'], $credentials['master_secret']],
-                ]);
-
-                // Validate response by looking at the received status code
-                if (!in_array($response->getStatusCode(), [200, 201, 202])) {
-                    throw new SendPushFailedException(sprintf('[%s] Could not send push message. Status code received: %d %s', $appName, $response->getStatusCode(), $response->getReasonPhrase()));
-                }
-
-                // Decode response
-                $content = json_decode($response->getBody()->getContents(), true);
-
-                // Handle potential errors
-                if (empty($content['ok']) || !$content['ok']) {
-                    throw (new SendPushFailedException(sprintf('[%s] Could not send push message. Reason: %s', $appName, $content->error), $content->error_code))->setErrors(new MessageBag($content['details']));
-                }
-
-                $results[] = $content;
-            } catch (ClientException $e) {
-                if ($error) {
-                    if ($e->hasResponse()) {
-                        $content = json_decode($e->getResponse()->getBody()->getContents(), true);
-                    } else {
-                        $content = [];
-                    }
-                    call_user_func($error, (new SendPushFailedException(sprintf('[%s] Could not send push message. Reason: %s', $appName, $e->getMessage())))->setErrors(new MessageBag($content['details'])));
-                }
-            } catch (\Throwable $e) {
-                if ($error) {
-                    call_user_func($error, new SendPushFailedException(sprintf('[%s] Could not send push message. Reason: %s', $appName, $e->getMessage())));
-                }
-            }
-
-            if ($success) {
-                call_user_func($success, $results);
-            }
-        }
-    }
-
-    /**
      * validateBeforePush
      *
      * @author Casper Rasmussen <cr@nodes.dk>
@@ -493,27 +423,3 @@ class UrbanAirshipV3 extends AbstractProvider
         return parent::setMessage($message);
     }
 }
-
-//class AsyncTask extends \Thread
-//{
-//    protected $urbanAirshipV3;
-//
-//    public function __construct(UrbanAirshipV3 $urbanAirshipV3)
-//    {
-//        $this->urbanAirshipV3 = $urbanAirshipV3;
-//    }
-//
-//    public function run(callable $success = null, callable $error = null)
-//    {
-//        try {
-//            $responses = $this->urbanAirshipV3->send();
-//            if ($success) {
-//                call_user_func($success, $responses);
-//            }
-//        } catch (SendPushFailedException $pushFailedException) {
-//            if ($error) {
-//                call_user_func($error, $pushFailedException);
-//            }
-//        }
-//    }
-//}

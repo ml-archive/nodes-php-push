@@ -84,12 +84,6 @@ push()->setMessage('test')
     'id' => 1
 ])
 ->send();
-
-push()->setMessage('test')
-->setExtra([
-    'id' => 1
-])
-->sendAsync();
 ```
 
 ### Function on provider used to send push
@@ -108,7 +102,6 @@ setChannel(string $channel) : ProviderInterface;
 
 // Send push, before this is executed nothing will get send
 send() : array; //In request, return array of results from provider
-sendAsync() : array; // Async, return array of promises if callback is needed
 
 // Advanced configs
 setIOSBadge($iOSBadge) : ProviderInterface; //Control badge on iOS app icon

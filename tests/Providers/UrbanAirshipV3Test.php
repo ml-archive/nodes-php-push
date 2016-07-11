@@ -181,26 +181,6 @@ class UrbanAirshipV3Test extends TestCase
         ], $requestData);
     }
 
-    public function testSendAsync()
-    {
-        $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
-        $urbanAirshipV3->setMessage('nodes/push php package - unittest - testSendAsync');
-        $urbanAirshipV3->sendAsync(function(array $results) {
-            $this->assertTrue(!empty($results[0]['ok']) && $results[0]['ok']);
-        }, function(SendPushFailedException $e) {
-            $this->assertTrue(false);
-        });
-
-        $this->assertTrue(true);
-    }
-
-    public function testSendAsyncNoMessage()
-    {
-        $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
-        $this->expectException(MissingArgumentException::class);
-        $urbanAirshipV3->sendAsync();
-    }
-
     public function testSendNoMessage()
     {
         $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
