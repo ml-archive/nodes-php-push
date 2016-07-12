@@ -11,7 +11,7 @@ A Push manager to send push messages to mobile devices from your project.
 [![Watch repository on GitHub](https://img.shields.io/github/watchers/nodes-php/push.svg?style=social&label=Watch)](https://github.com/nodes-php/push/watchers)
 [![Fork repository on GitHub](https://img.shields.io/github/forks/nodes-php/push.svg?style=social&label=Fork)](https://github.com/nodes-php/push/network)
 [![Travis tests](https://img.shields.io/travis/nodes-php/push.svg)](https://travis-ci.org/nodes-php/push)
-[![Travis tests](https://img.shields.io/codecov/c/github/nodes-php/push.svg?maxAge=2592000)](https://travis-ci.org/nodes-php/push)
+[![codecov](https://codecov.io/gh/nodes-php/push/branch/master/graph/badge.svg)](https://codecov.io/gh/nodes-php/push)php/push)
 
 ## 📝 Introduction
 
