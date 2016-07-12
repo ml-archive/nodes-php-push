@@ -106,6 +106,14 @@ class AbstractProviderTest extends TestCase
         $urbanAirshipV3->setIOSBadge($urbanAirshipV3);
     }
 
+    public function testSetIOSBadgeError2()
+    {
+        $urbanAirshipV3 = $this->getAbstractProvider();
+
+        $this->expectException(InvalidArgumentException::class);
+        $urbanAirshipV3->setIOSBadge($urbanAirshipV3);
+    }
+
     /**
      * @dataProvider setIOSBadgeSuccessProviderSuccess
      */
@@ -116,6 +124,9 @@ class AbstractProviderTest extends TestCase
         $this->assertSame($a, $urbanAirshipV3->getIOSBadge());
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function setIOSBadgeSuccessProviderSuccess()
     {
         return [
