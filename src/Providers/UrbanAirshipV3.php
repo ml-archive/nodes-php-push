@@ -5,11 +5,11 @@ namespace Nodes\Push\Providers;
 
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Psr7\Response;
 use Illuminate\Support\MessageBag;
 use Nodes\Push\Contracts\ProviderInterface;
 use Nodes\Push\Exceptions\InvalidArgumentException;
 use Nodes\Push\Exceptions\MissingArgumentException;
+use Nodes\Push\Exceptions\PushSizeLimitException;
 use Nodes\Push\Exceptions\SendPushFailedException;
 
 /**
@@ -109,7 +109,7 @@ class UrbanAirshipV3 extends AbstractProvider
         ];
 
         foreach ($extra as $key => $value) {
-            if (in_array($key, $protectedUAKeys)) {
+            if (in_array($value, $protectedUAKeys)) {
                 throw new InvalidArgumentException(sprintf('The used key [%s] in extra is protected by UA', $key));
             }
         }
@@ -125,6 +125,7 @@ class UrbanAirshipV3 extends AbstractProvider
      * @return array
      * @throws \Nodes\Push\Exceptions\MissingArgumentException
      * @throws \Nodes\Push\Exceptions\SendPushFailedException
+     * @throws \Nodes\Push\Exceptions\PushSizeLimitException
      */
     public function send() : array
     {
@@ -185,11 +186,25 @@ class UrbanAirshipV3 extends AbstractProvider
      * @access public
      * @return void
      * @throws \Nodes\Push\Exceptions\MissingArgumentException
+     * @throws \Nodes\Push\Exceptions\PushSizeLimitException
      */
     protected function validateBeforePush()
     {
         if (!$this->getMessage()) {
             throw new MissingArgumentException('You have to setMessage() before sending push');
+        }
+
+        // Check kb size
+        if(mb_strlen(json_encode($this->buildIOSData())) > 2000) {
+            throw new PushSizeLimitException(sprintf('Limit of ios is 2kb, %s was send', mb_strlen(json_encode($this->buildIOSData()))));
+        }
+
+        if(mb_strlen(json_encode($this->buildWnsData())) > 2000) {
+            throw new PushSizeLimitException(sprintf('Limit of wns is 2kb, %s was send', mb_strlen(json_encode($this->buildWnsData()))));
+        }
+
+        if(mb_strlen(json_encode($this->buildAndroidData())) > 4000) {
+            throw new PushSizeLimitException(sprintf('Limit of android is 4kb, %s was send', mb_strlen(json_encode($this->buildAndroidData()))));
         }
     }
 

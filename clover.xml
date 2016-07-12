@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1468228882">
-  <project timestamp="1468228882">
+<coverage generated="1468319175">
+  <project timestamp="1468319175">
     <package name="Nodes\Push\Tests\Providers">
       <file name="/var/www/alarmeringsapp/htdocs/vendor/nodes/push/tests/Providers/AbstractProviderTest.php">
         <class name="AbstractProviderTest" namespace="Nodes\Push\Tests\Providers">
@@ -176,7 +176,7 @@
       </file>
       <file name="/var/www/alarmeringsapp/htdocs/vendor/nodes/push/tests/Providers/UrbanAirshipV3Test.php">
         <class name="UrbanAirshipV3Test" namespace="Nodes\Push\Tests\Providers">
-          <metrics complexity="21" methods="17" coveredmethods="13" conditionals="0" coveredconditionals="0" statements="113" coveredstatements="105" elements="130" coveredelements="118"/>
+          <metrics complexity="21" methods="17" coveredmethods="13" conditionals="0" coveredconditionals="0" statements="113" coveredstatements="107" elements="130" coveredelements="120"/>
         </class>
         <line num="16" type="method" name="getPackageProviders" visibility="protected" complexity="1" crap="1" count="21"/>
         <line num="19" type="stmt" count="21"/>
@@ -287,12 +287,12 @@
         <line num="227" type="stmt" count="1"/>
         <line num="228" type="stmt" count="1"/>
         <line num="229" type="stmt" count="1"/>
-        <line num="231" type="method" name="testSetExtraError" visibility="public" complexity="1" crap="1.12" count="1"/>
+        <line num="231" type="method" name="testSetExtraError" visibility="public" complexity="1" crap="1.00" count="1"/>
         <line num="233" type="stmt" count="1"/>
         <line num="234" type="stmt" count="1"/>
         <line num="235" type="stmt" count="1"/>
-        <line num="237" type="stmt" count="0"/>
-        <line num="238" type="stmt" count="0"/>
+        <line num="237" type="stmt" count="1"/>
+        <line num="238" type="stmt" count="1"/>
         <line num="239" type="stmt" count="0"/>
         <line num="241" type="method" name="testSetBadgeError" visibility="public" complexity="1" crap="1.12" count="1"/>
         <line num="243" type="stmt" count="1"/>
@@ -308,7 +308,7 @@
         <line num="259" type="stmt" count="7"/>
         <line num="261" type="method" name="setIOSBadgeSuccessProviderSuccess" visibility="public" complexity="1" crap="2" count="0"/>
         <line num="264" type="stmt" count="0"/>
-        <metrics loc="275" ncloc="272" classes="1" methods="17" coveredmethods="13" conditionals="0" coveredconditionals="0" statements="113" coveredstatements="105" elements="130" coveredelements="118"/>
+        <metrics loc="275" ncloc="272" classes="1" methods="17" coveredmethods="13" conditionals="0" coveredconditionals="0" statements="113" coveredstatements="107" elements="130" coveredelements="120"/>
       </file>
     </package>
     <package name="Nodes\Push\Tests\Facades\Helpers">
@@ -371,6 +371,6 @@
         <metrics loc="73" ncloc="73" classes="2" methods="7" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="11" elements="21" coveredelements="15"/>
       </file>
     </package>
-    <metrics files="5" loc="717" ncloc="711" classes="6" methods="59" coveredmethods="34" conditionals="0" coveredconditionals="0" statements="270" coveredstatements="239" elements="329" coveredelements="273"/>
+    <metrics files="5" loc="717" ncloc="711" classes="6" methods="59" coveredmethods="34" conditionals="0" coveredconditionals="0" statements="270" coveredstatements="241" elements="329" coveredelements="275"/>
   </project>
 </coverage>

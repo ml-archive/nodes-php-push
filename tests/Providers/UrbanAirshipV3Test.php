@@ -24,7 +24,7 @@ class UrbanAirshipV3Test extends TestCase
     {
         $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
 
-        $urbanAirshipV3->setIOSBadge('+1');
+        $urbanAirshipV3->setIOSBadge('+1')->removeSound();
         $requestData = $urbanAirshipV3->getRequestData();
         $this->assertSame([
             'audience'     => 'all',
@@ -47,7 +47,7 @@ class UrbanAirshipV3Test extends TestCase
             uniqid() => uniqid(),
         ];
 
-        $urbanAirshipV3->setExtra($extra);
+        $urbanAirshipV3->setExtra($extra)->removeSound();
         $requestData = $urbanAirshipV3->getRequestData();
         $this->assertSame([
             'audience'     => 'all',
@@ -101,7 +101,7 @@ class UrbanAirshipV3Test extends TestCase
     {
         $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
 
-        $urbanAirshipV3->setIosContentAvailable(true);
+        $urbanAirshipV3->setIosContentAvailable(true)->removeSound();
         $requestData = $urbanAirshipV3->getRequestData();
         $this->assertSame([
             'audience'     => 'all',
@@ -119,7 +119,7 @@ class UrbanAirshipV3Test extends TestCase
     {
         $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
         $channel = uniqid();
-        $urbanAirshipV3->setChannel($channel);
+        $urbanAirshipV3->setChannel($channel)->removeSound();
         $requestData = $urbanAirshipV3->getRequestData();
         $this->assertSame([
             'audience'     => [
@@ -138,7 +138,7 @@ class UrbanAirshipV3Test extends TestCase
     {
         $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
         $alias = uniqid();
-        $urbanAirshipV3->setAlias($alias);
+        $urbanAirshipV3->setAlias($alias)->removeSound();
         $requestData = $urbanAirshipV3->getRequestData();
         $this->assertSame([
             'audience'     => [
@@ -157,7 +157,7 @@ class UrbanAirshipV3Test extends TestCase
     {
         $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
         $message = uniqid();
-        $urbanAirshipV3->setMessage($message);
+        $urbanAirshipV3->setMessage($message)->removeSound();
         $requestData = $urbanAirshipV3->getRequestData();
         $this->assertSame([
             'audience'     => 'all',
@@ -170,7 +170,7 @@ class UrbanAirshipV3Test extends TestCase
 
     public function testGetRequestDataEmpty()
     {
-        $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
+        $urbanAirshipV3 = $this->getUrbanAirshipV3Provider()->removeSound();
         $requestData = $urbanAirshipV3->getRequestData();
         $this->assertSame([
             'audience'     => 'all',
