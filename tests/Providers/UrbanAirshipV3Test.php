@@ -228,21 +228,31 @@ class UrbanAirshipV3Test extends TestCase
         $this->assertTrue(!empty($result[0]['ok']) && $result[0]['ok']);
     }
 
-    public function testSetExtraError()
+    public function testSetExtraError1()
     {
         $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
         $this->expectException(InvalidArgumentException::class);
         $urbanAirshipV3->setExtra(['from' => 'test']);
+    }
+
+    public function testSetExtraError2()
+    {
+        $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
 
         $this->expectException(InvalidArgumentException::class);
         $urbanAirshipV3->setIOSBadge('no supported');
     }
 
-    public function testSetBadgeError()
+    public function testSetBadgeError1()
     {
         $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
         $this->expectException(InvalidArgumentException::class);
         $urbanAirshipV3->setIOSBadge(-12);
+    }
+
+    public function testSetBadgeError2()
+    {
+        $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
 
         $this->expectException(InvalidArgumentException::class);
         $urbanAirshipV3->setIOSBadge('no supported');
@@ -258,6 +268,9 @@ class UrbanAirshipV3Test extends TestCase
         $this->assertSame($b, $urbanAirshipV3->getIOSBadge());
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function setIOSBadgeSuccessProviderSuccess()
     {
         return [

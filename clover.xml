@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1468320288">
-  <project timestamp="1468320288">
+<coverage generated="1468321018">
+  <project timestamp="1468321018">
     <package name="Nodes\Push\Tests\Providers">
       <file name="/var/www/alarmeringsapp/htdocs/vendor/nodes/push/tests/Providers/AbstractProviderTest.php">
         <class name="AbstractProviderTest" namespace="Nodes\Push\Tests\Providers">
-          <metrics complexity="32" methods="31" coveredmethods="13" conditionals="0" coveredconditionals="0" statements="138" coveredstatements="118" elements="169" coveredelements="131"/>
+          <metrics complexity="32" methods="31" coveredmethods="13" conditionals="0" coveredconditionals="0" statements="136" coveredstatements="118" elements="167" coveredelements="131"/>
         </class>
         <line num="14" type="method" name="getPackageProviders" visibility="protected" complexity="1" crap="1" count="32"/>
         <line num="17" type="stmt" count="32"/>
@@ -61,128 +61,126 @@
         <line num="94" type="stmt" count="1"/>
         <line num="96" type="stmt" count="1"/>
         <line num="97" type="stmt" count="1"/>
-        <line num="99" type="method" name="testSetIOSBadgeError" visibility="public" complexity="1" crap="1.12" count="1"/>
+        <line num="99" type="method" name="testSetIOSBadgeError1" visibility="public" complexity="1" crap="1.02" count="1"/>
         <line num="101" type="stmt" count="1"/>
         <line num="102" type="stmt" count="1"/>
         <line num="103" type="stmt" count="1"/>
-        <line num="105" type="stmt" count="0"/>
-        <line num="106" type="stmt" count="0"/>
-        <line num="107" type="stmt" count="0"/>
-        <line num="109" type="method" name="testSetIOSBadgeError2" visibility="public" complexity="1" crap="1.02" count="1"/>
+        <line num="104" type="stmt" count="0"/>
+        <line num="106" type="method" name="testSetIOSBadgeError2" visibility="public" complexity="1" crap="1.02" count="1"/>
+        <line num="108" type="stmt" count="1"/>
+        <line num="110" type="stmt" count="1"/>
         <line num="111" type="stmt" count="1"/>
-        <line num="113" type="stmt" count="1"/>
-        <line num="114" type="stmt" count="1"/>
-        <line num="115" type="stmt" count="0"/>
-        <line num="120" type="method" name="testSetIOSBadgeSuccess" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="112" type="stmt" count="0"/>
+        <line num="117" type="method" name="testSetIOSBadgeSuccess" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="119" type="stmt" count="3"/>
+        <line num="120" type="stmt" count="3"/>
+        <line num="121" type="stmt" count="3"/>
         <line num="122" type="stmt" count="3"/>
-        <line num="123" type="stmt" count="3"/>
-        <line num="124" type="stmt" count="3"/>
-        <line num="125" type="stmt" count="3"/>
-        <line num="139" type="method" name="testSetExtraErrorObject" visibility="public" complexity="1" crap="1.01" count="1"/>
-        <line num="141" type="stmt" count="1"/>
+        <line num="136" type="method" name="testSetExtraErrorObject" visibility="public" complexity="1" crap="1.01" count="1"/>
+        <line num="138" type="stmt" count="1"/>
+        <line num="139" type="stmt" count="1"/>
         <line num="142" type="stmt" count="1"/>
-        <line num="145" type="stmt" count="1"/>
-        <line num="149" type="stmt" count="1"/>
-        <line num="150" type="stmt" count="0"/>
-        <line num="152" type="method" name="testSetExtraErrorArray" visibility="public" complexity="1" crap="1.01" count="1"/>
-        <line num="154" type="stmt" count="1"/>
-        <line num="155" type="stmt" count="1"/>
+        <line num="146" type="stmt" count="1"/>
+        <line num="147" type="stmt" count="0"/>
+        <line num="149" type="method" name="testSetExtraErrorArray" visibility="public" complexity="1" crap="1.01" count="1"/>
+        <line num="151" type="stmt" count="1"/>
+        <line num="152" type="stmt" count="1"/>
+        <line num="156" type="stmt" count="1"/>
         <line num="159" type="stmt" count="1"/>
-        <line num="162" type="stmt" count="1"/>
-        <line num="163" type="stmt" count="0"/>
-        <line num="165" type="method" name="testSetExtra" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="160" type="stmt" count="0"/>
+        <line num="162" type="method" name="testSetExtra" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="165" type="stmt" count="1"/>
         <line num="168" type="stmt" count="1"/>
+        <line num="169" type="stmt" count="1"/>
         <line num="171" type="stmt" count="1"/>
         <line num="172" type="stmt" count="1"/>
-        <line num="174" type="stmt" count="1"/>
-        <line num="175" type="stmt" count="1"/>
-        <line num="177" type="method" name="testSetMessageError" visibility="public" complexity="1" crap="1.02" count="1"/>
-        <line num="179" type="stmt" count="1"/>
-        <line num="180" type="stmt" count="1"/>
-        <line num="181" type="stmt" count="1"/>
-        <line num="182" type="stmt" count="0"/>
-        <line num="184" type="method" name="testSetMessageSuccess" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="174" type="method" name="testSetMessageError" visibility="public" complexity="1" crap="1.02" count="1"/>
+        <line num="176" type="stmt" count="1"/>
+        <line num="177" type="stmt" count="1"/>
+        <line num="178" type="stmt" count="1"/>
+        <line num="179" type="stmt" count="0"/>
+        <line num="181" type="method" name="testSetMessageSuccess" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="183" type="stmt" count="1"/>
+        <line num="184" type="stmt" count="1"/>
         <line num="186" type="stmt" count="1"/>
         <line num="187" type="stmt" count="1"/>
-        <line num="189" type="stmt" count="1"/>
-        <line num="190" type="stmt" count="1"/>
-        <line num="192" type="method" name="testSetChannelError" visibility="public" complexity="1" crap="1.02" count="1"/>
-        <line num="194" type="stmt" count="1"/>
-        <line num="195" type="stmt" count="1"/>
-        <line num="196" type="stmt" count="1"/>
-        <line num="197" type="stmt" count="0"/>
-        <line num="199" type="method" name="testSetChannelSuccess" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="189" type="method" name="testSetChannelError" visibility="public" complexity="1" crap="1.02" count="1"/>
+        <line num="191" type="stmt" count="1"/>
+        <line num="192" type="stmt" count="1"/>
+        <line num="193" type="stmt" count="1"/>
+        <line num="194" type="stmt" count="0"/>
+        <line num="196" type="method" name="testSetChannelSuccess" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="198" type="stmt" count="1"/>
+        <line num="199" type="stmt" count="1"/>
         <line num="201" type="stmt" count="1"/>
         <line num="202" type="stmt" count="1"/>
-        <line num="204" type="stmt" count="1"/>
-        <line num="205" type="stmt" count="1"/>
-        <line num="206" type="stmt" count="1"/>
-        <line num="208" type="method" name="testSetChannelsFail" visibility="public" complexity="1" crap="1.02" count="1"/>
-        <line num="210" type="stmt" count="1"/>
-        <line num="211" type="stmt" count="1"/>
-        <line num="212" type="stmt" count="1"/>
-        <line num="213" type="stmt" count="0"/>
-        <line num="215" type="method" name="testSetChannelsSuccess" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="203" type="stmt" count="1"/>
+        <line num="205" type="method" name="testSetChannelsFail" visibility="public" complexity="1" crap="1.02" count="1"/>
+        <line num="207" type="stmt" count="1"/>
+        <line num="208" type="stmt" count="1"/>
+        <line num="209" type="stmt" count="1"/>
+        <line num="210" type="stmt" count="0"/>
+        <line num="212" type="method" name="testSetChannelsSuccess" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="214" type="stmt" count="1"/>
+        <line num="215" type="stmt" count="1"/>
         <line num="217" type="stmt" count="1"/>
         <line num="218" type="stmt" count="1"/>
+        <line num="219" type="stmt" count="1"/>
         <line num="220" type="stmt" count="1"/>
         <line num="221" type="stmt" count="1"/>
-        <line num="222" type="stmt" count="1"/>
-        <line num="223" type="stmt" count="1"/>
-        <line num="224" type="stmt" count="1"/>
-        <line num="226" type="method" name="testSetApplicationError" visibility="public" complexity="1" crap="1.02" count="1"/>
-        <line num="228" type="stmt" count="1"/>
-        <line num="229" type="stmt" count="1"/>
-        <line num="230" type="stmt" count="1"/>
-        <line num="231" type="stmt" count="0"/>
-        <line num="233" type="method" name="testSetApplicationSuccess" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="223" type="method" name="testSetApplicationError" visibility="public" complexity="1" crap="1.02" count="1"/>
+        <line num="225" type="stmt" count="1"/>
+        <line num="226" type="stmt" count="1"/>
+        <line num="227" type="stmt" count="1"/>
+        <line num="228" type="stmt" count="0"/>
+        <line num="230" type="method" name="testSetApplicationSuccess" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="232" type="stmt" count="1"/>
+        <line num="233" type="stmt" count="1"/>
+        <line num="234" type="stmt" count="1"/>
         <line num="235" type="stmt" count="1"/>
         <line num="236" type="stmt" count="1"/>
-        <line num="237" type="stmt" count="1"/>
-        <line num="238" type="stmt" count="1"/>
-        <line num="239" type="stmt" count="1"/>
-        <line num="241" type="method" name="testInitProvideDefaultAppGroupDoesNotExist" visibility="public" complexity="1" crap="1.02" count="1"/>
-        <line num="243" type="stmt" count="1"/>
-        <line num="244" type="stmt" count="1"/>
-        <line num="245" type="stmt" count="1"/>
-        <line num="256" type="stmt" count="0"/>
-        <line num="258" type="method" name="testInitProvideAppGroupIsNotAnArray" visibility="public" complexity="1" crap="1.02" count="1"/>
-        <line num="260" type="stmt" count="1"/>
-        <line num="261" type="stmt" count="1"/>
-        <line num="262" type="stmt" count="1"/>
-        <line num="265" type="stmt" count="0"/>
-        <line num="267" type="method" name="testInitProvideEmptyAppGroup" visibility="public" complexity="1" crap="1.02" count="1"/>
-        <line num="269" type="stmt" count="1"/>
-        <line num="270" type="stmt" count="1"/>
-        <line num="271" type="stmt" count="1"/>
-        <line num="273" type="stmt" count="0"/>
-        <line num="275" type="method" name="testInitProviderSuccess" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="277" type="stmt" count="1"/>
-        <line num="278" type="stmt" count="1"/>
-        <line num="279" type="stmt" count="1"/>
-        <line num="281" type="method" name="testInitProvideNullDefaultAppGroup" visibility="public" complexity="1" crap="1.02" count="1"/>
-        <line num="283" type="stmt" count="1"/>
-        <line num="284" type="stmt" count="1"/>
-        <line num="285" type="stmt" count="1"/>
-        <line num="296" type="stmt" count="0"/>
-        <line num="298" type="method" name="testInitProvideEmptyDefaultAppGroup" visibility="public" complexity="1" crap="1.02" count="1"/>
-        <line num="300" type="stmt" count="1"/>
-        <line num="301" type="stmt" count="1"/>
-        <line num="310" type="stmt" count="1"/>
-        <line num="312" type="stmt" count="0"/>
-        <line num="314" type="method" name="testInitProvideDefaultAppGroupIsNotAString" visibility="public" complexity="1" crap="1.02" count="1"/>
-        <line num="316" type="stmt" count="1"/>
+        <line num="238" type="method" name="testInitProvideDefaultAppGroupDoesNotExist" visibility="public" complexity="1" crap="1.02" count="1"/>
+        <line num="240" type="stmt" count="1"/>
+        <line num="241" type="stmt" count="1"/>
+        <line num="242" type="stmt" count="1"/>
+        <line num="253" type="stmt" count="0"/>
+        <line num="255" type="method" name="testInitProvideAppGroupIsNotAnArray" visibility="public" complexity="1" crap="1.02" count="1"/>
+        <line num="257" type="stmt" count="1"/>
+        <line num="258" type="stmt" count="1"/>
+        <line num="259" type="stmt" count="1"/>
+        <line num="262" type="stmt" count="0"/>
+        <line num="264" type="method" name="testInitProvideEmptyAppGroup" visibility="public" complexity="1" crap="1.02" count="1"/>
+        <line num="266" type="stmt" count="1"/>
+        <line num="267" type="stmt" count="1"/>
+        <line num="268" type="stmt" count="1"/>
+        <line num="270" type="stmt" count="0"/>
+        <line num="272" type="method" name="testInitProviderSuccess" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="274" type="stmt" count="1"/>
+        <line num="275" type="stmt" count="1"/>
+        <line num="276" type="stmt" count="1"/>
+        <line num="278" type="method" name="testInitProvideNullDefaultAppGroup" visibility="public" complexity="1" crap="1.02" count="1"/>
+        <line num="280" type="stmt" count="1"/>
+        <line num="281" type="stmt" count="1"/>
+        <line num="282" type="stmt" count="1"/>
+        <line num="293" type="stmt" count="0"/>
+        <line num="295" type="method" name="testInitProvideEmptyDefaultAppGroup" visibility="public" complexity="1" crap="1.02" count="1"/>
+        <line num="297" type="stmt" count="1"/>
+        <line num="298" type="stmt" count="1"/>
+        <line num="307" type="stmt" count="1"/>
+        <line num="309" type="stmt" count="0"/>
+        <line num="311" type="method" name="testInitProvideDefaultAppGroupIsNotAString" visibility="public" complexity="1" crap="1.02" count="1"/>
+        <line num="313" type="stmt" count="1"/>
+        <line num="314" type="stmt" count="1"/>
         <line num="317" type="stmt" count="1"/>
-        <line num="320" type="stmt" count="1"/>
-        <line num="331" type="stmt" count="0"/>
-        <metrics loc="333" ncloc="327" classes="1" methods="31" coveredmethods="13" conditionals="0" coveredconditionals="0" statements="138" coveredstatements="118" elements="169" coveredelements="131"/>
+        <line num="328" type="stmt" count="0"/>
+        <metrics loc="330" ncloc="324" classes="1" methods="31" coveredmethods="13" conditionals="0" coveredconditionals="0" statements="136" coveredstatements="118" elements="167" coveredelements="131"/>
       </file>
       <file name="/var/www/alarmeringsapp/htdocs/vendor/nodes/push/tests/Providers/UrbanAirshipV3Test.php">
         <class name="UrbanAirshipV3Test" namespace="Nodes\Push\Tests\Providers">
-          <metrics complexity="21" methods="17" coveredmethods="13" conditionals="0" coveredconditionals="0" statements="113" coveredstatements="107" elements="130" coveredelements="120"/>
+          <metrics complexity="23" methods="18" coveredmethods="13" conditionals="0" coveredconditionals="0" statements="116" coveredstatements="111" elements="134" coveredelements="124"/>
         </class>
-        <line num="16" type="method" name="getPackageProviders" visibility="protected" complexity="1" crap="1" count="21"/>
-        <line num="19" type="stmt" count="21"/>
+        <line num="16" type="method" name="getPackageProviders" visibility="protected" complexity="1" crap="1" count="23"/>
+        <line num="19" type="stmt" count="23"/>
         <line num="23" type="method" name="testGetRequestDataIOSBadge" visibility="public" complexity="1" crap="1" count="1"/>
         <line num="25" type="stmt" count="1"/>
         <line num="27" type="stmt" count="1"/>
@@ -290,28 +288,32 @@
         <line num="227" type="stmt" count="1"/>
         <line num="228" type="stmt" count="1"/>
         <line num="229" type="stmt" count="1"/>
-        <line num="231" type="method" name="testSetExtraError" visibility="public" complexity="1" crap="1.00" count="1"/>
+        <line num="231" type="method" name="testSetExtraError1" visibility="public" complexity="1" crap="1.02" count="1"/>
         <line num="233" type="stmt" count="1"/>
         <line num="234" type="stmt" count="1"/>
         <line num="235" type="stmt" count="1"/>
-        <line num="237" type="stmt" count="1"/>
-        <line num="238" type="stmt" count="1"/>
-        <line num="239" type="stmt" count="0"/>
-        <line num="241" type="method" name="testSetBadgeError" visibility="public" complexity="1" crap="1.12" count="1"/>
+        <line num="236" type="stmt" count="0"/>
+        <line num="238" type="method" name="testSetExtraError2" visibility="public" complexity="1" crap="1.02" count="1"/>
+        <line num="240" type="stmt" count="1"/>
+        <line num="242" type="stmt" count="1"/>
         <line num="243" type="stmt" count="1"/>
-        <line num="244" type="stmt" count="1"/>
-        <line num="245" type="stmt" count="1"/>
-        <line num="247" type="stmt" count="0"/>
-        <line num="248" type="stmt" count="0"/>
-        <line num="249" type="stmt" count="0"/>
-        <line num="254" type="method" name="testIOSSetBadgeSuccess" visibility="public" complexity="1" crap="1" count="7"/>
-        <line num="256" type="stmt" count="7"/>
-        <line num="257" type="stmt" count="7"/>
-        <line num="258" type="stmt" count="7"/>
-        <line num="259" type="stmt" count="7"/>
-        <line num="261" type="method" name="setIOSBadgeSuccessProviderSuccess" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="264" type="stmt" count="0"/>
-        <metrics loc="275" ncloc="272" classes="1" methods="17" coveredmethods="13" conditionals="0" coveredconditionals="0" statements="113" coveredstatements="107" elements="130" coveredelements="120"/>
+        <line num="244" type="stmt" count="0"/>
+        <line num="246" type="method" name="testSetBadgeError1" visibility="public" complexity="1" crap="1.02" count="1"/>
+        <line num="248" type="stmt" count="1"/>
+        <line num="249" type="stmt" count="1"/>
+        <line num="250" type="stmt" count="1"/>
+        <line num="251" type="stmt" count="0"/>
+        <line num="253" type="method" name="testSetBadgeError2" visibility="public" complexity="1" crap="1.02" count="1"/>
+        <line num="255" type="stmt" count="1"/>
+        <line num="257" type="stmt" count="1"/>
+        <line num="258" type="stmt" count="1"/>
+        <line num="259" type="stmt" count="0"/>
+        <line num="264" type="method" name="testIOSSetBadgeSuccess" visibility="public" complexity="1" crap="1" count="7"/>
+        <line num="266" type="stmt" count="7"/>
+        <line num="267" type="stmt" count="7"/>
+        <line num="268" type="stmt" count="7"/>
+        <line num="269" type="stmt" count="7"/>
+        <metrics loc="288" ncloc="282" classes="1" methods="18" coveredmethods="13" conditionals="0" coveredconditionals="0" statements="116" coveredstatements="111" elements="134" coveredelements="124"/>
       </file>
     </package>
     <package name="Nodes\Push\Tests\Facades\Helpers">
@@ -353,6 +355,6 @@
         <metrics loc="85" ncloc="73" classes="2" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
     </package>
-    <metrics files="5" loc="740" ncloc="719" classes="6" methods="52" coveredmethods="30" conditionals="0" coveredconditionals="0" statements="259" coveredstatements="233" elements="311" coveredelements="263"/>
+    <metrics files="5" loc="750" ncloc="726" classes="6" methods="53" coveredmethods="30" conditionals="0" coveredconditionals="0" statements="260" coveredstatements="237" elements="313" coveredelements="267"/>
   </project>
 </coverage>

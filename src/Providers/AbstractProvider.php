@@ -328,7 +328,7 @@ abstract class AbstractProvider implements ProviderInterface
                 throw new InvalidArgumentException(sprintf('Extra key [%s] was array/object/null', $key));
             }
 
-            if (in_array($value, $protectedKeys)) {
+            if (in_array($key, $protectedKeys)) {
                 throw new InvalidArgumentException(sprintf('The used key [%s] in extra is protected by package', $key));
             }
         }

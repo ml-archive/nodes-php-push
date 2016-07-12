@@ -96,14 +96,11 @@ class AbstractProviderTest extends TestCase
         $this->assertSame('sound', $abstractProvider->getSound());
     }
 
-    public function testSetIOSBadgeError()
+    public function testSetIOSBadgeError1()
     {
         $urbanAirshipV3 = $this->getAbstractProvider();
         $this->expectException(InvalidArgumentException::class);
         $urbanAirshipV3->setIOSBadge([]);
-
-        $this->expectException(InvalidArgumentException::class);
-        $urbanAirshipV3->setIOSBadge($urbanAirshipV3);
     }
 
     public function testSetIOSBadgeError2()
