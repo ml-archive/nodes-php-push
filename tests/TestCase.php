@@ -6,6 +6,9 @@ use Nodes\Push\Providers\UrbanAirshipV3;
 use Nodes\Push\ServiceProvider;
 use Nodes\Push\Contracts\ProviderInterface as NodesPushProviderContract;
 
+/**
+ * @codeCoverageIgnore
+ */
 class TestCase extends \Orchestra\Testbench\TestCase
 {
     protected function getPackageProviders($app)
