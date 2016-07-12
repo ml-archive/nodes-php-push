@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1468321288">
-  <project timestamp="1468321288">
+<coverage generated="1468323035">
+  <project timestamp="1468323035">
     <package name="Nodes\Push\Tests\Providers">
       <file name="/var/www/alarmeringsapp/htdocs/vendor/nodes/push/tests/Providers/AbstractProviderTest.php">
         <class name="AbstractProviderTest" namespace="Nodes\Push\Tests\Providers">
