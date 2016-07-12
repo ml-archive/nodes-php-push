@@ -109,7 +109,7 @@ class UrbanAirshipV3 extends AbstractProvider
         ];
 
         foreach ($extra as $key => $value) {
-            if (in_array($key, $protectedUAKeys)) {
+            if (in_array(strval($key), $protectedUAKeys)) {
                 throw new InvalidArgumentException(sprintf('The used key [%s] in extra is protected by UA', $key));
             }
         }

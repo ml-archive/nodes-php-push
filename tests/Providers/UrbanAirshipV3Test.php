@@ -243,6 +243,14 @@ class UrbanAirshipV3Test extends TestCase
         $urbanAirshipV3->setIOSBadge('no supported');
     }
 
+    public function testSetExtraSuccess()
+    {
+        $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
+        $urbanAirshipV3->setExtra([0 => 'test']);
+
+        $this->assertTrue(true);
+    }
+
     public function testSetBadgeError1()
     {
         $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
