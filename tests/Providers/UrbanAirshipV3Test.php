@@ -38,6 +38,20 @@ class UrbanAirshipV3Test extends TestCase
         ], $requestData);
     }
 
+    public function testGetRequestDataAndroidExtra()
+    {
+        $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
+
+        $extra = [
+            uniqid() => uniqid(),
+            uniqid() => uniqid(),
+        ];
+
+        $urbanAirshipV3->setAndroidData($extra)->removeSound();
+        $androidData = $urbanAirshipV3->getAndroidData();
+        $this->assertSame($extra, $androidData);
+    }
+
     public function testGetRequestDataExtra()
     {
         $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
@@ -276,9 +290,6 @@ class UrbanAirshipV3Test extends TestCase
         $this->assertSame($b, $urbanAirshipV3->getIOSBadge());
     }
 
-    /**
-     * @codeCoverageIgnore
-     */
     public function setIOSBadgeSuccessProviderSuccess()
     {
         return [

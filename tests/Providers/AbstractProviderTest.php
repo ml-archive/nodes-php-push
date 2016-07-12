@@ -121,9 +121,6 @@ class AbstractProviderTest extends TestCase
         $this->assertSame($a, $urbanAirshipV3->getIOSBadge());
     }
 
-    /**
-     * @codeCoverageIgnore
-     */
     public function setIOSBadgeSuccessProviderSuccess()
     {
         return [

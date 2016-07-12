@@ -6,14 +6,8 @@ use Nodes\Push\Providers\UrbanAirshipV3;
 use Nodes\Push\ServiceProvider;
 use Nodes\Push\Contracts\ProviderInterface as NodesPushProviderContract;
 
-/**
- * @codeCoverageIgnore
- */
 class TestCase extends \Orchestra\Testbench\TestCase
 {
-    /**
-     * @codeCoverageIgnore
-     */
     protected function getPackageProviders($app)
     {
         return [
@@ -67,17 +61,11 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
 class AbstractProviderTester extends AbstractProvider
 {
-    /**
-     * @codeCoverageIgnore
-     */
     public function send() : array
     {
         throw new \Exception('Feature not supported', 500);
     }
 
-    /**
-     * @codeCoverageIgnore
-     */
     public function getRequestData() : array
     {
         throw new \Exception('Feature not supported', 500);
