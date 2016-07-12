@@ -113,7 +113,7 @@ interface ProviderInterface
      * Remember there is limits for size of push
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @access pu
+     * @access public
      * @param array $extra
      * @return \Nodes\Push\Contracts\ProviderInterface
      * @throws \Nodes\Push\Exceptions\InvalidArgumentException
