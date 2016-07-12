@@ -105,6 +105,7 @@ class UrbanAirshipV3 extends AbstractProvider
         $protectedUAKeys = [
             'from',
             'collapse_key',
+            'sound'
         ];
 
         foreach ($extra as $key => $value) {
