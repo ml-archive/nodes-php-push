@@ -204,6 +204,7 @@ interface ProviderInterface
      * @return array
      * @throws \Nodes\Push\Exceptions\MissingArgumentException
      * @throws \Nodes\Push\Exceptions\SendPushFailedException
+     * @throws \Nodes\Push\Exceptions\PushSizeLimitException
      */
     public function send() : array;
 
