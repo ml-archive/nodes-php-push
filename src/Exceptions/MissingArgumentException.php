@@ -4,14 +4,14 @@ namespace Nodes\Push\Exceptions;
 use Nodes\Exceptions\Exception as NodesException;
 
 /**
- * Class SendPushFailedException
+ * Class MissingArgumentException
  *
  * @package Nodes\Push\Exceptions
  */
-class SendPushFailedException extends NodesException
+class MissingArgumentException extends NodesException
 {
     /**
-     * SendPushFailedException constructor
+     * InvalidArgumentException constructor
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      * @access public

@@ -1,28 +1,26 @@
 <?php
 namespace Nodes\Push;
 
-use Nodes\AbstractServiceProvider;
+use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 use Nodes\Push\Contracts\ProviderInterface as NodesPushProviderContract;
+use Nodes\Push\Exceptions\InvalidPushProviderException;
 
 /**
  * Class ServiceProvider
  *
  * @package Nodes\Push
  */
-class ServiceProvider extends AbstractServiceProvider
+class ServiceProvider extends IlluminateServiceProvider
 {
     /**
      * Boot the service provider
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     *
      * @access public
      * @return void
      */
     public function boot()
     {
-        parent::boot();
-
         $this->publishGroups();
     }
 
@@ -30,20 +28,18 @@ class ServiceProvider extends AbstractServiceProvider
      * Register the service provider
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     *
      * @access public
      * @return void
      */
     public function register()
     {
-        $this->registerPushManager();
+        $this->registerPushProvider();
     }
 
     /**
      * Register publish groups
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     *
      * @access protected
      * @return void
      */
@@ -56,42 +52,40 @@ class ServiceProvider extends AbstractServiceProvider
     }
 
     /**
-     * Register push manager
+     * registerPushProvider
      *
-     * @author Morten Rugaard <moru@nodes.dk>
-     *
-     * @access public
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access protected
      * @return void
      */
-    public function registerPushManager()
+    protected function registerPushProvider()
     {
-        $this->app->singleton('nodes.push', function ($app) {
+        $this->app->singleton('nodes.push', function() {
             // Retrieve push provider
             $provider = prepare_config_instance(config('nodes.push.provider'));
 
             // Validate push provider
             if (!$provider instanceof NodesPushProviderContract) {
-                throw new Exception('Invalid Push Provider. Not implementing Push contract.');
+                throw new InvalidPushProviderException($provider);
             }
 
-            return new Manager($provider);
+            return $provider;
         });
 
-        $this->app->bind(Manager::class, function ($app) {
+        $this->app->bind(NodesPushProviderContract::class, function($app) {
             return $app['nodes.push'];
         });
     }
-
-    /**
-     * Get the services provided by the provider
-     *
-     * @author Morten Rugaard <moru@nodes.dk>
-     *
-     * @access public
-     * @return array
-     */
-    public function provides()
-    {
-        return ['nodes.push'];
-    }
+//
+//    /**
+//     * Get the services provided by the provider
+//     *
+//     * @author Morten Rugaard <moru@nodes.dk>
+//     * @access public
+//     * @return array
+//     */
+//    public function provides()
+//    {
+//        return ['nodes.push'];
+//    }
 }
