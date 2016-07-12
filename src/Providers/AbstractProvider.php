@@ -325,7 +325,7 @@ abstract class AbstractProvider implements ProviderInterface
         // Make sure channels are strings
         foreach ($extra as $key => $value) {
             if (!is_scalar($value)) {
-                throw new InvalidArgumentException(sprintf('Extra key [%s] was an array/object', $key));
+                throw new InvalidArgumentException(sprintf('Extra key [%s] was array/object/null', $key));
             }
 
             if (in_array($key, $protectedKeys)) {
