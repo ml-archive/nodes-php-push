@@ -320,10 +320,7 @@ abstract class AbstractProvider implements ProviderInterface
      */
     protected function validateExtra(array $extra)
     {
-        $protectedKeys = [
-            'sound',
-            'data',
-        ];
+        $protectedKeys = [];
 
         // Make sure channels are strings
         foreach ($extra as $key => $value) {
