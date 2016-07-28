@@ -1,5 +1,6 @@
 <?php
-declare (strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Nodes\Push\Providers;
 
@@ -13,14 +14,12 @@ use Nodes\Push\Exceptions\PushSizeLimitException;
 use Nodes\Push\Exceptions\SendPushFailedException;
 
 /**
- * Class UrbanAirship
- *
- * @package Nodes\Push\Providers
+ * Class UrbanAirship.
  */
 class UrbanAirshipV3 extends AbstractProvider
 {
     /**
-     * Guzzle HTTP Client
+     * Guzzle HTTP Client.
      *
      * @var \GuzzleHttp\Client
      */
@@ -28,10 +27,9 @@ class UrbanAirshipV3 extends AbstractProvider
 
     /**
      * setBadge, badge is the small red icon on the app in the launcher.
-     * The badge can be controlled by using this function
+     * The badge can be controlled by using this function.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @access public
      * @param int|string $iOSBadge
      * @return \Nodes\Push\Contracts\ProviderInterface
      * @throws \Nodes\Push\Exceptions\InvalidArgumentException
@@ -39,7 +37,7 @@ class UrbanAirshipV3 extends AbstractProvider
     public function setIOSBadge($iOSBadge) : ProviderInterface
     {
         // Convert to int, if badge does not start with +/-, since int means setting the value
-        if (is_numeric($iOSBadge) && !starts_with($iOSBadge, '-') && !starts_with($iOSBadge, '+')) {
+        if (is_numeric($iOSBadge) && ! starts_with($iOSBadge, '-') && ! starts_with($iOSBadge, '+')) {
             $iOSBadge = intval($iOSBadge);
         }
 
@@ -47,7 +45,7 @@ class UrbanAirshipV3 extends AbstractProvider
             throw new InvalidArgumentException('Bagde was set to minus integer, either set 0 or as string fx "-5');
         }
 
-        if (!is_int($iOSBadge) && $iOSBadge != 'auto' && !is_numeric($iOSBadge)) {
+        if (! is_int($iOSBadge) && $iOSBadge != 'auto' && ! is_numeric($iOSBadge)) {
             throw new InvalidArgumentException('The passed badge is not supported');
         }
 
@@ -59,10 +57,9 @@ class UrbanAirshipV3 extends AbstractProvider
     /**
      * setExtra, extra is a map of key /value which can be passed to mobile
      * There is a hard limit on how big a push notification can be, specially for ios
-     * Consider not putting too much in here, and consider using setAndroidData if you want to send more to android
+     * Consider not putting too much in here, and consider using setAndroidData if you want to send more to android.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @access public
      * @param array $extra
      * @return \Nodes\Push\Contracts\ProviderInterface
      * @throws \Nodes\Push\Exceptions\InvalidArgumentException
@@ -76,10 +73,9 @@ class UrbanAirshipV3 extends AbstractProvider
 
     /**
      * setAndroidData, since android can handle 4kb while ios only have 0.5kb
-     * Note this will override keys in extra, if same keys are passed
+     * Note this will override keys in extra, if same keys are passed.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @access public
      * @param array $androidData
      * @return \Nodes\Push\Contracts\ProviderInterface
      * @throws \Nodes\Push\Exceptions\InvalidArgumentException
@@ -92,10 +88,9 @@ class UrbanAirshipV3 extends AbstractProvider
     }
 
     /**
-     * validateExtra
+     * validateExtra.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @access public
      * @param array $extra
      * @return void
      * @throws \Nodes\Push\Exceptions\InvalidArgumentException
@@ -105,7 +100,7 @@ class UrbanAirshipV3 extends AbstractProvider
         $protectedUAKeys = [
             'from',
             'collapse_key',
-            'sound'
+            'sound',
         ];
 
         foreach ($extra as $key => $value) {
@@ -118,10 +113,9 @@ class UrbanAirshipV3 extends AbstractProvider
     }
 
     /**
-     * send push notification in request
+     * send push notification in request.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @access public
      * @return array
      * @throws \Nodes\Push\Exceptions\MissingArgumentException
      * @throws \Nodes\Push\Exceptions\SendPushFailedException
@@ -151,7 +145,7 @@ class UrbanAirshipV3 extends AbstractProvider
                 ]);
 
                 // Validate response by looking at the received status code
-                if (!in_array($response->getStatusCode(), [200, 201, 202])) {
+                if (! in_array($response->getStatusCode(), [200, 201, 202])) {
                     throw new SendPushFailedException(sprintf('[%s] Could not send push message. Status code received: %d %s', $appName, $response->getStatusCode(), $response->getReasonPhrase()));
                 }
 
@@ -159,7 +153,7 @@ class UrbanAirshipV3 extends AbstractProvider
                 $content = json_decode($response->getBody()->getContents(), true);
 
                 // Handle potential errors
-                if (empty($content['ok']) || !$content['ok']) {
+                if (empty($content['ok']) || ! $content['ok']) {
                     throw (new SendPushFailedException(sprintf('[%s] Could not send push message. Reason: %s', $appName, $content->error), $content->error_code))->setErrors(new MessageBag($content['details']));
                 }
 
@@ -180,39 +174,37 @@ class UrbanAirshipV3 extends AbstractProvider
     }
 
     /**
-     * validateBeforePush
+     * validateBeforePush.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @access public
      * @return void
      * @throws \Nodes\Push\Exceptions\MissingArgumentException
      * @throws \Nodes\Push\Exceptions\PushSizeLimitException
      */
     protected function validateBeforePush()
     {
-        if (!$this->getMessage()) {
+        if (! $this->getMessage()) {
             throw new MissingArgumentException('You have to setMessage() before sending push');
         }
 
         // Check kb size
-        if(mb_strlen(json_encode($this->buildIOSData())) > 2000) {
+        if (mb_strlen(json_encode($this->buildIOSData())) > 2000) {
             throw new PushSizeLimitException(sprintf('Limit of ios is 2kb, %s was send', mb_strlen(json_encode($this->buildIOSData()))));
         }
 
-        if(mb_strlen(json_encode($this->buildWnsData())) > 2000) {
+        if (mb_strlen(json_encode($this->buildWnsData())) > 2000) {
             throw new PushSizeLimitException(sprintf('Limit of wns is 2kb, %s was send', mb_strlen(json_encode($this->buildWnsData()))));
         }
 
-        if(mb_strlen(json_encode($this->buildAndroidData())) > 4000) {
+        if (mb_strlen(json_encode($this->buildAndroidData())) > 4000) {
             throw new PushSizeLimitException(sprintf('Limit of android is 4kb, %s was send', mb_strlen(json_encode($this->buildAndroidData()))));
         }
     }
 
     /**
-     * hasEmptyCredentials
+     * hasEmptyCredentials.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @access public
      * @param array $credentials
      * @return bool
      */
@@ -230,15 +222,14 @@ class UrbanAirshipV3 extends AbstractProvider
     }
 
     /**
-     * Retrieve HTTP client
+     * Retrieve HTTP client.
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     * @access protected
      * @return \GuzzleHttp\Client
      */
     protected function getHttpClient() : HttpClient
     {
-        if (!is_null($this->httpClient)) {
+        if (! is_null($this->httpClient)) {
             return $this->httpClient;
         }
 
@@ -253,10 +244,9 @@ class UrbanAirshipV3 extends AbstractProvider
     }
 
     /**
-     * Build push data array
+     * Build push data array.
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     * @access protected
      * @return array
      */
     protected function buildPushData() : array
@@ -265,23 +255,23 @@ class UrbanAirshipV3 extends AbstractProvider
         $data = [];
 
         // Set audience
-        $data['audience'] = !empty($this->buildAudienceData()) ? $this->buildAudienceData() : 'all';
+        $data['audience'] = ! empty($this->buildAudienceData()) ? $this->buildAudienceData() : 'all';
 
         // Set message
         $data['notification']['alert'] = $this->getMessage();
 
         // Set iOS data
-        if (!empty($this->buildIOSData())) {
+        if (! empty($this->buildIOSData())) {
             $data['notification']['ios'] = $this->buildIOSData();
         }
 
         // Set Android data
-        if (!empty($this->buildAndroidData())) {
+        if (! empty($this->buildAndroidData())) {
             $data['notification']['android'] = $this->buildAndroidData();
         }
 
         // Set Windows data
-        if (!empty($this->buildWnsData())) {
+        if (! empty($this->buildWnsData())) {
             $data['notification']['wns'] = $this->buildWnsData();
         }
 
@@ -292,10 +282,9 @@ class UrbanAirshipV3 extends AbstractProvider
     }
 
     /**
-     * Build audience data array
+     * Build audience data array.
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     * @access protected
      * @return array
      */
     protected function buildAudienceData() : array
@@ -304,12 +293,12 @@ class UrbanAirshipV3 extends AbstractProvider
         $audience = [];
 
         // Add target channnels
-        if (!empty($this->getChannels())) {
+        if (! empty($this->getChannels())) {
             $audience['tag'] = $this->getChannels();
         }
 
         // Add target aliases
-        if (!empty($this->getAliases())) {
+        if (! empty($this->getAliases())) {
             foreach ($this->getAliases() as $alias) {
                 $audience['alias'][] = $alias;
             }
@@ -319,10 +308,9 @@ class UrbanAirshipV3 extends AbstractProvider
     }
 
     /**
-     * Build iOS data array
+     * Build iOS data array.
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     * @access protected
      * @return array
      */
     protected function buildIOSData() : array
@@ -331,17 +319,17 @@ class UrbanAirshipV3 extends AbstractProvider
         $ios = [];
 
         // Set extra data for push notification
-        if (!empty($this->getExtra())) {
+        if (! empty($this->getExtra())) {
             $ios['extra'] = $this->getExtra();
         }
 
         // Set badge count for push notification
-        if (!is_null($this->getIOSBadge())) {
+        if (! is_null($this->getIOSBadge())) {
             $ios['badge'] = $this->getIOSBadge();
         }
 
         // Set sound of push notification
-        if (!is_null($this->getSound())) {
+        if (! is_null($this->getSound())) {
             $ios['sound'] = $this->getSound();
         }
 
@@ -354,10 +342,9 @@ class UrbanAirshipV3 extends AbstractProvider
     }
 
     /**
-     * Build Android data array
+     * Build Android data array.
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     * @access protected
      * @return array
      */
     protected function buildAndroidData() : array
@@ -366,12 +353,12 @@ class UrbanAirshipV3 extends AbstractProvider
         $android = [];
 
         // Set extra data of push notification
-        if (!empty($this->getExtra())) {
+        if (! empty($this->getExtra())) {
             $android['extra'] = $this->getExtra();
         }
 
         // Add android data
-        if (!empty($this->androidData)) {
+        if (! empty($this->androidData)) {
             if (empty($android['extra'])) {
                 $android['extra'] = $this->androidData;
             } else {
@@ -380,7 +367,7 @@ class UrbanAirshipV3 extends AbstractProvider
         }
 
         // Set sound of push notification
-        if (!is_null($this->getSound())) {
+        if (! is_null($this->getSound())) {
             $android['extra']['sound'] = $this->getSound();
         }
 
@@ -388,10 +375,9 @@ class UrbanAirshipV3 extends AbstractProvider
     }
 
     /**
-     * buildWnsData
+     * buildWnsData.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @access public
      * @return array
      */
     protected function buildWnsData() : array
@@ -400,7 +386,7 @@ class UrbanAirshipV3 extends AbstractProvider
         $wns = [];
 
         // Set extra data of push notification
-        if (!empty($this->getExtra())) {
+        if (! empty($this->getExtra())) {
             $wns['toast']['binding']['template'] = 'ToastText01';
             $wns['toast']['binding']['text'] = $this->message;
             $wns['toast']['launch'] = json_encode($this->extra);
@@ -410,10 +396,9 @@ class UrbanAirshipV3 extends AbstractProvider
     }
 
     /**
-     * getRequestData, for debugging retrieve the request data
+     * getRequestData, for debugging retrieve the request data.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @access public
      * @return array
      */
     public function getRequestData() : array
@@ -422,10 +407,9 @@ class UrbanAirshipV3 extends AbstractProvider
     }
 
     /**
-     * setMessage
+     * setMessage.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @access public
      * @param string $message
      * @return \Nodes\Push\Contracts\ProviderInterface
      */
@@ -433,7 +417,7 @@ class UrbanAirshipV3 extends AbstractProvider
     {
         // Max strlen is 254
         if (strlen($message) > 254) {
-            $message = substr($message, 0, 251) . '...';
+            $message = substr($message, 0, 251).'...';
         }
 
         return parent::setMessage($message);

@@ -1,4 +1,5 @@
 <?php
+
 namespace Nodes\Push\Tests\Facades\Helpers;
 
 use Nodes\Push\Contracts\ProviderInterface;
