@@ -1,4 +1,5 @@
 <?php
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -11,7 +12,7 @@ return [
     | that all the required methods has been implemented
     |
     */
-    'provider' => function() {
+    'provider' => function () {
         return new \Nodes\Push\Providers\UrbanAirshipV3(
             config('nodes.push.urban-airship')
         );
@@ -81,7 +82,7 @@ return [
                     'master_secret' => null,
                 ]
                 */
-            ]
-        ]
-    ]
+            ],
+        ],
+    ],
 ];

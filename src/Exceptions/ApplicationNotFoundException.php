@@ -1,20 +1,18 @@
 <?php
+
 namespace Nodes\Push\Exceptions;
 
 use Nodes\Exceptions\Exception as NodesException;
 
 /**
- * Class ApplicationNotFoundException
- *
- * @package Nodes\Push\Exceptions
+ * Class ApplicationNotFoundException.
  */
 class ApplicationNotFoundException extends NodesException
 {
     /**
-     * ApplicationNotFoundException constructor
+     * ApplicationNotFoundException constructor.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @access public
      * @param string $message
      */
     public function __construct($message)

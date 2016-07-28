@@ -1,12 +1,12 @@
 <?php
+
 use Nodes\Push\Contracts\ProviderInterface;
 
-if (!function_exists('push')) {
+if (! function_exists('push')) {
     /**
-     * push
+     * push.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @access public
      * @return \Nodes\Push\Contracts\ProviderInterface
      */
     function push() : ProviderInterface

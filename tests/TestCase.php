@@ -1,4 +1,5 @@
 <?php
+
 namespace Nodes\Push\Tests;
 
 use Nodes\Push\Providers\AbstractProvider;
@@ -17,11 +18,11 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
     protected function bindProviderToServiceContainer()
     {
-        app()->singleton('nodes.push', function() {
+        app()->singleton('nodes.push', function () {
             return $this->getUrbanAirshipV3Provider();
         });
 
-        app()->bind(NodesPushProviderContract::class, function($app) {
+        app()->bind(NodesPushProviderContract::class, function ($app) {
             return $app['nodes.push'];
         });
     }

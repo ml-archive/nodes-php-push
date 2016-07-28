@@ -324,4 +324,3 @@ class AbstractProviderTest extends TestCase
         ]);
     }
 }
-

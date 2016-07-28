@@ -1,31 +1,27 @@
 <?php
+
 namespace Nodes\Push\Exceptions;
 
 use Nodes\Exceptions\Exception as NodesException;
 
 /**
- * Class InvalidPushProviderException
- *
- * @package Nodes\Push\Exceptions
+ * Class InvalidPushProviderException.
  */
 class InvalidPushProviderException extends NodesException
 {
     /**
-     * InvalidPushProvider constructor
+     * InvalidPushProvider constructor.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @access public
      * @param string $object
      */
     public function __construct($object)
     {
-        if(is_object($object)) {
+        if (is_object($object)) {
             $provider = get_class($object);
-        }
-        else if(empty($object)) {
+        } elseif (empty($object)) {
             $provider = 'NULL';
-        }
-        else {
+        } else {
             $provider = $object;
         }
         $message = sprintf('The push provider used [%s] is not an instance of ProviderInstance', $provider);
