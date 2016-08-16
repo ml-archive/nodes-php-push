@@ -165,7 +165,6 @@ class UrbanAirshipV3 extends AbstractProvider
                 } else {
                     throw (new SendPushFailedException(sprintf('[%s] Could not send push message. Reason: %s', $appName, $e->getMessage())));
                 }
-                
             } catch (\Throwable $e) {
                 throw new SendPushFailedException(sprintf('[%s] Could not send push message. Reason: %s', $appName, $e->getMessage()));
             }
