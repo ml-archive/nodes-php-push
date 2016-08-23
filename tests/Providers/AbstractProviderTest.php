@@ -130,6 +130,19 @@ class AbstractProviderTest extends TestCase
         ];
     }
 
+    public function testSetAndroidData()
+    {
+        $abstractProvider = $this->getAbstractProvider();
+        $data = [
+            'test1' => 1,
+            'test2' => 2
+        ];
+        $abstractProvider->setAndroidData($data);
+
+        $androidData = $abstractProvider->getAndroidData();
+        $this->assertSame($data, $androidData);
+    }
+
     public function testSetExtraErrorObject()
     {
         $abstractProvider = $this->getAbstractProvider();
