@@ -1,21 +1,22 @@
 <?php
+
 // coverage-checker.php
-$inputFile  = $argv[1];
+$inputFile = $argv[1];
 $percentage = min(100, max(0, (int) $argv[2]));
 
-if (!file_exists($inputFile)) {
-    echo $inputFile . ' was not found';
+if (! file_exists($inputFile)) {
+    echo $inputFile.' was not found';
     exit(0);
 }
 
-if (!$percentage) {
+if (! $percentage) {
     echo 'An integer checked percentage must be given as second parameter';
     exit(0);
 }
 
-$xml             = new \SimpleXMLElement(file_get_contents($inputFile));
-$metrics         = $xml->xpath('//metrics');
-$totalElements   = 0;
+$xml = new \SimpleXMLElement(file_get_contents($inputFile));
+$metrics = $xml->xpath('//metrics');
+$totalElements = 0;
 $checkedElements = 0;
 
 foreach ($metrics as $metric) {
@@ -23,15 +24,15 @@ foreach ($metrics as $metric) {
     $checkedElements += (int) $metric['coveredelements'];
 }
 
-if($totalElements == 0) {
-    echo 'Code coverage has no elements ' . PHP_EOL;
+if ($totalElements == 0) {
+    echo 'Code coverage has no elements '.PHP_EOL;
     exit(1);
 }
 $coverage = ($checkedElements / $totalElements) * 100;
 
 if ($coverage < $percentage) {
-    echo 'Code coverage is ' . $coverage . '%, which is below the accepted ' . $percentage . '%' . PHP_EOL;
+    echo 'Code coverage is '.$coverage.'%, which is below the accepted '.$percentage.'%'.PHP_EOL;
     exit(1);
 }
 
-echo 'Code coverage is ' . $coverage . '% - OK!' . PHP_EOL;
+echo 'Code coverage is '.$coverage.'% - OK!'.PHP_EOL;

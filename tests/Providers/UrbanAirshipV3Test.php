@@ -1,13 +1,10 @@
 <?php
+
 namespace Nodes\Push\Tests\Providers;
 
 use Carbon\Carbon;
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Promise\Promise;
-use GuzzleHttp\Psr7\Response;
 use Nodes\Push\Exceptions\InvalidArgumentException;
 use Nodes\Push\Exceptions\MissingArgumentException;
-use Nodes\Push\Exceptions\SendPushFailedException;
 use Nodes\Push\ServiceProvider;
 use Nodes\Push\Tests\TestCase;
 
@@ -205,7 +202,7 @@ class UrbanAirshipV3Test extends TestCase
     public function testTooLongMessage()
     {
         $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
-        $message = 'nodes/push php package - unittest - ' . __METHOD__;
+        $message = 'nodes/push php package - unittest - '.__METHOD__;
 
         for ($i = 0; $i < 1000; $i++) {
             $message .= uniqid();
@@ -214,13 +211,13 @@ class UrbanAirshipV3Test extends TestCase
         $urbanAirshipV3->setMessage($message);
         $result = $urbanAirshipV3->send();
 
-        $this->assertTrue(!empty($result[0]['ok']) && $result[0]['ok']);
+        $this->assertTrue(! empty($result[0]['ok']) && $result[0]['ok']);
     }
 
     public function testAndroidDataSend()
     {
         $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
-        $urbanAirshipV3->setMessage('nodes/push php package - unittest - ' . __METHOD__);
+        $urbanAirshipV3->setMessage('nodes/push php package - unittest - '.__METHOD__);
         $urbanAirshipV3->setExtra([
             'type' => 'created',
         ]);
@@ -231,15 +228,15 @@ class UrbanAirshipV3Test extends TestCase
             'updated_at' => Carbon::now()->toDateTimeString(),
         ]);
         $result = $urbanAirshipV3->send();
-        $this->assertTrue(!empty($result[0]['ok']) && $result[0]['ok']);
+        $this->assertTrue(! empty($result[0]['ok']) && $result[0]['ok']);
     }
 
     public function testSend()
     {
         $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
-        $urbanAirshipV3->setMessage('nodes/push php package - unittest - ' . __METHOD__);
+        $urbanAirshipV3->setMessage('nodes/push php package - unittest - '.__METHOD__);
         $result = $urbanAirshipV3->send();
-        $this->assertTrue(!empty($result[0]['ok']) && $result[0]['ok']);
+        $this->assertTrue(! empty($result[0]['ok']) && $result[0]['ok']);
     }
 
     public function testSetExtraError1()
@@ -303,5 +300,3 @@ class UrbanAirshipV3Test extends TestCase
         ];
     }
 }
-
-

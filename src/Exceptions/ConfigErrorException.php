@@ -1,20 +1,18 @@
 <?php
+
 namespace Nodes\Push\Exceptions;
 
 use Nodes\Exceptions\Exception as NodesException;
 
 /**
- * Class ConfigErrorException
- *
- * @package Nodes\Push\Exceptions
+ * Class ConfigErrorException.
  */
 class ConfigErrorException extends NodesException
 {
     /**
-     * MissingConfigsException constructor
+     * MissingConfigsException constructor.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @access public
      * @param string $message
      */
     public function __construct($message)
