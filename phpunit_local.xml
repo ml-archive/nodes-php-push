@@ -1,5 +1,5 @@
-<!--Copy to htdocs-->
 <?xml version="1.0" encoding="UTF-8"?>
+<!--Copy to htdocs-->
 <phpunit backupGlobals="false"
          backupStaticAttributes="false"
          beStrictAboutTestsThatDoNotTestAnything="true"
@@ -20,9 +20,9 @@
     <php>
         <env name="APP_KEY" value="AckfSECXIvnK5r28GVIWUAxmbBSjTsmF"/>
         <env name="APP_NAME" value="test-app"/>
-        <env name="URBAN_AIRSHIP_APP_KEY" value="3N2QsetxRBGHokBion9tMg"/>
-        <env name="URBAN_AIRSHIP_APP_SECRET" value="Q7UrI_VRThGaQOaPXnUIQA"/>
-        <env name="URBAN_AIRSHIP_MASTER_SECRET" value="wuC9V2R9xO3SIQcfwBO-l3"/>
+        <env name="URBAN_AIRSHIP_APP_KEY" value="TODO"/>
+        <env name="URBAN_AIRSHIP_APP_SECRET" value="TODO"/>
+        <env name="URBAN_AIRSHIP_MASTER_SECRET" value="TODO"/>
     </php>
     <testsuites>
         <testsuite name="API Test Suite">
