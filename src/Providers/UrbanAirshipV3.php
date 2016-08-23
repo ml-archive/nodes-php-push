@@ -161,10 +161,14 @@ class UrbanAirshipV3 extends AbstractProvider
             } catch (ClientException $e) {
                 if ($e->hasResponse()) {
                     $content = json_decode($e->getResponse()->getBody()->getContents(), true);
-                } else {
-                    $content = [];
                 }
-                throw (new SendPushFailedException(sprintf('[%s] Could not send push message. Reason: %s', $appName, $e->getMessage())))->setErrors(new MessageBag($content['details']));
+
+                // Apply content as errors if possible
+                if (!empty($content['details']) && is_array($content['details'])) {
+                    throw (new SendPushFailedException(sprintf('[%s] Could not send push message. Reason: %s', $appName, $e->getMessage())))->setErrors(new MessageBag($content['details']));
+                } else {
+                    throw (new SendPushFailedException(sprintf('[%s] Could not send push message. Reason: %s', $appName, $e->getMessage())));
+                }
             } catch (\Throwable $e) {
                 throw new SendPushFailedException(sprintf('[%s] Could not send push message. Reason: %s', $appName, $e->getMessage()));
             }
