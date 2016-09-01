@@ -36,6 +36,18 @@ return [
 
         /*
         |--------------------------------------------------------------------------
+        | Proxy
+        |--------------------------------------------------------------------------
+        | If you need Urban airship called through a proxy, define it here
+        |
+        | It needs to contain either URL or IP and a port number
+        | e.g.
+        | 127.0.0.1:8888
+        */
+        'proxy' => env('URBAN_AIRSHIP_PROXY'),
+
+        /*
+        |--------------------------------------------------------------------------
         | App groups
         |--------------------------------------------------------------------------
         | App groups can be used to change between a set of application, can be used
