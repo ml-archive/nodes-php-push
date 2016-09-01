@@ -129,7 +129,9 @@ abstract class AbstractProvider implements ProviderInterface
 
         $this->appGroups = $config['app-groups'];
 
-        $this->proxy = $config['proxy'];
+        if (!empty($config['proxy'])) {
+            $this->proxy = $config['proxy'];
+        }
 
         if (! array_key_exists($this->defaultAppGroup, $config['app-groups'])) {
             throw new ApplicationNotFoundException(sprintf('default-app-group [%s] was not found in list of of app-groups',
