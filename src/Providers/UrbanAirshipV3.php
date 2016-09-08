@@ -137,16 +137,16 @@ class UrbanAirshipV3 extends AbstractProvider
                 continue;
             }
 
-            $UAData = [
-                'body' => json_encode($this->buildPushData()),
-                'auth' => [$credentials['app_key'], $credentials['master_secret']],
-            ];
-
-            if (!empty($this->proxy)) {
-                $UAData += ['proxy' => $this->proxy];
-            }
-
             try {
+                $UAData = [
+                    'body' => json_encode($this->buildPushData()),
+                    'auth' => [$credentials['app_key'], $credentials['master_secret']],
+                ];
+    
+                if (!empty($this->proxy)) {
+                    $UAData['proxy'] = $this->proxy;
+                }
+            
                 // Send request to Urban Airship
                 $response = $this->getHttpClient()->post('/api/push', $UAData);
 
