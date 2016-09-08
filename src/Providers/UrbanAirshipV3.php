@@ -138,11 +138,17 @@ class UrbanAirshipV3 extends AbstractProvider
             }
 
             try {
-                // Send request to Urban Airship
-                $response = $this->getHttpClient()->post('/api/push', [
+                $UAData = [
                     'body' => json_encode($this->buildPushData()),
                     'auth' => [$credentials['app_key'], $credentials['master_secret']],
-                ]);
+                ];
+    
+                if (!empty($this->proxy)) {
+                    $UAData['proxy'] = $this->proxy;
+                }
+            
+                // Send request to Urban Airship
+                $response = $this->getHttpClient()->post('/api/push', $UAData);
 
                 // Validate response by looking at the received status code
                 if (! in_array($response->getStatusCode(), [200, 201, 202])) {
