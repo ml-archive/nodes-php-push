@@ -146,7 +146,9 @@ class UrbanAirshipV3 extends AbstractProvider
                 if (!empty($this->proxy)) {
                     $UAData['proxy'] = $this->proxy;
                 }
-            
+
+                //dd($UAData);
+
                 // Send request to Urban Airship
                 $response = $this->getHttpClient()->post('/api/push', $UAData);
 
@@ -392,14 +394,24 @@ class UrbanAirshipV3 extends AbstractProvider
      */
     protected function buildWnsData() : array
     {
+        // Init the windows extras
+        $windowsExtra = $this->extra;
+
         // Data container
         $wns = [];
+
+        // apply sound as a key
+        if($this->sound) {
+            $windowsExtra['sound'] = $this->sound;
+            #$wns['toast']['audio']['sound']= 'src=ms-appdata:///local/' . $this->sound;
+            #$wns['toast']['audio']['loop'] = 'false';
+        }
 
         // Set extra data of push notification
         if (! empty($this->getExtra())) {
             $wns['toast']['binding']['template'] = 'ToastText01';
             $wns['toast']['binding']['text'] = $this->message;
-            $wns['toast']['launch'] = json_encode($this->extra);
+            $wns['toast']['launch'] = json_encode($windowsExtra);
         }
 
         return $wns;

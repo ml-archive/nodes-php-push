@@ -103,10 +103,11 @@ class UrbanAirshipV3Test extends TestCase
                     'extra' => [
                         'sound' => $sound,
                     ],
-                ],
+                ]
             ],
             'device_types' => 'all',
         ], $requestData);
+
     }
 
     public function testGetRequestDataContentAvailable()
