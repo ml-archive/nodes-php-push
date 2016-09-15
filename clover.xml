@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1473932957">
-  <project timestamp="1473932957">
+<coverage generated="1473933484">
+  <project timestamp="1473933484">
     <package name="Nodes\Push\Exceptions">
       <file name="/var/www/riide/htdocs/vendor/nodes/push/src/Exceptions/ApplicationNotFoundException.php">
         <class name="ApplicationNotFoundException" namespace="Nodes\Push\Exceptions">
@@ -52,33 +52,36 @@
       </file>
       <file name="/var/www/riide/htdocs/vendor/nodes/push/src/Exceptions/SendPushFailedException.php">
         <class name="SendPushFailedException" namespace="Nodes\Push\Exceptions">
-          <metrics complexity="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+          <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
         </class>
-        <metrics loc="22" ncloc="13" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="20" type="stmt" count="1"/>
+        <line num="21" type="stmt" count="1"/>
+        <metrics loc="22" ncloc="13" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
       </file>
     </package>
     <package name="Nodes\Push\Providers">
       <file name="/var/www/riide/htdocs/vendor/nodes/push/src/Providers/AbstractProvider.php">
         <class name="AbstractProvider" namespace="Nodes\Push\Providers">
-          <metrics complexity="37" methods="24" coveredmethods="23" conditionals="0" coveredconditionals="0" statements="68" coveredstatements="67" elements="92" coveredelements="90"/>
+          <metrics complexity="37" methods="24" coveredmethods="24" conditionals="0" coveredconditionals="0" statements="68" coveredstatements="68" elements="92" coveredelements="92"/>
         </class>
-        <line num="109" type="method" name="__construct" visibility="public" complexity="7" crap="7.01" count="60"/>
-        <line num="112" type="stmt" count="60"/>
+        <line num="109" type="method" name="__construct" visibility="public" complexity="7" crap="7" count="61"/>
+        <line num="112" type="stmt" count="61"/>
         <line num="113" type="stmt" count="2"/>
-        <line num="116" type="stmt" count="58"/>
+        <line num="116" type="stmt" count="59"/>
         <line num="117" type="stmt" count="1"/>
-        <line num="120" type="stmt" count="57"/>
-        <line num="122" type="stmt" count="57"/>
+        <line num="120" type="stmt" count="58"/>
+        <line num="122" type="stmt" count="58"/>
         <line num="123" type="stmt" count="1"/>
-        <line num="126" type="stmt" count="56"/>
+        <line num="126" type="stmt" count="57"/>
         <line num="127" type="stmt" count="1"/>
-        <line num="130" type="stmt" count="55"/>
-        <line num="132" type="stmt" count="55"/>
-        <line num="133" type="stmt" count="0"/>
-        <line num="136" type="stmt" count="55"/>
+        <line num="130" type="stmt" count="56"/>
+        <line num="132" type="stmt" count="56"/>
+        <line num="133" type="stmt" count="1"/>
+        <line num="136" type="stmt" count="56"/>
         <line num="137" type="stmt" count="1"/>
         <line num="138" type="stmt" count="1"/>
-        <line num="140" type="stmt" count="54"/>
+        <line num="140" type="stmt" count="55"/>
         <line num="150" type="method" name="setAppGroup" visibility="public" complexity="2" crap="2" count="2"/>
         <line num="152" type="stmt" count="2"/>
         <line num="153" type="stmt" count="1"/>
@@ -95,8 +98,8 @@
         <line num="201" type="method" name="setChannel" visibility="public" complexity="1" crap="1" count="2"/>
         <line num="203" type="stmt" count="2"/>
         <line num="205" type="stmt" count="2"/>
-        <line num="214" type="method" name="getChannels" visibility="public" complexity="1" crap="1" count="13"/>
-        <line num="216" type="stmt" count="13"/>
+        <line num="214" type="method" name="getChannels" visibility="public" complexity="1" crap="1" count="14"/>
+        <line num="216" type="stmt" count="14"/>
         <line num="228" type="method" name="setAliases" visibility="public" complexity="2" crap="2" count="2"/>
         <line num="231" type="stmt" count="2"/>
         <line num="232" type="stmt" count="2"/>
@@ -105,13 +108,13 @@
         <line num="248" type="method" name="setAlias" visibility="public" complexity="1" crap="1" count="2"/>
         <line num="250" type="stmt" count="2"/>
         <line num="252" type="stmt" count="2"/>
-        <line num="261" type="method" name="getAliases" visibility="public" complexity="1" crap="1" count="13"/>
-        <line num="263" type="stmt" count="13"/>
-        <line num="273" type="method" name="setMessage" visibility="public" complexity="1" crap="1" count="5"/>
-        <line num="275" type="stmt" count="5"/>
-        <line num="277" type="stmt" count="5"/>
-        <line num="286" type="method" name="getMessage" visibility="public" complexity="1" crap="1" count="13"/>
-        <line num="288" type="stmt" count="13"/>
+        <line num="261" type="method" name="getAliases" visibility="public" complexity="1" crap="1" count="14"/>
+        <line num="263" type="stmt" count="14"/>
+        <line num="273" type="method" name="setMessage" visibility="public" complexity="1" crap="1" count="6"/>
+        <line num="275" type="stmt" count="6"/>
+        <line num="277" type="stmt" count="6"/>
+        <line num="286" type="method" name="getMessage" visibility="public" complexity="1" crap="1" count="14"/>
+        <line num="288" type="stmt" count="14"/>
         <line num="301" type="method" name="setExtra" visibility="public" complexity="1" crap="1" count="6"/>
         <line num="303" type="stmt" count="6"/>
         <line num="305" type="stmt" count="4"/>
@@ -130,35 +133,35 @@
         <line num="349" type="stmt" count="3"/>
         <line num="358" type="method" name="getAndroidData" visibility="public" complexity="1" crap="1" count="2"/>
         <line num="360" type="stmt" count="2"/>
-        <line num="369" type="method" name="getExtra" visibility="public" complexity="1" crap="1" count="12"/>
-        <line num="371" type="stmt" count="12"/>
+        <line num="369" type="method" name="getExtra" visibility="public" complexity="1" crap="1" count="13"/>
+        <line num="371" type="stmt" count="13"/>
         <line num="382" type="method" name="setIOSBadge" visibility="public" complexity="2" crap="2" count="5"/>
         <line num="384" type="stmt" count="5"/>
         <line num="385" type="stmt" count="2"/>
         <line num="388" type="stmt" count="3"/>
         <line num="390" type="stmt" count="3"/>
-        <line num="399" type="method" name="getIOSBadge" visibility="public" complexity="1" crap="1" count="21"/>
-        <line num="401" type="stmt" count="21"/>
+        <line num="399" type="method" name="getIOSBadge" visibility="public" complexity="1" crap="1" count="22"/>
+        <line num="401" type="stmt" count="22"/>
         <line num="412" type="method" name="setSound" visibility="public" complexity="1" crap="1" count="3"/>
         <line num="414" type="stmt" count="3"/>
         <line num="416" type="stmt" count="3"/>
         <line num="425" type="method" name="removeSound" visibility="public" complexity="1" crap="1" count="9"/>
         <line num="427" type="stmt" count="9"/>
         <line num="429" type="stmt" count="9"/>
-        <line num="438" type="method" name="getSound" visibility="public" complexity="1" crap="1" count="13"/>
-        <line num="440" type="stmt" count="13"/>
+        <line num="438" type="method" name="getSound" visibility="public" complexity="1" crap="1" count="14"/>
+        <line num="440" type="stmt" count="14"/>
         <line num="450" type="method" name="setIosContentAvailable" visibility="public" complexity="1" crap="1" count="2"/>
         <line num="452" type="stmt" count="2"/>
         <line num="454" type="stmt" count="2"/>
-        <line num="463" type="method" name="isIosContentAvailable" visibility="public" complexity="1" crap="1" count="12"/>
-        <line num="465" type="stmt" count="12"/>
+        <line num="463" type="method" name="isIosContentAvailable" visibility="public" complexity="1" crap="1" count="13"/>
+        <line num="465" type="stmt" count="13"/>
         <line num="474" type="method" name="getInstance" visibility="public" complexity="1" crap="1" count="1"/>
         <line num="476" type="stmt" count="1"/>
-        <metrics loc="478" ncloc="235" classes="1" methods="24" coveredmethods="23" conditionals="0" coveredconditionals="0" statements="68" coveredstatements="67" elements="92" coveredelements="90"/>
+        <metrics loc="478" ncloc="235" classes="1" methods="24" coveredmethods="24" conditionals="0" coveredconditionals="0" statements="68" coveredstatements="68" elements="92" coveredelements="92"/>
       </file>
       <file name="/var/www/riide/htdocs/vendor/nodes/push/src/Providers/UrbanAirshipV3.php">
         <class name="UrbanAirshipV3" namespace="Nodes\Push\Providers">
-          <metrics complexity="61" methods="15" coveredmethods="15" conditionals="0" coveredconditionals="0" statements="94" coveredstatements="94" elements="109" coveredelements="109"/>
+          <metrics complexity="61" methods="15" coveredmethods="15" conditionals="0" coveredconditionals="0" statements="97" coveredstatements="97" elements="112" coveredelements="112"/>
         </class>
         <line num="37" type="method" name="setIOSBadge" visibility="public" complexity="9" crap="9" count="11"/>
         <line num="40" type="stmt" count="11"/>
@@ -182,94 +185,97 @@
         <line num="108" type="stmt" count="5"/>
         <line num="112" type="stmt" count="4"/>
         <line num="113" type="stmt" count="4"/>
-        <line num="124" type="method" name="send" visibility="public" complexity="12" crap="12" count="4"/>
-        <line num="126" type="stmt" count="4"/>
-        <line num="128" type="stmt" count="3"/>
-        <line num="132" type="stmt" count="3"/>
-        <line num="135" type="stmt" count="3"/>
-        <line num="142" type="stmt" count="3"/>
-        <line num="143" type="stmt" count="3"/>
-        <line num="146" type="stmt" count="3"/>
-        <line num="151" type="stmt" count="3"/>
+        <line num="124" type="method" name="send" visibility="public" complexity="12" crap="12" count="5"/>
+        <line num="126" type="stmt" count="5"/>
+        <line num="128" type="stmt" count="4"/>
+        <line num="132" type="stmt" count="4"/>
+        <line num="135" type="stmt" count="4"/>
+        <line num="142" type="stmt" count="4"/>
+        <line num="143" type="stmt" count="4"/>
+        <line num="146" type="stmt" count="4"/>
+        <line num="147" type="stmt" count="1"/>
+        <line num="151" type="stmt" count="4"/>
         <line num="154" type="stmt" count="3"/>
         <line num="159" type="stmt" count="3"/>
         <line num="162" type="stmt" count="3"/>
         <line num="166" type="stmt" count="3"/>
-        <line num="179" type="stmt" count="3"/>
+        <line num="167" type="stmt" count="1"/>
+        <line num="178" type="stmt" count="1"/>
+        <line num="179" type="stmt" count="4"/>
         <line num="183" type="stmt" count="3"/>
-        <line num="194" type="method" name="validateBeforePush" visibility="protected" complexity="5" crap="5" count="4"/>
-        <line num="196" type="stmt" count="4"/>
+        <line num="194" type="method" name="validateBeforePush" visibility="protected" complexity="5" crap="5" count="5"/>
+        <line num="196" type="stmt" count="5"/>
         <line num="197" type="stmt" count="1"/>
-        <line num="201" type="stmt" count="3"/>
-        <line num="205" type="stmt" count="3"/>
-        <line num="209" type="stmt" count="3"/>
-        <line num="212" type="stmt" count="3"/>
-        <line num="221" type="method" name="hasEmptyCredentials" visibility="protected" complexity="4" crap="4" count="3"/>
-        <line num="225" type="stmt" count="3"/>
-        <line num="226" type="stmt" count="3"/>
-        <line num="231" type="stmt" count="3"/>
-        <line num="240" type="method" name="getHttpClient" visibility="protected" complexity="2" crap="2" count="3"/>
-        <line num="242" type="stmt" count="3"/>
-        <line num="246" type="stmt" count="3"/>
-        <line num="247" type="stmt" count="3"/>
-        <line num="249" type="stmt" count="3"/>
-        <line num="250" type="stmt" count="3"/>
-        <line num="252" type="stmt" count="3"/>
-        <line num="262" type="method" name="buildPushData" visibility="protected" complexity="5" crap="5" count="11"/>
-        <line num="265" type="stmt" count="11"/>
-        <line num="268" type="stmt" count="11"/>
-        <line num="271" type="stmt" count="11"/>
-        <line num="274" type="stmt" count="11"/>
-        <line num="275" type="stmt" count="7"/>
-        <line num="279" type="stmt" count="11"/>
-        <line num="280" type="stmt" count="5"/>
-        <line num="284" type="stmt" count="11"/>
+        <line num="201" type="stmt" count="4"/>
+        <line num="205" type="stmt" count="4"/>
+        <line num="209" type="stmt" count="4"/>
+        <line num="212" type="stmt" count="4"/>
+        <line num="221" type="method" name="hasEmptyCredentials" visibility="protected" complexity="4" crap="4" count="4"/>
+        <line num="225" type="stmt" count="4"/>
+        <line num="226" type="stmt" count="4"/>
+        <line num="231" type="stmt" count="4"/>
+        <line num="240" type="method" name="getHttpClient" visibility="protected" complexity="2" crap="2" count="4"/>
+        <line num="242" type="stmt" count="4"/>
+        <line num="246" type="stmt" count="4"/>
+        <line num="247" type="stmt" count="4"/>
+        <line num="249" type="stmt" count="4"/>
+        <line num="250" type="stmt" count="4"/>
+        <line num="252" type="stmt" count="4"/>
+        <line num="262" type="method" name="buildPushData" visibility="protected" complexity="5" crap="5" count="12"/>
+        <line num="265" type="stmt" count="12"/>
+        <line num="268" type="stmt" count="12"/>
+        <line num="271" type="stmt" count="12"/>
+        <line num="274" type="stmt" count="12"/>
+        <line num="275" type="stmt" count="8"/>
+        <line num="279" type="stmt" count="12"/>
+        <line num="280" type="stmt" count="6"/>
+        <line num="284" type="stmt" count="12"/>
         <line num="285" type="stmt" count="2"/>
-        <line num="289" type="stmt" count="11"/>
-        <line num="291" type="stmt" count="11"/>
-        <line num="300" type="method" name="buildAudienceData" visibility="protected" complexity="4" crap="4" count="11"/>
-        <line num="303" type="stmt" count="11"/>
-        <line num="306" type="stmt" count="11"/>
+        <line num="289" type="stmt" count="12"/>
+        <line num="291" type="stmt" count="12"/>
+        <line num="300" type="method" name="buildAudienceData" visibility="protected" complexity="4" crap="4" count="12"/>
+        <line num="303" type="stmt" count="12"/>
+        <line num="306" type="stmt" count="12"/>
         <line num="307" type="stmt" count="1"/>
-        <line num="311" type="stmt" count="11"/>
+        <line num="311" type="stmt" count="12"/>
         <line num="312" type="stmt" count="1"/>
         <line num="313" type="stmt" count="1"/>
-        <line num="317" type="stmt" count="11"/>
-        <line num="326" type="method" name="buildIOSData" visibility="protected" complexity="5" crap="5" count="11"/>
-        <line num="329" type="stmt" count="11"/>
-        <line num="332" type="stmt" count="11"/>
+        <line num="317" type="stmt" count="12"/>
+        <line num="326" type="method" name="buildIOSData" visibility="protected" complexity="5" crap="5" count="12"/>
+        <line num="329" type="stmt" count="12"/>
+        <line num="332" type="stmt" count="12"/>
         <line num="333" type="stmt" count="2"/>
-        <line num="337" type="stmt" count="11"/>
+        <line num="337" type="stmt" count="12"/>
         <line num="338" type="stmt" count="1"/>
-        <line num="342" type="stmt" count="11"/>
-        <line num="343" type="stmt" count="4"/>
-        <line num="347" type="stmt" count="11"/>
+        <line num="342" type="stmt" count="12"/>
+        <line num="343" type="stmt" count="5"/>
+        <line num="347" type="stmt" count="12"/>
         <line num="348" type="stmt" count="1"/>
-        <line num="351" type="stmt" count="11"/>
-        <line num="360" type="method" name="buildAndroidData" visibility="protected" complexity="5" crap="5" count="11"/>
-        <line num="363" type="stmt" count="11"/>
-        <line num="366" type="stmt" count="11"/>
+        <line num="351" type="stmt" count="12"/>
+        <line num="360" type="method" name="buildAndroidData" visibility="protected" complexity="5" crap="5" count="12"/>
+        <line num="363" type="stmt" count="12"/>
+        <line num="366" type="stmt" count="12"/>
         <line num="367" type="stmt" count="2"/>
-        <line num="371" type="stmt" count="11"/>
+        <line num="371" type="stmt" count="12"/>
         <line num="372" type="stmt" count="1"/>
         <line num="375" type="stmt" count="1"/>
-        <line num="380" type="stmt" count="11"/>
-        <line num="381" type="stmt" count="4"/>
-        <line num="384" type="stmt" count="11"/>
-        <line num="393" type="method" name="buildWnsData" visibility="protected" complexity="2" crap="2" count="11"/>
-        <line num="396" type="stmt" count="11"/>
-        <line num="399" type="stmt" count="11"/>
+        <line num="380" type="stmt" count="12"/>
+        <line num="381" type="stmt" count="5"/>
+        <line num="384" type="stmt" count="12"/>
+        <line num="393" type="method" name="buildWnsData" visibility="protected" complexity="2" crap="2" count="12"/>
+        <line num="396" type="stmt" count="12"/>
+        <line num="399" type="stmt" count="12"/>
         <line num="400" type="stmt" count="2"/>
         <line num="401" type="stmt" count="2"/>
         <line num="402" type="stmt" count="2"/>
-        <line num="405" type="stmt" count="11"/>
+        <line num="405" type="stmt" count="12"/>
         <line num="414" type="method" name="getRequestData" visibility="public" complexity="1" crap="1" count="8"/>
         <line num="416" type="stmt" count="8"/>
-        <line num="426" type="method" name="setMessage" visibility="public" complexity="2" crap="2" count="4"/>
-        <line num="429" type="stmt" count="4"/>
+        <line num="426" type="method" name="setMessage" visibility="public" complexity="2" crap="2" count="5"/>
+        <line num="429" type="stmt" count="5"/>
         <line num="430" type="stmt" count="1"/>
-        <line num="433" type="stmt" count="4"/>
-        <metrics loc="435" ncloc="250" classes="1" methods="15" coveredmethods="15" conditionals="0" coveredconditionals="0" statements="94" coveredstatements="94" elements="109" coveredelements="109"/>
+        <line num="433" type="stmt" count="5"/>
+        <metrics loc="435" ncloc="250" classes="1" methods="15" coveredmethods="15" conditionals="0" coveredconditionals="0" statements="97" coveredstatements="97" elements="112" coveredelements="112"/>
       </file>
     </package>
     <package name="Nodes\Push">
@@ -277,22 +283,22 @@
         <class name="ServiceProvider" namespace="Nodes\Push">
           <metrics complexity="6" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="15" coveredelements="15"/>
         </class>
-        <line num="20" type="method" name="boot" visibility="public" complexity="1" crap="1" count="60"/>
-        <line num="22" type="stmt" count="60"/>
-        <line num="23" type="stmt" count="60"/>
-        <line num="31" type="method" name="register" visibility="public" complexity="1" crap="1" count="60"/>
-        <line num="33" type="stmt" count="60"/>
-        <line num="34" type="stmt" count="60"/>
-        <line num="42" type="method" name="publishGroups" visibility="protected" complexity="1" crap="1" count="60"/>
-        <line num="45" type="stmt" count="60"/>
-        <line num="46" type="stmt" count="60"/>
-        <line num="47" type="stmt" count="60"/>
-        <line num="48" type="stmt" count="60"/>
-        <line num="56" type="method" name="registerPushProvider" visibility="protected" complexity="2" crap="2" count="60"/>
-        <line num="68" type="stmt" count="60"/>
-        <line num="70" type="method" name="anonymous function" complexity="1" crap="1" count="60"/>
-        <line num="72" type="stmt" count="60"/>
-        <line num="73" type="stmt" count="60"/>
+        <line num="20" type="method" name="boot" visibility="public" complexity="1" crap="1" count="61"/>
+        <line num="22" type="stmt" count="61"/>
+        <line num="23" type="stmt" count="61"/>
+        <line num="31" type="method" name="register" visibility="public" complexity="1" crap="1" count="61"/>
+        <line num="33" type="stmt" count="61"/>
+        <line num="34" type="stmt" count="61"/>
+        <line num="42" type="method" name="publishGroups" visibility="protected" complexity="1" crap="1" count="61"/>
+        <line num="45" type="stmt" count="61"/>
+        <line num="46" type="stmt" count="61"/>
+        <line num="47" type="stmt" count="61"/>
+        <line num="48" type="stmt" count="61"/>
+        <line num="56" type="method" name="registerPushProvider" visibility="protected" complexity="2" crap="2" count="61"/>
+        <line num="68" type="stmt" count="61"/>
+        <line num="70" type="method" name="anonymous function" complexity="1" crap="1" count="61"/>
+        <line num="72" type="stmt" count="61"/>
+        <line num="73" type="stmt" count="61"/>
         <metrics loc="87" ncloc="30" classes="1" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="16" coveredelements="16"/>
       </file>
     </package>
@@ -310,6 +316,6 @@
       <line num="14" type="stmt" count="1"/>
       <metrics loc="16" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="1" coveredelements="1"/>
     </file>
-    <metrics files="12" loc="1202" ncloc="637" classes="11" methods="49" coveredmethods="48" conditionals="0" coveredconditionals="0" statements="183" coveredstatements="182" elements="232" coveredelements="230"/>
+    <metrics files="12" loc="1202" ncloc="637" classes="11" methods="50" coveredmethods="50" conditionals="0" coveredconditionals="0" statements="188" coveredstatements="188" elements="238" coveredelements="238"/>
   </project>
 </coverage>

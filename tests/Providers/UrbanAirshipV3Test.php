@@ -5,6 +5,7 @@ namespace Nodes\Push\Tests\Providers;
 use Carbon\Carbon;
 use Nodes\Push\Exceptions\InvalidArgumentException;
 use Nodes\Push\Exceptions\MissingArgumentException;
+use Nodes\Push\Exceptions\SendPushFailedException;
 use Nodes\Push\ServiceProvider;
 use Nodes\Push\Tests\TestCase;
 
@@ -237,6 +238,14 @@ class UrbanAirshipV3Test extends TestCase
         $urbanAirshipV3->setMessage('nodes/push php package - unittest - '.__METHOD__);
         $result = $urbanAirshipV3->send();
         $this->assertTrue(! empty($result[0]['ok']) && $result[0]['ok']);
+    }
+
+    public function testSendProxy()
+    {
+        $urbanAirshipV3 = $this->getUrbanAirshipV3WithProxyProvider();
+        $urbanAirshipV3->setMessage('nodes/push php package - unittest - '.__METHOD__);
+        $this->expectException(SendPushFailedException::class);
+        $urbanAirshipV3->send();
     }
 
     public function testSetExtraError1()
