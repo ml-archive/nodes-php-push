@@ -401,7 +401,7 @@ class UrbanAirshipV3 extends AbstractProvider
         $wns = [];
 
         // apply sound as a key
-        if($this->sound) {
+        if ($this->sound) {
             $windowsExtra['sound'] = $this->sound;
             #$wns['toast']['audio']['sound']= 'src=ms-appdata:///local/' . $this->sound;
             #$wns['toast']['audio']['loop'] = 'false';

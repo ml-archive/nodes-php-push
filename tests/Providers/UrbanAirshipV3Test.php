@@ -107,7 +107,6 @@ class UrbanAirshipV3Test extends TestCase
             ],
             'device_types' => 'all',
         ], $requestData);
-
     }
 
     public function testGetRequestDataContentAvailable()
