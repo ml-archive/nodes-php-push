@@ -384,7 +384,7 @@ class UrbanAirshipV3 extends AbstractProvider
         }
 
         // Add delivery priority - defaults to normal
-        if($this->getAndroidDeliveryPriority() != 'normal') {
+        if ($this->getAndroidDeliveryPriority() != 'normal') {
             $android['delivery_priority'] = $this->getAndroidDeliveryPriority();
         }
 
