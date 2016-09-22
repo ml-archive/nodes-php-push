@@ -18,6 +18,25 @@ class UrbanAirshipV3Test extends TestCase
         ];
     }
 
+    public function testAndroidDeliveryPriority()
+    {
+        $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
+
+        $urbanAirshipV3->setAndroidDeliveryPriorityHigh()->removeSound();
+        $requestData = $urbanAirshipV3->getRequestData();
+
+        $this->assertSame([
+            'audience'     => 'all',
+            'notification' => [
+                'alert' => null,
+                'android'   => [
+                    'delivery_priority' => 'high',
+                ],
+            ],
+            'device_types' => 'all',
+        ], $requestData);
+    }
+
     public function testGetRequestDataIOSBadge()
     {
         $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();

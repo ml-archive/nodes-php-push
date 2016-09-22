@@ -245,6 +245,20 @@ class AbstractProviderTest extends TestCase
         $this->assertSame($appGroup, $abstractProvider->getAppGroup());
     }
 
+    public function testAndroidDeliveryPriorityNormal()
+    {
+        $abstractProvider = $this->getAbstractProvider();
+        $abstractProvider->setAndroidDeliveryPriorityNormal();
+        $this->assertSame('normal', $abstractProvider->getAndroidDeliveryPriority());
+    }
+
+    public function testAndroidDeliveryPriorityHigh()
+    {
+        $abstractProvider = $this->getAbstractProvider();
+        $abstractProvider->setAndroidDeliveryPriorityHigh();
+        $this->assertSame('high', $abstractProvider->getAndroidDeliveryPriority());
+    }
+
     public function testInitProvideDefaultAppGroupDoesNotExist()
     {
         $this->expectException(ApplicationNotFoundException::class);

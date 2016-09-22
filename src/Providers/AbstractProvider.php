@@ -85,6 +85,14 @@ abstract class AbstractProvider implements ProviderInterface
     protected $iosContentAvailable = false;
 
     /**
+     * Delivery priority for android
+     * in GCM "normal" and "high" is supported
+     *
+     * @var string
+     */
+    protected $androidDeliveryPriority = 'normal';
+
+    /**
      * Data just added for android in extra.
      *
      * @var array
@@ -113,7 +121,7 @@ abstract class AbstractProvider implements ProviderInterface
             throw new ConfigErrorException('Missing default-app-group config');
         }
 
-        if (! is_string($config['default-app-group'])) {
+        if (!is_string($config['default-app-group'])) {
             throw new ConfigErrorException('default-app-group is not a string');
         }
 
@@ -123,7 +131,7 @@ abstract class AbstractProvider implements ProviderInterface
             throw new ConfigErrorException('Missing app-groups config');
         }
 
-        if (! is_array($config['app-groups'])) {
+        if (!is_array($config['app-groups'])) {
             throw new ConfigErrorException('app-groups is not an array');
         }
 
@@ -133,7 +141,7 @@ abstract class AbstractProvider implements ProviderInterface
             $this->proxy = $config['proxy'];
         }
 
-        if (! array_key_exists($this->defaultAppGroup, $config['app-groups'])) {
+        if (!array_key_exists($this->defaultAppGroup, $config['app-groups'])) {
             throw new ApplicationNotFoundException(sprintf('default-app-group [%s] was not found in list of of app-groups',
                 $this->defaultAppGroup));
         }
@@ -149,7 +157,7 @@ abstract class AbstractProvider implements ProviderInterface
      */
     public function setAppGroup(string $appGroup) : ProviderInterface
     {
-        if (! array_key_exists($appGroup, $this->appGroups)) {
+        if (!array_key_exists($appGroup, $this->appGroups)) {
             throw new ApplicationNotFoundException(sprintf('The passed appGroup [%s] was not found in list of of app-groups',
                 $this->defaultAppGroup));
         }
@@ -321,7 +329,7 @@ abstract class AbstractProvider implements ProviderInterface
 
         // Make sure channels are strings
         foreach ($extra as $key => $value) {
-            if (! is_scalar($value)) {
+            if (!is_scalar($value)) {
                 throw new InvalidArgumentException(sprintf('Extra key [%s] was array/object/null', $key));
             }
 
@@ -381,7 +389,7 @@ abstract class AbstractProvider implements ProviderInterface
      */
     public function setIOSBadge($iOSBadge) : ProviderInterface
     {
-        if (! is_scalar($iOSBadge)) {
+        if (!is_scalar($iOSBadge)) {
             throw new InvalidArgumentException('The passed badge was an array/object');
         }
 
@@ -463,6 +471,46 @@ abstract class AbstractProvider implements ProviderInterface
     public function isIosContentAvailable() : bool
     {
         return $this->iosContentAvailable;
+    }
+
+    /**
+     * setAndroidDeliveryPriorityNormal
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function setAndroidDeliveryPriorityNormal() : ProviderInterface
+    {
+        $this->androidDeliveryPriority = 'normal';
+
+        return $this;
+    }
+
+    /**
+     * setAndroidDeliveryPriorityHigh
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function setAndroidDeliveryPriorityHigh() : ProviderInterface
+    {
+        $this->androidDeliveryPriority = 'high';
+
+        return $this;
+    }
+
+    /**
+     * getAndroidDeliveryPriority
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return string
+     */
+    public function getAndroidDeliveryPriority() : string
+    {
+        return $this->androidDeliveryPriority;
     }
 
     /**

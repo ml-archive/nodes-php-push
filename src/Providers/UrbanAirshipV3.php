@@ -383,6 +383,11 @@ class UrbanAirshipV3 extends AbstractProvider
             $android['extra']['sound'] = $this->getSound();
         }
 
+        // Add delivery priority - defaults to normal
+        if ($this->getAndroidDeliveryPriority() != 'normal') {
+            $android['delivery_priority'] = $this->getAndroidDeliveryPriority();
+        }
+
         return $android;
     }
 
