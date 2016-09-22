@@ -110,6 +110,7 @@ setSound(string $sound) : ProviderInterface; // Custom sound
 removeSound() : ProviderInterface; // Remove custom sound
 setIosContentAvailable(bool $iosContentAvailable) : ProviderInterface; // Should not go in notification center
 setAndroidData(array $androidData) : ProviderInterface; // Add more extra for android only, android can handle 8 times more data in push than iOS
+setAndroidDeliveryPriorityHigh() : ProviderInterface; // Make sure the Android device wakes up when push is recieved 
 setAppGroup(string $appGroup) : ProviderInterface; // Change your default-app-group in run time. Handy for white labeling
 ```
 
