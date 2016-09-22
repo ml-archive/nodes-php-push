@@ -214,6 +214,33 @@ interface ProviderInterface
     public function getAndroidData() : array;
 
     /**
+     * setAndroidDeliveryPriorityNormal
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function setAndroidDeliveryPriorityNormal() : ProviderInterface;
+
+    /**
+     * setAndroidDeliveryPriorityHigh
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function setAndroidDeliveryPriorityHigh() : ProviderInterface;
+
+    /**
+     * getAndroidDeliveryPriority
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @access public
+     * @return string
+     */
+    public function getAndroidDeliveryPriority() : string;
+    
+    /**
      * getInstance.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
