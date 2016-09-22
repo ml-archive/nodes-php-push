@@ -483,6 +483,8 @@ abstract class AbstractProvider implements ProviderInterface
     public function setAndroidDeliveryPriorityNormal() : ProviderInterface
     {
         $this->androidDeliveryPriority = 'normal';
+
+        return $this;
     }
 
     /**
