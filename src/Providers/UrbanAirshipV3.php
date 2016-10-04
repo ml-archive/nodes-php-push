@@ -142,7 +142,7 @@ class UrbanAirshipV3 extends AbstractProvider
                     'body' => json_encode($this->buildPushData()),
                     'auth' => [$credentials['app_key'], $credentials['master_secret']],
                 ];
-    
+
                 if (!empty($this->proxy)) {
                     $UAData['proxy'] = $this->proxy;
                 }
@@ -386,6 +386,14 @@ class UrbanAirshipV3 extends AbstractProvider
         // Add delivery priority - defaults to normal
         if ($this->getAndroidDeliveryPriority() != 'normal') {
             $android['delivery_priority'] = $this->getAndroidDeliveryPriority();
+        }
+
+        // Set the visibility of the push notification
+        $android['visibility'] = $this->getAndroidVisibility();
+
+        // Set android style if available
+        if (!empty($this->getAndroidStyle())) {
+            $android['style'] = $this->getAndroidStyle();
         }
 
         return $android;
