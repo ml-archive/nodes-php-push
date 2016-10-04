@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Nodes\Push\Providers;
 
@@ -145,7 +145,7 @@ abstract class AbstractProvider implements ProviderInterface
             throw new ConfigErrorException('Missing default-app-group config');
         }
 
-        if ( ! is_string($config['default-app-group'])) {
+        if (! is_string($config['default-app-group'])) {
             throw new ConfigErrorException('default-app-group is not a string');
         }
 
@@ -155,17 +155,17 @@ abstract class AbstractProvider implements ProviderInterface
             throw new ConfigErrorException('Missing app-groups config');
         }
 
-        if ( ! is_array($config['app-groups'])) {
+        if (! is_array($config['app-groups'])) {
             throw new ConfigErrorException('app-groups is not an array');
         }
 
         $this->appGroups = $config['app-groups'];
 
-        if ( ! empty($config['proxy'])) {
+        if (! empty($config['proxy'])) {
             $this->proxy = $config['proxy'];
         }
 
-        if ( ! array_key_exists($this->defaultAppGroup, $config['app-groups'])) {
+        if (! array_key_exists($this->defaultAppGroup, $config['app-groups'])) {
             throw new ApplicationNotFoundException(sprintf('default-app-group [%s] was not found in list of of app-groups',
                 $this->defaultAppGroup));
         }
@@ -183,7 +183,7 @@ abstract class AbstractProvider implements ProviderInterface
      */
     public function setAppGroup(string $appGroup) : ProviderInterface
     {
-        if ( ! array_key_exists($appGroup, $this->appGroups)) {
+        if (! array_key_exists($appGroup, $this->appGroups)) {
             throw new ApplicationNotFoundException(sprintf('The passed appGroup [%s] was not found in list of of app-groups',
                 $this->defaultAppGroup));
         }
@@ -369,7 +369,7 @@ abstract class AbstractProvider implements ProviderInterface
 
         // Make sure channels are strings
         foreach ($extra as $key => $value) {
-            if ( ! is_scalar($value)) {
+            if (! is_scalar($value)) {
                 throw new InvalidArgumentException(sprintf('Extra key [%s] was array/object/null', $key));
             }
 
@@ -433,7 +433,7 @@ abstract class AbstractProvider implements ProviderInterface
      */
     public function setIOSBadge($iOSBadge) : ProviderInterface
     {
-        if ( ! is_scalar($iOSBadge)) {
+        if (! is_scalar($iOSBadge)) {
             throw new InvalidArgumentException('The passed badge was an array/object');
         }
 
@@ -605,7 +605,7 @@ abstract class AbstractProvider implements ProviderInterface
             AndroidSettings::VISIBILITY_SECRET,
         ];
 
-        if ( ! in_array($androidVisibility, $availableSettings)) {
+        if (! in_array($androidVisibility, $availableSettings)) {
             throw new InvalidArgumentException('Android visibility settings can only be 1, 0 or -1.');
         }
 
@@ -649,7 +649,7 @@ abstract class AbstractProvider implements ProviderInterface
             AndroidSettings::STYLE_INBOX,
         ];
 
-        if ( ! in_array($type, $availableSettings)) {
+        if (! in_array($type, $availableSettings)) {
             throw new InvalidArgumentException('Android styles must be big_text, big_picture or inbox.');
         }
 
@@ -657,23 +657,19 @@ abstract class AbstractProvider implements ProviderInterface
 
         // Validate value
         if (in_array($type, [AndroidSettings::STYLE_BIG_PICTURE, AndroidSettings::STYLE_BIG_TEXT])) {
-
-            if ( ! is_string($typeValue)) {
+            if (! is_string($typeValue)) {
                 throw new InvalidArgumentException("Big picture and big text value should be a string.");
             }
-
         } else {
-
-            if ( ! is_array($typeValue)) {
+            if (! is_array($typeValue)) {
                 throw new InvalidArgumentException("Inbox type value should be an array of strings.");
             }
 
             foreach ($typeValue as $line) {
-                if ( ! is_string($line)) {
+                if (! is_string($line)) {
                     throw new InvalidArgumentException("Inbox type value should be an array of strings.");
                 }
             }
-
         }
 
         // Prepare the style array
@@ -685,12 +681,12 @@ abstract class AbstractProvider implements ProviderInterface
         ];
 
         // Optional string field which will override the notification
-        if ( ! empty($title)) {
+        if (! empty($title)) {
             $styleArray['title'] = $title;
         }
 
         // Optional string field which will override the summary of the notification.
-        if ( ! empty($summary)) {
+        if (! empty($summary)) {
             $styleArray['summary'] = $summary;
         }
 

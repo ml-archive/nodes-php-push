@@ -462,5 +462,4 @@ class AbstractProviderTest extends TestCase
             ],
         ];
     }
-
 }
