@@ -2,6 +2,7 @@
 
 namespace Nodes\Push\Tests\Providers;
 
+use Nodes\Push\Constants\AndroidSettings;
 use Nodes\Push\Exceptions\ApplicationNotFoundException;
 use Nodes\Push\Exceptions\ConfigErrorException;
 use Nodes\Push\Exceptions\InvalidArgumentException;
@@ -133,9 +134,9 @@ class AbstractProviderTest extends TestCase
     public function testSetAndroidData()
     {
         $abstractProvider = $this->getAbstractProvider();
-        $data = [
+        $data             = [
             'test1' => 1,
-            'test2' => 2
+            'test2' => 2,
         ];
         $abstractProvider->setAndroidData($data);
 
@@ -239,7 +240,7 @@ class AbstractProviderTest extends TestCase
 
     public function testSetApplicationSuccess()
     {
-        $appGroup = 'default-app-group';
+        $appGroup         = 'default-app-group';
         $abstractProvider = $this->getAbstractProvider();
         $abstractProvider->setAppGroup($appGroup);
         $this->assertSame($appGroup, $abstractProvider->getAppGroup());
@@ -257,6 +258,74 @@ class AbstractProviderTest extends TestCase
         $abstractProvider = $this->getAbstractProvider();
         $abstractProvider->setAndroidDeliveryPriorityHigh();
         $this->assertSame('high', $abstractProvider->getAndroidDeliveryPriority());
+    }
+
+    public function testItShould_getAndroidVisibility_defaultPublic()
+    {
+        $abstractProvider = $this->getAbstractProvider();
+        $this->assertEquals(AndroidSettings::VISIBILITY_PUBLIC, $abstractProvider->getAndroidVisibility());
+    }
+
+    public function testItShould_setAndroidVisibility_validValues()
+    {
+        $abstractProvider = $this->getAbstractProvider();
+        $validValues      = [
+            AndroidSettings::VISIBILITY_PUBLIC,
+            AndroidSettings::VISIBILITY_PRIVATE,
+            AndroidSettings::VISIBILITY_SECRET,
+        ];
+
+        foreach ($validValues as $value) {
+            $abstractProvider->setAndroidVisibility($value);
+            $this->assertEquals($value, $abstractProvider->getAndroidVisibility());
+        }
+    }
+
+    public function testItShould_notSetAndroidVisibility_invalidValue()
+    {
+        $abstractProvider = $this->getAbstractProvider();
+
+        $this->expectException(InvalidArgumentException::class);
+
+        $abstractProvider->setAndroidVisibility(3);
+    }
+
+    public function testItShould_getAndroidStyle_defaultNull()
+    {
+        $abstractProvider = $this->getAbstractProvider();
+        $this->assertEquals(null, $abstractProvider->getAndroidStyle());
+    }
+
+    /**
+     * @dataProvider setAndroidStyle_validData_dataProvider
+     *
+     * @param $type
+     * @param $typeValue
+     */
+    public function testItShould_setAndroidStyle_validData($type, $typeValue)
+    {
+        $abstractProvider = $this->getAbstractProvider();
+
+        $abstractProvider->setAndroidStyle($type, $typeValue);
+
+        $style = $abstractProvider->getAndroidStyle();
+        $this->assertEquals($type, $style['type']);
+        $this->assertEquals($typeValue, $type == AndroidSettings::STYLE_INBOX ? $style['lines'] : $style[$type]);
+    }
+
+    /**
+     * @dataProvider setAndroidStyle_invalidData_dataProvider
+     *
+     * @param $type
+     * @param $typeValue
+     */
+    public function testItShould_notSetAndroidStyle_invalidData($type, $typeValue)
+    {
+        $abstractProvider = $this->getAbstractProvider();
+
+        $this->expectException(InvalidArgumentException::class);
+
+        $abstractProvider->setAndroidStyle($type, $typeValue);
     }
 
     public function testInitProvideDefaultAppGroupDoesNotExist()
@@ -349,5 +418,48 @@ class AbstractProviderTest extends TestCase
                 ],
             ],
         ]);
+    }
+
+    public function setAndroidStyle_validData_dataProvider()
+    {
+        return [
+            'bigPicture' => [
+                'type'      => AndroidSettings::STYLE_BIG_PICTURE,
+                'typeValue' => uniqid(),
+            ],
+            'bigText'    => [
+                'type'      => AndroidSettings::STYLE_BIG_TEXT,
+                'typeValue' => uniqid(),
+            ],
+            'inbox'      => [
+                'type'      => AndroidSettings::STYLE_INBOX,
+                'typeValue' => [
+                    uniqid(),
+                    uniqid(),
+                ],
+            ],
+        ];
+    }
+
+    public function setAndroidStyle_invalidData_dataProvider()
+    {
+        return [
+            'bigPicture' => [
+                'type'      => AndroidSettings::STYLE_BIG_PICTURE,
+                'typeValue' => null,
+            ],
+            'bigText'    => [
+                'type'      => AndroidSettings::STYLE_BIG_TEXT,
+                'typeValue' => null,
+            ],
+            'inbox'      => [
+                'type'      => AndroidSettings::STYLE_INBOX,
+                'typeValue' => null,
+            ],
+            'invalidType'      => [
+                'type'      => 'I am invalid',
+                'typeValue' => null,
+            ],
+        ];
     }
 }
