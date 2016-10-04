@@ -1,9 +1,8 @@
 <?php
 
-declare (strict_types = 1);
+declare(strict_types=1);
 
 namespace Nodes\Push\Constants;
-
 
 /**
  * Class AndroidSettings
@@ -32,5 +31,4 @@ final class AndroidSettings
     const STYLE_BIG_TEXT = 'big_text';
 
     const STYLE_INBOX = 'inbox';
-
 }
