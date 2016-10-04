@@ -646,7 +646,7 @@ abstract class AbstractProvider implements ProviderInterface
         $availableSettings = [
             AndroidSettings::STYLE_BIG_PICTURE,
             AndroidSettings::STYLE_BIG_TEXT,
-            AndroidSettings::VISIBILITY_PUBLIC,
+            AndroidSettings::STYLE_INBOX,
         ];
 
         if ( ! in_array($type, $availableSettings)) {
