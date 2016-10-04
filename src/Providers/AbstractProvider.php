@@ -594,10 +594,10 @@ abstract class AbstractProvider implements ProviderInterface
      *
      * @param  int $androidVisibility
      *
-     * @return \Nodes\Push\Providers\AbstractProvider
+     * @return \Nodes\Push\Providers\AbstractProvider|ProviderInterface
      * @throws \Nodes\Push\Exceptions\InvalidArgumentException
      */
-    public function setAndroidVisibility(int $androidVisibility)
+    public function setAndroidVisibility(int $androidVisibility) : ProviderInterface
     {
         $availableSettings = [
             AndroidSettings::VISIBILITY_PUBLIC,
@@ -638,10 +638,10 @@ abstract class AbstractProvider implements ProviderInterface
      * @param string|null $title
      * @param string|null $summary
      *
-     * @return $this
+     * @return AbstractProvider|ProviderInterface
      * @throws \Nodes\Push\Exceptions\InvalidArgumentException
      */
-    public function setAndroidStyle(string $type, $typeValue, string $title = null, string $summary = null)
+    public function setAndroidStyle(string $type, $typeValue, string $title = null, string $summary = null) : ProviderInterface
     {
         $availableSettings = [
             AndroidSettings::STYLE_BIG_PICTURE,
