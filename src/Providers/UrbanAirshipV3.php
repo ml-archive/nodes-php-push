@@ -348,6 +348,8 @@ class UrbanAirshipV3 extends AbstractProvider
         // Set Content-Available for push notification
         if ($this->isIosContentAvailable()) {
             $ios['content-available'] = $this->isIosContentAvailable();
+            unset($ios['badge']);
+            unset($ios['sound']);
         }
 
         return $ios;
