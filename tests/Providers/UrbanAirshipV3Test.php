@@ -155,6 +155,30 @@ class UrbanAirshipV3Test extends TestCase
         ], $requestData);
     }
 
+    public function testGetRequestDataContentAvailableRemovesSoundAndBadge()
+    {
+        $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
+
+        $urbanAirshipV3->setIosContentAvailable(true)->setSound('sound')->setIOSBadge('1');
+        $requestData = $urbanAirshipV3->getRequestData();
+        $this->assertSame([
+            'audience'     => 'all',
+            'notification' => [
+                'alert' => null,
+                'ios'   => [
+                    'content-available' => true,
+                ],
+                'android'   => [
+                    'extra' => [
+                        'sound' => 'sound'
+                    ],
+                    'visibility' => 1
+                ],
+            ],
+            'device_types' => 'all',
+        ], $requestData);
+    }
+
     public function testGetRequestDataChannel()
     {
         $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
