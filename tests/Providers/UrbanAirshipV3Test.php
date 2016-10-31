@@ -3,9 +3,11 @@
 namespace Nodes\Push\Tests\Providers;
 
 use Carbon\Carbon;
+use Nodes\Push\Constants\AndroidSettings;
 use Nodes\Push\Exceptions\InvalidArgumentException;
 use Nodes\Push\Exceptions\MissingArgumentException;
 use Nodes\Push\Exceptions\SendPushFailedException;
+use Nodes\Push\Providers\UrbanAirshipV3;
 use Nodes\Push\ServiceProvider;
 use Nodes\Push\Tests\TestCase;
 
@@ -28,13 +30,36 @@ class UrbanAirshipV3Test extends TestCase
         $this->assertSame([
             'audience'     => 'all',
             'notification' => [
-                'alert'   => null,
                 'android' => [
                     'delivery_priority' => 'high',
                     'visibility'        => 1,
                 ],
             ],
-            'device_types' => 'all',
+            'device_types' => UrbanAirshipV3::DEVICE_TYPES,
+        ], $requestData);
+    }
+
+    public function testAndroidStyle()
+    {
+        $urbanAirshipV3 = $this->getUrbanAirshipV3Provider()->removeSound();
+
+        $urbanAirshipV3->setAndroidStyle(AndroidSettings::STYLE_BIG_PICTURE, 'test', 'test1', 'test2');
+        $requestData = $urbanAirshipV3->getRequestData();
+
+        $this->assertSame([
+            'audience'     => 'all',
+            'notification' => [
+                'android' => [
+                    'visibility'        => 1,
+                    'style'             => [
+                        'type'        => 'big_picture',
+                        'big_picture' => 'test',
+                        'title'       => 'test1',
+                        'summary'     => 'test2',
+                    ],
+                ],
+            ],
+            'device_types' => UrbanAirshipV3::DEVICE_TYPES,
         ], $requestData);
     }
 
@@ -47,7 +72,6 @@ class UrbanAirshipV3Test extends TestCase
         $this->assertSame([
             'audience'     => 'all',
             'notification' => [
-                'alert'   => null,
                 'ios'     => [
                     'badge' => '+1',
                 ],
@@ -55,7 +79,7 @@ class UrbanAirshipV3Test extends TestCase
                     'visibility' => 1,
                 ],
             ],
-            'device_types' => 'all',
+            'device_types' => UrbanAirshipV3::DEVICE_TYPES,
         ], $requestData);
     }
 
@@ -87,7 +111,6 @@ class UrbanAirshipV3Test extends TestCase
         $this->assertSame([
             'audience'     => 'all',
             'notification' => [
-                'alert'   => null,
                 'ios'     => [
                     'extra' => $extra,
                 ],
@@ -105,7 +128,7 @@ class UrbanAirshipV3Test extends TestCase
                     ],
                 ],
             ],
-            'device_types' => 'all',
+            'device_types' => UrbanAirshipV3::DEVICE_TYPES,
         ], $requestData);
     }
 
@@ -119,18 +142,17 @@ class UrbanAirshipV3Test extends TestCase
         $this->assertSame([
             'audience'     => 'all',
             'notification' => [
-                'alert'   => null,
                 'ios'     => [
                     'sound' => $sound,
                 ],
                 'android' => [
-                    'extra' => [
+                    'extra'      => [
                         'sound' => $sound,
                     ],
                     'visibility' => 1,
                 ],
             ],
-            'device_types' => 'all',
+            'device_types' => UrbanAirshipV3::DEVICE_TYPES,
         ], $requestData);
     }
 
@@ -143,15 +165,14 @@ class UrbanAirshipV3Test extends TestCase
         $this->assertSame([
             'audience'     => 'all',
             'notification' => [
-                'alert' => null,
-                'ios'   => [
+                'ios'     => [
                     'content-available' => true,
                 ],
-                'android'   => [
-                    'visibility' => 1
+                'android' => [
+                    'visibility' => 1,
                 ],
             ],
-            'device_types' => 'all',
+            'device_types' => UrbanAirshipV3::DEVICE_TYPES,
         ], $requestData);
     }
 
@@ -164,18 +185,17 @@ class UrbanAirshipV3Test extends TestCase
         $this->assertSame([
             'audience'     => 'all',
             'notification' => [
-                'alert' => null,
-                'ios'   => [
+                'ios'     => [
                     'content-available' => true,
                 ],
-                'android'   => [
-                    'extra' => [
-                        'sound' => 'sound'
+                'android' => [
+                    'extra'      => [
+                        'sound' => 'sound',
                     ],
-                    'visibility' => 1
+                    'visibility' => 1,
                 ],
             ],
-            'device_types' => 'all',
+            'device_types' => UrbanAirshipV3::DEVICE_TYPES,
         ], $requestData);
     }
 
@@ -192,12 +212,11 @@ class UrbanAirshipV3Test extends TestCase
                 ],
             ],
             'notification' => [
-                'alert' => null,
-                'android'   => [
-                    'visibility' => 1
+                'android' => [
+                    'visibility' => 1,
                 ],
             ],
-            'device_types' => 'all',
+            'device_types' => UrbanAirshipV3::DEVICE_TYPES,
         ], $requestData);
     }
 
@@ -214,46 +233,47 @@ class UrbanAirshipV3Test extends TestCase
                 ],
             ],
             'notification' => [
-                'alert' => null,
-                'android'   => [
-                    'visibility' => 1
+                'android' => [
+                    'visibility' => 1,
                 ],
             ],
-            'device_types' => 'all',
+            'device_types' => UrbanAirshipV3::DEVICE_TYPES,
         ], $requestData);
     }
 
     public function testGetRequestDataMessage()
     {
         $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
-        $message        = uniqid();
+        $message = uniqid();
         $urbanAirshipV3->setMessage($message)->removeSound();
         $requestData = $urbanAirshipV3->getRequestData();
         $this->assertSame([
             'audience'     => 'all',
             'notification' => [
-                'alert' => strval($message),
-                'android'   => [
-                    'visibility' => 1
+                'ios'     => [
+                    'alert' => strval($message),
+                ],
+                'android' => [
+                    'alert'      => strval($message),
+                    'visibility' => 1,
                 ],
             ],
-            'device_types' => 'all',
+            'device_types' => UrbanAirshipV3::DEVICE_TYPES,
         ], $requestData);
     }
 
     public function testGetRequestDataEmpty()
     {
         $urbanAirshipV3 = $this->getUrbanAirshipV3Provider()->removeSound();
-        $requestData    = $urbanAirshipV3->getRequestData();
+        $requestData = $urbanAirshipV3->getRequestData();
         $this->assertSame([
             'audience'     => 'all',
             'notification' => [
-                'alert' => null,
-                'android'   => [
-                    'visibility' => 1
+                'android' => [
+                    'visibility' => 1,
                 ],
             ],
-            'device_types' => 'all',
+            'device_types' => UrbanAirshipV3::DEVICE_TYPES,
         ], $requestData);
     }
 
@@ -267,7 +287,7 @@ class UrbanAirshipV3Test extends TestCase
     public function testTooLongMessage()
     {
         $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
-        $message = 'nodes/push php package - unittest - '.__METHOD__;
+        $message = 'nodes/push php package - unittest - ' . __METHOD__;
 
         for ($i = 0; $i < 1000; $i++) {
             $message .= uniqid();
@@ -276,13 +296,13 @@ class UrbanAirshipV3Test extends TestCase
         $urbanAirshipV3->setMessage($message);
         $result = $urbanAirshipV3->send();
 
-        $this->assertTrue(! empty($result[0]['ok']) && $result[0]['ok']);
+        $this->assertTrue(!empty($result[0]['ok']) && $result[0]['ok']);
     }
 
     public function testAndroidDataSend()
     {
         $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
-        $urbanAirshipV3->setMessage('nodes/push php package - unittest - '.__METHOD__);
+        $urbanAirshipV3->setMessage('nodes/push php package - unittest - ' . __METHOD__);
         $urbanAirshipV3->setExtra([
             'type' => 'created',
         ]);
@@ -293,21 +313,21 @@ class UrbanAirshipV3Test extends TestCase
             'updated_at' => Carbon::now()->toDateTimeString(),
         ]);
         $result = $urbanAirshipV3->send();
-        $this->assertTrue(! empty($result[0]['ok']) && $result[0]['ok']);
+        $this->assertTrue(!empty($result[0]['ok']) && $result[0]['ok']);
     }
 
     public function testSend()
     {
         $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
-        $urbanAirshipV3->setMessage('nodes/push php package - unittest - '.__METHOD__);
+        $urbanAirshipV3->setMessage('nodes/push php package - unittest - ' . __METHOD__);
         $result = $urbanAirshipV3->send();
-        $this->assertTrue(! empty($result[0]['ok']) && $result[0]['ok']);
+        $this->assertTrue(!empty($result[0]['ok']) && $result[0]['ok']);
     }
 
     public function testSendProxy()
     {
         $urbanAirshipV3 = $this->getUrbanAirshipV3WithProxyProvider();
-        $urbanAirshipV3->setMessage('nodes/push php package - unittest - '.__METHOD__);
+        $urbanAirshipV3->setMessage('nodes/push php package - unittest - ' . __METHOD__);
         $this->expectException(SendPushFailedException::class);
         $urbanAirshipV3->send();
     }
