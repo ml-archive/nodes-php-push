@@ -147,8 +147,6 @@ class UrbanAirshipV3 extends AbstractProvider
                     $UAData['proxy'] = $this->proxy;
                 }
 
-                //dd($UAData);
-
                 // Send request to Urban Airship
                 $response = $this->getHttpClient()->post('/api/push', $UAData);
 
