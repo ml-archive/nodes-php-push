@@ -24,12 +24,20 @@ class UrbanAirshipV3 extends AbstractProvider
         'wns',
     ];
 
+    const MAX_RETRIES = 1;
+
     /**
      * Guzzle HTTP Client.
      *
      * @var \GuzzleHttp\Client
      */
     protected $httpClient;
+
+    /**
+     * @var int
+     */
+    protected $retries = 0;
+
 
     /**
      * setBadge, badge is the small red icon on the app in the launcher.
@@ -173,6 +181,13 @@ class UrbanAirshipV3 extends AbstractProvider
 
                 $results[] = $content;
             } catch (ClientException $e) {
+                if(in_array($e->getCode(), ['503', '504']) && $this->retries < self::MAX_RETRIES) {
+                    $this->retries++;
+                    sleep(1);
+
+                    return $this->send();
+                }
+
                 if ($e->hasResponse()) {
                     $content = json_decode($e->getResponse()->getBody()->getContents(), true);
                 }
@@ -190,6 +205,9 @@ class UrbanAirshipV3 extends AbstractProvider
                     $e->getMessage()));
             }
         }
+
+        // Reset retries in case we are running in queue --demon mode
+        $this->retries = 0;
 
         return $results;
     }
