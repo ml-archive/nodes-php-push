@@ -674,7 +674,6 @@ abstract class AbstractProvider implements ProviderInterface
 
         // Prepare the style array
         $styleArray = [
-
             'type'    => $type,
             $valueKey => $typeValue,
 
