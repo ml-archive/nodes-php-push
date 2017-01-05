@@ -128,6 +128,15 @@ abstract class AbstractProvider implements ProviderInterface
      */
     protected $proxy = null;
 
+
+    /**
+     * Platforms for push.
+     *
+     * @var array
+     */
+    protected $platforms = [];
+
+
     /**
      * AbstractProvider constructor.
      *
@@ -164,6 +173,13 @@ abstract class AbstractProvider implements ProviderInterface
         if (! empty($config['proxy'])) {
             $this->proxy = $config['proxy'];
         }
+        
+        if (empty($config['default_platforms']) || ! is_array($config['default_platforms'])) {
+            throw new ConfigErrorException('default platforms not set');
+        }
+
+        $this->platforms = $config['default_platforms'];
+
 
         if (! array_key_exists($this->defaultAppGroup, $config['app-groups'])) {
             throw new ApplicationNotFoundException(sprintf('default-app-group [%s] was not found in list of of app-groups',
@@ -705,4 +721,27 @@ abstract class AbstractProvider implements ProviderInterface
     {
         return $this->androidStyle;
     }
+
+
+
+
+
+    public function setPlatforms(array $platforms) : ProviderInterface
+    {
+        $this->platforms = $platforms;
+
+        return $this;
+    }
+
+    /**
+     * getEnvironments
+     *
+     * @author Tom Serowka <tose@nodesagency.com>
+     * @return array
+     */
+    public function getPlatforms() : array
+    {
+        return $this->platforms;
+    }
+
 }

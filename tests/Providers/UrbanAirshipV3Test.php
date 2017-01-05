@@ -7,7 +7,6 @@ use Nodes\Push\Constants\AndroidSettings;
 use Nodes\Push\Exceptions\InvalidArgumentException;
 use Nodes\Push\Exceptions\MissingArgumentException;
 use Nodes\Push\Exceptions\SendPushFailedException;
-use Nodes\Push\Providers\UrbanAirshipV3;
 use Nodes\Push\ServiceProvider;
 use Nodes\Push\Tests\TestCase;
 
@@ -35,7 +34,7 @@ class UrbanAirshipV3Test extends TestCase
                     'visibility'        => 1,
                 ],
             ],
-            'device_types' => UrbanAirshipV3::DEVICE_TYPES,
+            'device_types' => $urbanAirshipV3->getPlatforms(),
         ], $requestData);
     }
 
@@ -59,7 +58,7 @@ class UrbanAirshipV3Test extends TestCase
                     ],
                 ],
             ],
-            'device_types' => UrbanAirshipV3::DEVICE_TYPES,
+            'device_types' => $urbanAirshipV3->getPlatforms(),
         ], $requestData);
     }
 
@@ -79,7 +78,7 @@ class UrbanAirshipV3Test extends TestCase
                     'visibility' => 1,
                 ],
             ],
-            'device_types' => UrbanAirshipV3::DEVICE_TYPES,
+            'device_types' => $urbanAirshipV3->getPlatforms(),
         ], $requestData);
     }
 
@@ -128,7 +127,7 @@ class UrbanAirshipV3Test extends TestCase
                     ],
                 ],
             ],
-            'device_types' => UrbanAirshipV3::DEVICE_TYPES,
+            'device_types' => $urbanAirshipV3->getPlatforms(),
         ], $requestData);
     }
 
@@ -152,7 +151,7 @@ class UrbanAirshipV3Test extends TestCase
                     'visibility' => 1,
                 ],
             ],
-            'device_types' => UrbanAirshipV3::DEVICE_TYPES,
+            'device_types' => $urbanAirshipV3->getPlatforms(),
         ], $requestData);
     }
 
@@ -172,7 +171,7 @@ class UrbanAirshipV3Test extends TestCase
                     'visibility' => 1,
                 ],
             ],
-            'device_types' => UrbanAirshipV3::DEVICE_TYPES,
+            'device_types' => $urbanAirshipV3->getPlatforms(),
         ], $requestData);
     }
 
@@ -195,7 +194,7 @@ class UrbanAirshipV3Test extends TestCase
                     'visibility' => 1,
                 ],
             ],
-            'device_types' => UrbanAirshipV3::DEVICE_TYPES,
+            'device_types' => $urbanAirshipV3->getPlatforms(),
         ], $requestData);
     }
 
@@ -216,7 +215,7 @@ class UrbanAirshipV3Test extends TestCase
                     'visibility' => 1,
                 ],
             ],
-            'device_types' => UrbanAirshipV3::DEVICE_TYPES,
+            'device_types' => $urbanAirshipV3->getPlatforms(),
         ], $requestData);
     }
 
@@ -237,7 +236,7 @@ class UrbanAirshipV3Test extends TestCase
                     'visibility' => 1,
                 ],
             ],
-            'device_types' => UrbanAirshipV3::DEVICE_TYPES,
+            'device_types' => $urbanAirshipV3->getPlatforms(),
         ], $requestData);
     }
 
@@ -258,7 +257,7 @@ class UrbanAirshipV3Test extends TestCase
                     'visibility' => 1,
                 ],
             ],
-            'device_types' => UrbanAirshipV3::DEVICE_TYPES,
+            'device_types' => $urbanAirshipV3->getPlatforms(),
         ], $requestData);
     }
 
@@ -273,7 +272,7 @@ class UrbanAirshipV3Test extends TestCase
                     'visibility' => 1,
                 ],
             ],
-            'device_types' => UrbanAirshipV3::DEVICE_TYPES,
+            'device_types' => $urbanAirshipV3->getPlatforms(),
         ], $requestData);
     }
 

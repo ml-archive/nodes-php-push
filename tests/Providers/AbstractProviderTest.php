@@ -231,6 +231,17 @@ class AbstractProviderTest extends TestCase
         $this->assertSame('1.21', $channels[2]);
     }
 
+    public function testSetPlatformsSuccess()
+    {
+        $abstractProvider = $this->getAbstractProvider();
+        $abstractProvider->setPlatforms(['plat1', 'plat2', 'plat3']);
+
+        $platforms = $abstractProvider->getPlatforms();
+        $this->assertSame('plat1', $platforms[0]);
+        $this->assertSame('plat2', $platforms[1]);
+        $this->assertSame('plat3', $platforms[2]);
+    }
+
     public function testSetApplicationError()
     {
         $abstractProvider = $this->getAbstractProvider();
@@ -341,6 +352,11 @@ class AbstractProviderTest extends TestCase
                         'master_secret' => 'master-secret',
                     ],
                 ],
+            ],
+            'default_platforms' => [
+                'ios',
+                'android',
+                'wns'
             ],
         ]);
     }

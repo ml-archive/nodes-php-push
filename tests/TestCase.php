@@ -40,6 +40,11 @@ class TestCase extends \Orchestra\Testbench\TestCase
                     ],
                 ],
             ],
+            'default_platforms' => [
+                'ios',
+                'android',
+                'wns'
+            ],
         ]);
     }
 
@@ -57,6 +62,11 @@ class TestCase extends \Orchestra\Testbench\TestCase
                     ],
                 ],
             ],
+            'default_platforms' => [
+                'ios',
+                'android',
+                'wns'
+            ],
         ]);
     }
 
@@ -72,6 +82,11 @@ class TestCase extends \Orchestra\Testbench\TestCase
                         'master_secret' => 'master-secret',
                     ],
                 ],
+            ],
+            'default_platforms' => [
+                'ios',
+                'android',
+                'wns'
             ],
         ]);
     }

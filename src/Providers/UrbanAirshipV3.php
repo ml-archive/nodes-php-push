@@ -17,12 +17,7 @@ use Nodes\Push\Exceptions\SendPushFailedException;
  * Class UrbanAirship.
  */
 class UrbanAirshipV3 extends AbstractProvider
-{
-    const DEVICE_TYPES = [
-        'ios',
-        'android',
-        'wns',
-    ];
+{ 
 
     const MAX_RETRIES = 1;
 
@@ -315,7 +310,7 @@ class UrbanAirshipV3 extends AbstractProvider
         }
 
         // Set device types
-        $data['device_types'] = self::DEVICE_TYPES;
+        $data['device_types'] = $this->getPlatforms();
 
         return $data;
     }
