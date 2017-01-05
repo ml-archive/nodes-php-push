@@ -320,4 +320,23 @@ interface ProviderInterface
      * @return array|null
      */
     public function getAndroidStyle();
+
+    /**
+     * setPlatforms
+     *
+     * @author Tom Serowka <tose@nodesagency.com>
+     * @param array $environments
+     * @return ProviderInterface
+     */
+    public function setPlatforms(array $environments) : ProviderInterface;
+
+
+    /**
+     * getPlatforms
+     *
+     * @author Tom Serowka <tose@nodesagency.com>
+     * @return array
+     */
+    public function getPlatforms() : array;
+
 }
