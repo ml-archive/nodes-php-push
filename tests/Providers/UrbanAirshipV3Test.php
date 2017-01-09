@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Nodes\Push\Constants\AndroidSettings;
 use Nodes\Push\Exceptions\InvalidArgumentException;
 use Nodes\Push\Exceptions\MissingArgumentException;
+use Nodes\Push\Exceptions\PushSizeLimitException;
 use Nodes\Push\Exceptions\SendPushFailedException;
 use Nodes\Push\ServiceProvider;
 use Nodes\Push\Tests\TestCase;
@@ -367,6 +368,59 @@ class UrbanAirshipV3Test extends TestCase
 
         $this->expectException(InvalidArgumentException::class);
         $urbanAirshipV3->setIOSBadge('no supported');
+    }
+
+    public function testValidateSuccess()
+    {
+        $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
+        $urbanAirshipV3->setMessage('nodes/push php package - unittest - ' . __METHOD__);
+
+        $urbanAirshipV3->validateBeforePush();
+
+        $this->assertTrue(true); // Making it here without errors is good
+    }
+
+    public function testValidateError()
+    {
+        $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
+        $this->expectException(MissingArgumentException::class);
+        $urbanAirshipV3->validateBeforePush();
+    }
+
+    public function testValidateError2()
+    {
+        $hugeString = '';
+        for($i = 0; $i < 10000; $i++) {
+            $hugeString .=uniqid();
+        }
+
+        $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
+        $urbanAirshipV3->setMessage('nodes/push php package - unittest - ' . __METHOD__);
+        $urbanAirshipV3->setExtra([
+            'test' => $hugeString
+        ]);
+        $this->expectException(PushSizeLimitException::class);
+        $urbanAirshipV3->validateBeforePush();
+    }
+
+    public function testSetPlatformsExtrasSuccess()
+    {
+        $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
+        $urbanAirshipV3->setPlatforms(['wns']);
+        $urbanAirshipV3->setExtra([
+            'test' => 'test'
+        ]);
+
+        $requestData = $urbanAirshipV3->getRequestData();
+
+        $this->assertTrue(!empty($requestData['notification']['wns']));
+        $this->assertTrue(empty($requestData['notification']['ios']));
+        $this->assertTrue(empty($requestData['notification']['android']));
+
+//        $platforms = $abstractProvider->getPlatforms();
+//        $this->assertSame('plat1', $platforms[0]);
+//        $this->assertSame('plat2', $platforms[1]);
+//        $this->assertSame('plat3', $platforms[2]);
     }
 
     /**

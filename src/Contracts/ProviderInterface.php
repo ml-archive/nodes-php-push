@@ -339,4 +339,13 @@ interface ProviderInterface
      */
     public function getPlatforms() : array;
 
+    /**
+     * validateBeforePush.
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     * @return void
+     * @throws \Exception
+     */
+    public function validateBeforePush();
+
 }

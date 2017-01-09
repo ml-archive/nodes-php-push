@@ -215,7 +215,7 @@ class UrbanAirshipV3 extends AbstractProvider
      * @throws \Nodes\Push\Exceptions\MissingArgumentException
      * @throws \Nodes\Push\Exceptions\PushSizeLimitException
      */
-    protected function validateBeforePush()
+    public function validateBeforePush()
     {
         if (!$this->getMessage()) {
             throw new MissingArgumentException('You have to setMessage() before sending push');
@@ -223,17 +223,17 @@ class UrbanAirshipV3 extends AbstractProvider
 
         // Check kb size
         if (mb_strlen(json_encode($this->buildIOSData())) > 2048) {
-            throw new PushSizeLimitException(sprintf('Limit of ios is 2kb, %s was send',
+            throw new PushSizeLimitException(sprintf('Limit of ios is 2048b, %s was send',
                 mb_strlen(json_encode($this->buildIOSData()))));
         }
 
         if (mb_strlen(json_encode($this->buildWnsData())) > 2048) {
-            throw new PushSizeLimitException(sprintf('Limit of wns is 2kb, %s was send',
+            throw new PushSizeLimitException(sprintf('Limit of wns is 2048b, %s was send',
                 mb_strlen(json_encode($this->buildWnsData()))));
         }
 
         if (mb_strlen(json_encode($this->buildAndroidData())) > 4096) {
-            throw new PushSizeLimitException(sprintf('Limit of android is 4kb, %s was send',
+            throw new PushSizeLimitException(sprintf('Limit of android is 4096b, %s was send',
                 mb_strlen(json_encode($this->buildAndroidData()))));
         }
     }
@@ -349,6 +349,11 @@ class UrbanAirshipV3 extends AbstractProvider
      */
     protected function buildIOSData() : array
     {
+        // Avoid building a payload for a platform, not in platforms
+        if(!in_array('ios', $this->getPlatforms())) {
+            return [];
+        }
+
         // Data container
         $ios = [];
 
@@ -388,6 +393,11 @@ class UrbanAirshipV3 extends AbstractProvider
      */
     protected function buildAndroidData() : array
     {
+        // Avoid building a payload for a platform, not in platforms
+        if(!in_array('android', $this->getPlatforms())) {
+            return [];
+        }
+
         // Data container
         $android = [];
 
@@ -439,6 +449,11 @@ class UrbanAirshipV3 extends AbstractProvider
      */
     protected function buildWnsData() : array
     {
+        // Avoid building a payload for a platform, not in platforms
+        if(!in_array('wns', $this->getPlatforms())) {
+            return [];
+        }
+
         // Init the windows extras
         $windowsExtra = $this->extra;
 

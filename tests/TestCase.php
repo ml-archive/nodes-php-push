@@ -103,4 +103,9 @@ class AbstractProviderTester extends AbstractProvider
     {
         throw new \Exception('Feature not supported', 500);
     }
+
+    public function validateBeforePush()
+    {
+        throw new \Exception('Feature not supported', 500);
+    }
 }
