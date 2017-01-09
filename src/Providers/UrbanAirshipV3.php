@@ -222,17 +222,17 @@ class UrbanAirshipV3 extends AbstractProvider
         }
 
         // Check kb size
-        if (mb_strlen(json_encode($this->buildIOSData())) > 2000) {
+        if (mb_strlen(json_encode($this->buildIOSData())) > 2048) {
             throw new PushSizeLimitException(sprintf('Limit of ios is 2kb, %s was send',
                 mb_strlen(json_encode($this->buildIOSData()))));
         }
 
-        if (mb_strlen(json_encode($this->buildWnsData())) > 2000) {
+        if (mb_strlen(json_encode($this->buildWnsData())) > 2048) {
             throw new PushSizeLimitException(sprintf('Limit of wns is 2kb, %s was send',
                 mb_strlen(json_encode($this->buildWnsData()))));
         }
 
-        if (mb_strlen(json_encode($this->buildAndroidData())) > 4000) {
+        if (mb_strlen(json_encode($this->buildAndroidData())) > 4096) {
             throw new PushSizeLimitException(sprintf('Limit of android is 4kb, %s was send',
                 mb_strlen(json_encode($this->buildAndroidData()))));
         }
