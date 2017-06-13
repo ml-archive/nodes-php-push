@@ -193,8 +193,8 @@ abstract class AbstractProvider implements ProviderInterface
     public function setAppGroup(string $appGroup) : ProviderInterface
     {
         if (!array_key_exists($appGroup, $this->appGroups)) {
-            throw new ApplicationNotFoundException(sprintf('The passed appGroup [%s] was not found in list of of app-groups',
-                $this->defaultAppGroup));
+            throw (new ApplicationNotFoundException(sprintf('The passed appGroup [%s] was not found in list of of app-groups',
+                $this->defaultAppGroup)))->addMeta($this->appGroups);
         }
 
         $this->appGroup = $appGroup;
