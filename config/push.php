@@ -33,6 +33,7 @@ return [
         | Default platforms
         |
         | Here you can set default platforms for push
+        | ios, android, wns
         |--------------------------------------------------------------------------
         */
         'default_platforms' => ['ios', 'android', 'wns'],
