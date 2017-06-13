@@ -26,6 +26,7 @@ class UrbanAirshipV3Test extends TestCase
 
         $urbanAirshipV3->setAndroidDeliveryPriorityHigh()->removeSound();
         $requestData = $urbanAirshipV3->getRequestData();
+        unset($requestData['notification']['wns']);
 
         $this->assertSame([
             'audience'     => 'all',
@@ -45,6 +46,7 @@ class UrbanAirshipV3Test extends TestCase
 
         $urbanAirshipV3->setAndroidStyle(AndroidSettings::STYLE_BIG_PICTURE, 'test', 'test1', 'test2');
         $requestData = $urbanAirshipV3->getRequestData();
+        unset($requestData['notification']['wns']);
 
         $this->assertSame([
             'audience'     => 'all',
@@ -69,6 +71,7 @@ class UrbanAirshipV3Test extends TestCase
 
         $urbanAirshipV3->setIOSBadge('+1')->removeSound();
         $requestData = $urbanAirshipV3->getRequestData();
+        unset($requestData['notification']['wns']);
         $this->assertSame([
             'audience'     => 'all',
             'notification' => [
@@ -108,6 +111,7 @@ class UrbanAirshipV3Test extends TestCase
 
         $urbanAirshipV3->setExtra($extra)->removeSound();
         $requestData = $urbanAirshipV3->getRequestData();
+        unset($requestData['notification']['wns']);
         $this->assertSame([
             'audience'     => 'all',
             'notification' => [
@@ -117,16 +121,7 @@ class UrbanAirshipV3Test extends TestCase
                 'android' => [
                     'extra'      => $extra,
                     'visibility' => 1,
-                ],
-                'wns'     => [
-                    'toast' => [
-                        'binding' => [
-                            'template' => 'ToastText01',
-                            'text'     => null,
-                        ],
-                        'launch'  => json_encode($extra),
-                    ],
-                ],
+                ]
             ],
             'device_types' => $urbanAirshipV3->getPlatforms(),
         ], $requestData);
@@ -139,6 +134,7 @@ class UrbanAirshipV3Test extends TestCase
         $sound = uniqid();
         $urbanAirshipV3->setSound($sound);
         $requestData = $urbanAirshipV3->getRequestData();
+        unset($requestData['notification']['wns']);
         $this->assertSame([
             'audience'     => 'all',
             'notification' => [
@@ -162,6 +158,7 @@ class UrbanAirshipV3Test extends TestCase
 
         $urbanAirshipV3->setIosContentAvailable(true)->removeSound();
         $requestData = $urbanAirshipV3->getRequestData();
+        unset($requestData['notification']['wns']);
         $this->assertSame([
             'audience'     => 'all',
             'notification' => [
@@ -182,6 +179,7 @@ class UrbanAirshipV3Test extends TestCase
 
         $urbanAirshipV3->setIosContentAvailable(true)->setSound('sound')->setIOSBadge('1');
         $requestData = $urbanAirshipV3->getRequestData();
+        unset($requestData['notification']['wns']);
         $this->assertSame([
             'audience'     => 'all',
             'notification' => [
@@ -205,6 +203,7 @@ class UrbanAirshipV3Test extends TestCase
         $channel = uniqid();
         $urbanAirshipV3->setChannel($channel)->removeSound();
         $requestData = $urbanAirshipV3->getRequestData();
+        unset($requestData['notification']['wns']);
         $this->assertSame([
             'audience'     => [
                 'tag' => [
@@ -226,6 +225,7 @@ class UrbanAirshipV3Test extends TestCase
         $alias = uniqid();
         $urbanAirshipV3->setAlias($alias)->removeSound();
         $requestData = $urbanAirshipV3->getRequestData();
+        unset($requestData['notification']['wns']);
         $this->assertSame([
             'audience'     => [
                 'alias' => [
@@ -247,6 +247,7 @@ class UrbanAirshipV3Test extends TestCase
         $message = uniqid();
         $urbanAirshipV3->setMessage($message)->removeSound();
         $requestData = $urbanAirshipV3->getRequestData();
+        unset($requestData['notification']['wns']);
         $this->assertSame([
             'audience'     => 'all',
             'notification' => [
@@ -266,6 +267,7 @@ class UrbanAirshipV3Test extends TestCase
     {
         $urbanAirshipV3 = $this->getUrbanAirshipV3Provider()->removeSound();
         $requestData = $urbanAirshipV3->getRequestData();
+        unset($requestData['notification']['wns']);
         $this->assertSame([
             'audience'     => 'all',
             'notification' => [

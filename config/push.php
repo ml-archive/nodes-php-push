@@ -36,7 +36,7 @@ return [
         | ios, android, wns
         |--------------------------------------------------------------------------
         */
-        'default_platforms' => ['ios', 'android'],
+        'default_platforms' => ['ios', 'android', 'wns'],
 
 
         /*

@@ -176,6 +176,7 @@ class UrbanAirshipV3 extends AbstractProvider
 
                 $results[] = $content;
             } catch (ClientException $e) {
+                dd($e->getResponse()->getBody()->getContents());
                 if(in_array($e->getCode(), ['503', '504']) && $this->retries < self::MAX_RETRIES) {
                     $this->retries++;
                     sleep(1);
@@ -453,6 +454,7 @@ class UrbanAirshipV3 extends AbstractProvider
         if(!in_array('wns', $this->getPlatforms())) {
             return [];
         }
+        
 
         // Init the windows extras
         $windowsExtra = $this->extra;
@@ -476,11 +478,9 @@ class UrbanAirshipV3 extends AbstractProvider
         }
 
         // Set extra data of push notification
-        if (!empty($this->getExtra())) {
-            $wns['toast']['binding']['template'] = 'ToastText01';
-            $wns['toast']['binding']['text'] = $this->message;
-            $wns['toast']['launch'] = json_encode($windowsExtra);
-        }
+        $wns['toast']['binding']['template'] = 'ToastText01';
+        $wns['toast']['binding']['text'] = $this->message;
+        $wns['toast']['launch'] = json_encode($windowsExtra);
 
         return $wns;
     }

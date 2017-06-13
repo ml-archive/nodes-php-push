@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1483977168">
-  <project timestamp="1483977168">
+<coverage generated="1497367146">
+  <project timestamp="1497367146">
     <package name="Nodes\Push\Exceptions">
-      <file name="/var/www/alarmeringsapp/htdocs/vendor/nodes/push/src/Exceptions/ApplicationNotFoundException.php">
+      <file name="/var/www/riide/htdocs/vendor/nodes/push/src/Exceptions/ApplicationNotFoundException.php">
         <class name="ApplicationNotFoundException" namespace="Nodes\Push\Exceptions">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
         </class>
@@ -11,7 +11,7 @@
         <line num="21" type="stmt" count="2"/>
         <metrics loc="22" ncloc="13" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
       </file>
-      <file name="/var/www/alarmeringsapp/htdocs/vendor/nodes/push/src/Exceptions/ConfigErrorException.php">
+      <file name="/var/www/riide/htdocs/vendor/nodes/push/src/Exceptions/ConfigErrorException.php">
         <class name="ConfigErrorException" namespace="Nodes\Push\Exceptions">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
         </class>
@@ -20,7 +20,7 @@
         <line num="21" type="stmt" count="5"/>
         <metrics loc="22" ncloc="13" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
       </file>
-      <file name="/var/www/alarmeringsapp/htdocs/vendor/nodes/push/src/Exceptions/InvalidArgumentException.php">
+      <file name="/var/www/riide/htdocs/vendor/nodes/push/src/Exceptions/InvalidArgumentException.php">
         <class name="InvalidArgumentException" namespace="Nodes\Push\Exceptions">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
         </class>
@@ -29,13 +29,13 @@
         <line num="21" type="stmt" count="13"/>
         <metrics loc="22" ncloc="13" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
       </file>
-      <file name="/var/www/alarmeringsapp/htdocs/vendor/nodes/push/src/Exceptions/InvalidPushProviderException.php">
+      <file name="/var/www/riide/htdocs/vendor/nodes/push/src/Exceptions/InvalidPushProviderException.php">
         <class name="InvalidPushProviderException" namespace="Nodes\Push\Exceptions">
           <metrics complexity="3" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="30" ncloc="21" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/var/www/alarmeringsapp/htdocs/vendor/nodes/push/src/Exceptions/MissingArgumentException.php">
+      <file name="/var/www/riide/htdocs/vendor/nodes/push/src/Exceptions/MissingArgumentException.php">
         <class name="MissingArgumentException" namespace="Nodes\Push\Exceptions">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
         </class>
@@ -44,7 +44,7 @@
         <line num="21" type="stmt" count="2"/>
         <metrics loc="22" ncloc="13" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
       </file>
-      <file name="/var/www/alarmeringsapp/htdocs/vendor/nodes/push/src/Exceptions/PushSizeLimitException.php">
+      <file name="/var/www/riide/htdocs/vendor/nodes/push/src/Exceptions/PushSizeLimitException.php">
         <class name="PushSizeLimitException" namespace="Nodes\Push\Exceptions">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
         </class>
@@ -53,7 +53,7 @@
         <line num="21" type="stmt" count="1"/>
         <metrics loc="22" ncloc="13" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
       </file>
-      <file name="/var/www/alarmeringsapp/htdocs/vendor/nodes/push/src/Exceptions/SendPushFailedException.php">
+      <file name="/var/www/riide/htdocs/vendor/nodes/push/src/Exceptions/SendPushFailedException.php">
         <class name="SendPushFailedException" namespace="Nodes\Push\Exceptions">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
         </class>
@@ -64,7 +64,7 @@
       </file>
     </package>
     <package name="Nodes\Push\Providers">
-      <file name="/var/www/alarmeringsapp/htdocs/vendor/nodes/push/src/Providers/AbstractProvider.php">
+      <file name="/var/www/riide/htdocs/vendor/nodes/push/src/Providers/AbstractProvider.php">
         <class name="AbstractProvider" namespace="Nodes\Push\Providers">
           <metrics complexity="58" methods="33" coveredmethods="32" conditionals="0" coveredconditionals="0" statements="110" coveredstatements="109" elements="143" coveredelements="141"/>
         </class>
@@ -139,8 +139,8 @@
         <line num="392" type="stmt" count="3"/>
         <line num="401" type="method" name="getAndroidData" visibility="public" complexity="1" crap="1" count="2"/>
         <line num="403" type="stmt" count="2"/>
-        <line num="412" type="method" name="getExtra" visibility="public" complexity="1" crap="1" count="19"/>
-        <line num="414" type="stmt" count="19"/>
+        <line num="412" type="method" name="getExtra" visibility="public" complexity="1" crap="1" count="18"/>
+        <line num="414" type="stmt" count="18"/>
         <line num="425" type="method" name="setIOSBadge" visibility="public" complexity="2" crap="2" count="5"/>
         <line num="427" type="stmt" count="5"/>
         <line num="428" type="stmt" count="2"/>
@@ -213,9 +213,9 @@
         <line num="720" type="stmt" count="19"/>
         <metrics loc="722" ncloc="358" classes="1" methods="33" coveredmethods="32" conditionals="0" coveredconditionals="0" statements="110" coveredstatements="109" elements="143" coveredelements="141"/>
       </file>
-      <file name="/var/www/alarmeringsapp/htdocs/vendor/nodes/push/src/Providers/UrbanAirshipV3.php">
+      <file name="/var/www/riide/htdocs/vendor/nodes/push/src/Providers/UrbanAirshipV3.php">
         <class name="UrbanAirshipV3" namespace="Nodes\Push\Providers">
-          <metrics complexity="72" methods="15" coveredmethods="15" conditionals="0" coveredconditionals="0" statements="121" coveredstatements="121" elements="136" coveredelements="136"/>
+          <metrics complexity="71" methods="15" coveredmethods="15" conditionals="0" coveredconditionals="0" statements="120" coveredstatements="120" elements="135" coveredelements="135"/>
         </class>
         <line num="46" type="method" name="setIOSBadge" visibility="public" complexity="9" crap="9" count="12"/>
         <line num="49" type="stmt" count="12"/>
@@ -254,98 +254,97 @@
         <line num="172" type="stmt" count="3"/>
         <line num="177" type="stmt" count="3"/>
         <line num="178" type="stmt" count="1"/>
-        <line num="198" type="stmt" count="1"/>
         <line num="199" type="stmt" count="1"/>
-        <line num="200" type="stmt" count="4"/>
-        <line num="205" type="stmt" count="3"/>
-        <line num="207" type="stmt" count="3"/>
-        <line num="218" type="method" name="validateBeforePush" visibility="public" complexity="5" crap="5" count="8"/>
-        <line num="220" type="stmt" count="8"/>
-        <line num="221" type="stmt" count="2"/>
-        <line num="225" type="stmt" count="6"/>
-        <line num="226" type="stmt" count="1"/>
+        <line num="200" type="stmt" count="1"/>
+        <line num="201" type="stmt" count="4"/>
+        <line num="206" type="stmt" count="3"/>
+        <line num="208" type="stmt" count="3"/>
+        <line num="219" type="method" name="validateBeforePush" visibility="public" complexity="5" crap="5" count="8"/>
+        <line num="221" type="stmt" count="8"/>
+        <line num="222" type="stmt" count="2"/>
+        <line num="226" type="stmt" count="6"/>
         <line num="227" type="stmt" count="1"/>
-        <line num="230" type="stmt" count="5"/>
-        <line num="235" type="stmt" count="5"/>
-        <line num="239" type="stmt" count="5"/>
-        <line num="248" type="method" name="hasEmptyCredentials" visibility="protected" complexity="4" crap="4" count="4"/>
-        <line num="252" type="stmt" count="4"/>
+        <line num="228" type="stmt" count="1"/>
+        <line num="231" type="stmt" count="5"/>
+        <line num="236" type="stmt" count="5"/>
+        <line num="240" type="stmt" count="5"/>
+        <line num="249" type="method" name="hasEmptyCredentials" visibility="protected" complexity="4" crap="4" count="4"/>
         <line num="253" type="stmt" count="4"/>
-        <line num="258" type="stmt" count="4"/>
-        <line num="267" type="method" name="getHttpClient" visibility="protected" complexity="2" crap="2" count="4"/>
-        <line num="269" type="stmt" count="4"/>
-        <line num="273" type="stmt" count="4"/>
+        <line num="254" type="stmt" count="4"/>
+        <line num="259" type="stmt" count="4"/>
+        <line num="268" type="method" name="getHttpClient" visibility="protected" complexity="2" crap="2" count="4"/>
+        <line num="270" type="stmt" count="4"/>
         <line num="274" type="stmt" count="4"/>
-        <line num="276" type="stmt" count="4"/>
+        <line num="275" type="stmt" count="4"/>
         <line num="277" type="stmt" count="4"/>
-        <line num="279" type="stmt" count="4"/>
-        <line num="289" type="method" name="buildPushData" visibility="protected" complexity="5" crap="5" count="16"/>
-        <line num="292" type="stmt" count="16"/>
-        <line num="295" type="stmt" count="16"/>
-        <line num="298" type="stmt" count="16"/>
-        <line num="299" type="stmt" count="10"/>
-        <line num="303" type="stmt" count="16"/>
-        <line num="304" type="stmt" count="15"/>
-        <line num="308" type="stmt" count="16"/>
-        <line num="309" type="stmt" count="3"/>
-        <line num="313" type="stmt" count="16"/>
-        <line num="315" type="stmt" count="16"/>
-        <line num="324" type="method" name="buildAudienceData" visibility="protected" complexity="4" crap="4" count="16"/>
-        <line num="327" type="stmt" count="16"/>
-        <line num="330" type="stmt" count="16"/>
-        <line num="331" type="stmt" count="1"/>
-        <line num="335" type="stmt" count="16"/>
-        <line num="336" type="stmt" count="1"/>
+        <line num="278" type="stmt" count="4"/>
+        <line num="280" type="stmt" count="4"/>
+        <line num="290" type="method" name="buildPushData" visibility="protected" complexity="5" crap="5" count="16"/>
+        <line num="293" type="stmt" count="16"/>
+        <line num="296" type="stmt" count="16"/>
+        <line num="299" type="stmt" count="16"/>
+        <line num="300" type="stmt" count="10"/>
+        <line num="304" type="stmt" count="16"/>
+        <line num="305" type="stmt" count="15"/>
+        <line num="309" type="stmt" count="16"/>
+        <line num="310" type="stmt" count="16"/>
+        <line num="314" type="stmt" count="16"/>
+        <line num="316" type="stmt" count="16"/>
+        <line num="325" type="method" name="buildAudienceData" visibility="protected" complexity="4" crap="4" count="16"/>
+        <line num="328" type="stmt" count="16"/>
+        <line num="331" type="stmt" count="16"/>
+        <line num="332" type="stmt" count="1"/>
+        <line num="336" type="stmt" count="16"/>
         <line num="337" type="stmt" count="1"/>
-        <line num="341" type="stmt" count="16"/>
-        <line num="350" type="method" name="buildIOSData" visibility="protected" complexity="7" crap="7" count="18"/>
-        <line num="353" type="stmt" count="18"/>
-        <line num="354" type="stmt" count="1"/>
-        <line num="358" type="stmt" count="17"/>
-        <line num="361" type="stmt" count="17"/>
-        <line num="362" type="stmt" count="3"/>
-        <line num="366" type="stmt" count="17"/>
-        <line num="367" type="stmt" count="2"/>
-        <line num="371" type="stmt" count="17"/>
-        <line num="372" type="stmt" count="8"/>
-        <line num="376" type="stmt" count="17"/>
-        <line num="377" type="stmt" count="2"/>
+        <line num="338" type="stmt" count="1"/>
+        <line num="342" type="stmt" count="16"/>
+        <line num="351" type="method" name="buildIOSData" visibility="protected" complexity="7" crap="7" count="18"/>
+        <line num="354" type="stmt" count="18"/>
+        <line num="355" type="stmt" count="1"/>
+        <line num="359" type="stmt" count="17"/>
+        <line num="362" type="stmt" count="17"/>
+        <line num="363" type="stmt" count="3"/>
+        <line num="367" type="stmt" count="17"/>
+        <line num="368" type="stmt" count="2"/>
+        <line num="372" type="stmt" count="17"/>
+        <line num="373" type="stmt" count="8"/>
+        <line num="377" type="stmt" count="17"/>
         <line num="378" type="stmt" count="2"/>
         <line num="379" type="stmt" count="2"/>
-        <line num="381" type="stmt" count="15"/>
-        <line num="382" type="stmt" count="7"/>
-        <line num="385" type="stmt" count="17"/>
-        <line num="394" type="method" name="buildAndroidData" visibility="protected" complexity="9" crap="9" count="17"/>
-        <line num="397" type="stmt" count="17"/>
-        <line num="398" type="stmt" count="1"/>
-        <line num="402" type="stmt" count="16"/>
-        <line num="405" type="stmt" count="16"/>
-        <line num="406" type="stmt" count="6"/>
-        <line num="410" type="stmt" count="16"/>
-        <line num="411" type="stmt" count="2"/>
-        <line num="415" type="stmt" count="16"/>
-        <line num="416" type="stmt" count="1"/>
-        <line num="419" type="stmt" count="1"/>
-        <line num="424" type="stmt" count="16"/>
-        <line num="425" type="stmt" count="7"/>
-        <line num="429" type="stmt" count="16"/>
-        <line num="430" type="stmt" count="1"/>
-        <line num="434" type="stmt" count="16"/>
-        <line num="437" type="stmt" count="16"/>
-        <line num="438" type="stmt" count="1"/>
-        <line num="441" type="stmt" count="16"/>
-        <line num="450" type="method" name="buildWnsData" visibility="protected" complexity="5" crap="5" count="17"/>
-        <line num="453" type="stmt" count="17"/>
-        <line num="458" type="stmt" count="17"/>
-        <line num="461" type="stmt" count="17"/>
-        <line num="464" type="stmt" count="17"/>
-        <line num="465" type="stmt" count="6"/>
-        <line num="469" type="stmt" count="17"/>
-        <line num="470" type="stmt" count="8"/>
-        <line num="479" type="stmt" count="17"/>
-        <line num="480" type="stmt" count="3"/>
-        <line num="481" type="stmt" count="3"/>
-        <line num="482" type="stmt" count="3"/>
+        <line num="380" type="stmt" count="2"/>
+        <line num="382" type="stmt" count="15"/>
+        <line num="383" type="stmt" count="7"/>
+        <line num="386" type="stmt" count="17"/>
+        <line num="395" type="method" name="buildAndroidData" visibility="protected" complexity="9" crap="9" count="17"/>
+        <line num="398" type="stmt" count="17"/>
+        <line num="399" type="stmt" count="1"/>
+        <line num="403" type="stmt" count="16"/>
+        <line num="406" type="stmt" count="16"/>
+        <line num="407" type="stmt" count="6"/>
+        <line num="411" type="stmt" count="16"/>
+        <line num="412" type="stmt" count="2"/>
+        <line num="416" type="stmt" count="16"/>
+        <line num="417" type="stmt" count="1"/>
+        <line num="420" type="stmt" count="1"/>
+        <line num="425" type="stmt" count="16"/>
+        <line num="426" type="stmt" count="7"/>
+        <line num="430" type="stmt" count="16"/>
+        <line num="431" type="stmt" count="1"/>
+        <line num="435" type="stmt" count="16"/>
+        <line num="438" type="stmt" count="16"/>
+        <line num="439" type="stmt" count="1"/>
+        <line num="442" type="stmt" count="16"/>
+        <line num="451" type="method" name="buildWnsData" visibility="protected" complexity="4" crap="4" count="17"/>
+        <line num="454" type="stmt" count="17"/>
+        <line num="460" type="stmt" count="17"/>
+        <line num="463" type="stmt" count="17"/>
+        <line num="466" type="stmt" count="17"/>
+        <line num="467" type="stmt" count="6"/>
+        <line num="471" type="stmt" count="17"/>
+        <line num="472" type="stmt" count="8"/>
+        <line num="481" type="stmt" count="17"/>
+        <line num="482" type="stmt" count="17"/>
+        <line num="483" type="stmt" count="17"/>
         <line num="485" type="stmt" count="17"/>
         <line num="494" type="method" name="getRequestData" visibility="public" complexity="1" crap="1" count="12"/>
         <line num="496" type="stmt" count="12"/>
@@ -353,11 +352,11 @@
         <line num="509" type="stmt" count="7"/>
         <line num="510" type="stmt" count="1"/>
         <line num="513" type="stmt" count="7"/>
-        <metrics loc="515" ncloc="299" classes="1" methods="15" coveredmethods="15" conditionals="0" coveredconditionals="0" statements="121" coveredstatements="121" elements="136" coveredelements="136"/>
+        <metrics loc="515" ncloc="299" classes="1" methods="15" coveredmethods="15" conditionals="0" coveredconditionals="0" statements="120" coveredstatements="120" elements="135" coveredelements="135"/>
       </file>
     </package>
     <package name="Nodes\Push">
-      <file name="/var/www/alarmeringsapp/htdocs/vendor/nodes/push/src/ServiceProvider.php">
+      <file name="/var/www/riide/htdocs/vendor/nodes/push/src/ServiceProvider.php">
         <class name="ServiceProvider" namespace="Nodes\Push">
           <metrics complexity="6" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="15" coveredelements="15"/>
         </class>
@@ -381,7 +380,7 @@
       </file>
     </package>
     <package name="Nodes\Push\Support\Facades">
-      <file name="/var/www/alarmeringsapp/htdocs/vendor/nodes/push/src/Support/Facades/Push.php">
+      <file name="/var/www/riide/htdocs/vendor/nodes/push/src/Support/Facades/Push.php">
         <class name="Push" namespace="Nodes\Push\Support\Facades">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
         </class>
@@ -390,10 +389,10 @@
         <metrics loc="24" ncloc="13" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
       </file>
     </package>
-    <file name="/var/www/alarmeringsapp/htdocs/vendor/nodes/push/src/Support/Helpers/Push.php">
+    <file name="/var/www/riide/htdocs/vendor/nodes/push/src/Support/Helpers/Push.php">
       <line num="14" type="stmt" count="1"/>
       <metrics loc="16" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="1" coveredelements="1"/>
     </file>
-    <metrics files="12" loc="1526" ncloc="809" classes="10" methods="60" coveredmethods="59" conditionals="0" coveredconditionals="0" statements="256" coveredstatements="255" elements="316" coveredelements="314"/>
+    <metrics files="12" loc="1526" ncloc="809" classes="10" methods="60" coveredmethods="59" conditionals="0" coveredconditionals="0" statements="255" coveredstatements="254" elements="315" coveredelements="313"/>
   </project>
 </coverage>
