@@ -176,7 +176,6 @@ class UrbanAirshipV3 extends AbstractProvider
 
                 $results[] = $content;
             } catch (ClientException $e) {
-                dd($e->getResponse()->getBody()->getContents());
                 if(in_array($e->getCode(), ['503', '504']) && $this->retries < self::MAX_RETRIES) {
                     $this->retries++;
                     sleep(1);
