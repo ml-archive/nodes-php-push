@@ -161,8 +161,12 @@ class UrbanAirshipV3 extends AbstractProvider
 
                 // Validate response by looking at the received status code
                 if (!in_array($response->getStatusCode(), [200, 201, 202])) {
-                    throw new SendPushFailedException(sprintf('[%s] Could not send push message. Status code received: %d %s',
-                        $appName, $response->getStatusCode(), $response->getReasonPhrase()));
+                    throw (new SendPushFailedException(sprintf('[%s] - [%s] Could not send push message. Status code received: %d %s',
+                        $this->appGroup, $appName, $response->getStatusCode(), $response->getReasonPhrase())))
+                        ->addMeta([
+                            'responseCode' => $response->getStatusCode(),
+                            'responseContent' => $response->getBody()->getContents()
+                        ]);
                 }
 
                 // Decode response
@@ -170,8 +174,13 @@ class UrbanAirshipV3 extends AbstractProvider
 
                 // Handle potential errors
                 if (empty($content['ok']) || !$content['ok']) {
-                    throw (new SendPushFailedException(sprintf('[%s] Could not send push message. Reason: %s', $appName,
-                        $content->error), $content->error_code))->setErrors(new MessageBag($content['details']));
+                    throw (new SendPushFailedException(sprintf('[%s]- [%s] Could not send push message. Reason: %s', $appName, $this->appGroup,
+                        $content->error), $content->error_code))
+                        ->addMeta([
+                            'requestData' => $this->getRequestData(),
+                            'responseCode' => $response->getStatusCode(),
+                            'responseContent' => $content
+                        ]);
                 }
 
                 $results[] = $content;
@@ -183,21 +192,19 @@ class UrbanAirshipV3 extends AbstractProvider
                     return $this->send();
                 }
 
-                if ($e->hasResponse()) {
-                    $content = json_decode($e->getResponse()->getBody()->getContents(), true);
-                }
-
-                // Apply content as errors if possible
-                if (!empty($content['details']) && is_array($content['details'])) {
-                    throw (new SendPushFailedException(sprintf('[%s] Could not send push message. Reason: %s', $appName,
-                        $e->getMessage())))->setErrors(new MessageBag($content['details']));
-                } else {
-                    throw (new SendPushFailedException(sprintf('[%s] Could not send push message. Reason: %s', $appName,
-                        $e->getMessage())));
-                }
+                throw (new SendPushFailedException(sprintf('[%s] - [%s] Could not send push message. Reason: %s', $this->appGroup, $appName,
+                    $e->getMessage())))
+                    ->addMeta([
+                        'requestData' => $this->getRequestData(),
+                        'responseCode' => $e->getResponse()->getStatusCode(),
+                        'responseContent' => $e->hasResponse() ? $e->getResponse()->getBody()->getContents() : null
+                    ]);
             } catch (\Throwable $e) {
-                throw new SendPushFailedException(sprintf('[%s] Could not send push message. Reason: %s', $appName,
-                    $e->getMessage()));
+                throw (new SendPushFailedException(sprintf('[%s] - [%] Could not send push message. Reason: %s', $this->appGroup, $appName,
+                    $e->getMessage()))
+                )->addMeta([
+                    'requestData' => $this->getRequestData()
+                ]);
             }
         }
 
