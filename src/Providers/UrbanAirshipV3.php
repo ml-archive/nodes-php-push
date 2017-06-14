@@ -195,6 +195,8 @@ class UrbanAirshipV3 extends AbstractProvider
                 throw (new SendPushFailedException(sprintf('[%s] - [%s] Could not send push message. Reason: %s', $this->appGroup, $appName,
                     $e->getMessage())))
                     ->addMeta([
+                        'credentials' => $credentials,
+                        'proxy' => $this->proxy,
                         'requestData' => $this->getRequestData(),
                         'responseCode' => $e->getResponse()->getStatusCode(),
                         'responseContent' => $e->hasResponse() ? $e->getResponse()->getBody()->getContents() : null
@@ -203,6 +205,9 @@ class UrbanAirshipV3 extends AbstractProvider
                 throw (new SendPushFailedException(sprintf('[%s] - [%] Could not send push message. Reason: %s', $this->appGroup, $appName,
                     $e->getMessage()))
                 )->addMeta([
+                    'code' => $e->getCode(),
+                    'credentials' => $credentials,
+                    'proxy' => $this->proxy,
                     'requestData' => $this->getRequestData()
                 ]);
             }
