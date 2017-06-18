@@ -19,7 +19,7 @@ use Nodes\Push\Exceptions\SendPushFailedException;
 class UrbanAirshipV3 extends AbstractProvider
 { 
 
-    const MAX_RETRIES = 1;
+    const MAX_RETRIES = 3;
 
     /**
      * Guzzle HTTP Client.
@@ -187,6 +187,10 @@ class UrbanAirshipV3 extends AbstractProvider
             } catch (ClientException $e) {
                 if(in_array($e->getCode(), ['503', '504']) && $this->retries < self::MAX_RETRIES) {
                     $this->retries++;
+
+                    // Sleep 1, 2*3, 3*3 etc
+                    $sleepSeconds = ($this->retries > 1) ? $this->retries * 3 : 1;
+
                     sleep(1);
 
                     return $this->send();
