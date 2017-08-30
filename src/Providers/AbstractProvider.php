@@ -237,9 +237,7 @@ abstract class AbstractProvider implements ProviderInterface
     public function setChannels(array $channels) : ProviderInterface
     {
         // Make sure channels are strings
-        foreach ($channels as &$channel) {
-            $channel = strval($channel);
-        }
+        $channels = $this->ensureStringArray($channels);
 
         $this->channels = $channels;
 
@@ -282,10 +280,8 @@ abstract class AbstractProvider implements ProviderInterface
      */
     public function setAliases(array $aliases) : ProviderInterface
     {
-        // Make sure channels are strings
-        foreach ($aliases as &$alias) {
-            $alias = strval($alias);
-        }
+        // Make sure aliases are strings
+        $aliases = $this->ensureStringArray($aliases);
 
         $this->aliases = $aliases;
 
@@ -767,5 +763,21 @@ abstract class AbstractProvider implements ProviderInterface
     public function getPlatforms() : array
     {
         return $this->platforms;
+    }
+
+    /**
+     * ensureStringArray
+     *
+     * @author Justin Busschau <jubu@nodesagency.com>
+     * @param array $inputArray
+     * @return array
+     */
+    private function ensureStringArray($inputArray) : array
+    {
+        foreach ($inputArray as &$element) {
+            $element = strval($element);
+        }
+
+        return $inputArray;
     }
 }
