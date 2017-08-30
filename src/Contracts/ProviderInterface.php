@@ -92,6 +92,32 @@ interface ProviderInterface
     public function getAliases() : array;
 
     /**
+     * setNamedUsers, for segmented push.
+     *
+     * @author Justin Busschau <jubu@nodesagency.com>
+     * @param array $namedUsers
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function setNamedUsers(array $namedUsers) : ProviderInterface;
+
+    /**
+     * setNamedUser, for segmented push.
+     *
+     * @author Justin Busschau <jubu@nodesagency.com>
+     * @param string $namedUser
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function setNamedUser(string $namedUser) : ProviderInterface;
+
+    /**
+     * getNamedUsers, for segmented push.
+     *
+     * @author Justin Busschau <jubu@nodesagency.com>
+     * @return array
+     */
+    public function getNamedUsers() : array;
+
+    /**
      * setMessage, which will be in notification center/title of the push notification.
      *
      * @author Casper Rasmussen <cr@nodes.dk>

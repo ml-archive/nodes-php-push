@@ -51,6 +51,13 @@ abstract class AbstractProvider implements ProviderInterface
     protected $aliases = [];
 
     /**
+     * Named Users for segmented push.
+     *
+     * @var array
+     */
+    protected $namedUsers = [];
+
+    /**
      * The message which will be shown in the push notification.
      *
      * @var string|null
@@ -309,6 +316,43 @@ abstract class AbstractProvider implements ProviderInterface
     public function getAliases() : array
     {
         return $this->aliases;
+    }
+
+    /**
+     * setNamedUsers,
+     * Named users are typically used for segmented push.
+     *
+     * @author Justin Busschau <jubu@nodesagency.com>
+     * @param array $namedUsers
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function setNamedUsers(array $namedUsers) : ProviderInterface
+    {
+        return $this;
+    }
+
+    /**
+     * setNamedUser,
+     * Named users are typically uswed for segmented push.
+     *
+     * @author Justin Busschau <jubu@nodesagency.com>
+     * @param string $namedUser
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     */
+    public function setNamedUser(string $namedUser): ProviderInterface
+    {
+        return $this;
+    }
+
+    /**
+     * getNamedUsers.
+     *
+     * @author Justin Busschau <jubu@nodesagency.com>
+     * @return array
+     */
+    public function getNamedUsers(): array
+    {
+        return $this->namedUsers;
     }
 
     /**
