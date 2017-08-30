@@ -354,6 +354,13 @@ class UrbanAirshipV3 extends AbstractProvider
             }
         }
 
+        // Add named user targets
+        if (!empty($this->getNamedUsers())) {
+            foreach ($this->getNamedUsers() as $namedUser) {
+                $audience['named_user'][] = $namedUser;
+            }
+        }
+
         return $audience;
     }
 
