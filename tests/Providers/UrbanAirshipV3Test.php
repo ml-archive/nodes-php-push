@@ -241,6 +241,52 @@ class UrbanAirshipV3Test extends TestCase
         ], $requestData);
     }
 
+    public function testGetRequestDataNamedUser()
+    {
+        $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
+        $namedUser = uniqid();
+        $urbanAirshipV3->setNamedUser($namedUser)->removeSound();
+        $requestData = $urbanAirshipV3->getRequestData();
+        unset($requestData['notification']['wns']);
+        $this->assertSame([
+            'audience'     => [
+                'named_user' => [
+                    $namedUser,
+                ],
+            ],
+            'notification' => [
+                'android' => [
+                    'visibility' => 1,
+                ],
+            ],
+            'device_types' => $urbanAirshipV3->getPlatforms(),
+        ], $requestData);
+    }
+
+    public function testGetRequestDataNamedUsers()
+    {
+        $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
+        $namedUserA = uniqid();
+        $namedUserB = uniqid();
+        $urbanAirshipV3->setNamedUsers([$namedUserA, $namedUserB])->removeSound();
+        $requestData = $urbanAirshipV3->getRequestData();
+        unset($requestData['notification']['wns']);
+        $this->assertSame([
+            'audience'     => [
+                'named_user' => [
+                    $namedUserA,
+                    $namedUserB,
+                ],
+            ],
+            'notification' => [
+                'android' => [
+                    'visibility' => 1,
+                ],
+            ],
+            'device_types' => $urbanAirshipV3->getPlatforms(),
+        ], $requestData);
+    }
+
     public function testGetRequestDataMessage()
     {
         $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
