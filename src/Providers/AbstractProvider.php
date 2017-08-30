@@ -321,9 +321,15 @@ abstract class AbstractProvider implements ProviderInterface
      * @author Justin Busschau <jubu@nodesagency.com>
      * @param array $namedUsers
      * @return \Nodes\Push\Contracts\ProviderInterface
+     * @throws \Throwable
      */
     public function setNamedUsers(array $namedUsers) : ProviderInterface
     {
+        // Make sure we have an array of strings
+        $namedUsers = $this->ensureArrayOfStrings($namedUsers);
+
+        $this->namedUsers = $namedUsers;
+
         return $this;
     }
 
@@ -334,9 +340,12 @@ abstract class AbstractProvider implements ProviderInterface
      * @author Justin Busschau <jubu@nodesagency.com>
      * @param string $namedUser
      * @return \Nodes\Push\Contracts\ProviderInterface
+     * @throws \Throwable
      */
     public function setNamedUser(string $namedUser): ProviderInterface
     {
+        $this->namedUsers = [$namedUser];
+
         return $this;
     }
 
