@@ -53,6 +53,40 @@ class AbstractProviderTest extends TestCase
         $this->assertSame('1.21', $aliases[2]);
     }
 
+    public function testSetNamedUserError()
+    {
+        $abstractProvider = $this->getAbstractProvider();
+        $this->expectException(\Throwable::class);
+        $abstractProvider->setNamedUser(['user-id-01234']);
+    }
+
+    public function testSetNmedUserSuccess()
+    {
+        $abstractProvider = $this->getAbstractProvider();
+        $abstractProvider->setNamedUser('user-id-01234');
+
+        $namedUsers = $abstractProvider->getNamedUsers();
+        $this->assertSame('user-id-01234', $namedUsers[0]);
+    }
+
+    public function testSetNamesUsersError()
+    {
+        $abstractProvider = $this->getAbstractProvider();
+        $this->expectException(\Throwable::class);
+        $abstractProvider->setNamedUsers([$abstractProvider]);
+    }
+
+    public function testSetNamedUsersSuccess()
+    {
+        $abstractProvider = $this->getAbstractProvider();
+        $abstractProvider->setNamedUsers(['user-id-01234', 'josh_brolin_456', 'john_doe']);
+
+        $namedUsers = $abstractProvider->getNamedUsers();
+        $this->assertSame('user-id-01234', $namedUsers[0]);
+        $this->assertSame('josh_brolin_456', $namedUsers[1]);
+        $this->assertSame('john_doe', $namedUsers[2]);
+    }
+
     public function testIosContentAvailableError()
     {
         $abstractProvider = $this->getAbstractProvider();
