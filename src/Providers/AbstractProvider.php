@@ -51,6 +51,13 @@ abstract class AbstractProvider implements ProviderInterface
     protected $aliases = [];
 
     /**
+     * Named Users for segmented push.
+     *
+     * @var array
+     */
+    protected $namedUsers = [];
+
+    /**
      * The message which will be shown in the push notification.
      *
      * @var string|null
@@ -230,9 +237,7 @@ abstract class AbstractProvider implements ProviderInterface
     public function setChannels(array $channels) : ProviderInterface
     {
         // Make sure channels are strings
-        foreach ($channels as &$channel) {
-            $channel = strval($channel);
-        }
+        $channels = $this->ensureArrayOfStrings($channels);
 
         $this->channels = $channels;
 
@@ -275,10 +280,8 @@ abstract class AbstractProvider implements ProviderInterface
      */
     public function setAliases(array $aliases) : ProviderInterface
     {
-        // Make sure channels are strings
-        foreach ($aliases as &$alias) {
-            $alias = strval($alias);
-        }
+        // Make sure aliases are strings
+        $aliases = $this->ensureArrayOfStrings($aliases);
 
         $this->aliases = $aliases;
 
@@ -309,6 +312,52 @@ abstract class AbstractProvider implements ProviderInterface
     public function getAliases() : array
     {
         return $this->aliases;
+    }
+
+    /**
+     * setNamedUsers,
+     * Named users are typically used for segmented push.
+     *
+     * @author Justin Busschau <jubu@nodesagency.com>
+     * @param array $namedUsers
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     * @throws \Throwable
+     */
+    public function setNamedUsers(array $namedUsers) : ProviderInterface
+    {
+        // Make sure we have an array of strings
+        $namedUsers = $this->ensureArrayOfStrings($namedUsers);
+
+        $this->namedUsers = $namedUsers;
+
+        return $this;
+    }
+
+    /**
+     * setNamedUser,
+     * Named users are typically uswed for segmented push.
+     *
+     * @author Justin Busschau <jubu@nodesagency.com>
+     * @param string $namedUser
+     * @return \Nodes\Push\Contracts\ProviderInterface
+     * @throws \Throwable
+     */
+    public function setNamedUser(string $namedUser): ProviderInterface
+    {
+        $this->namedUsers = [$namedUser];
+
+        return $this;
+    }
+
+    /**
+     * getNamedUsers.
+     *
+     * @author Justin Busschau <jubu@nodesagency.com>
+     * @return array
+     */
+    public function getNamedUsers(): array
+    {
+        return $this->namedUsers;
     }
 
     /**
@@ -723,5 +772,21 @@ abstract class AbstractProvider implements ProviderInterface
     public function getPlatforms() : array
     {
         return $this->platforms;
+    }
+
+    /**
+     * ensureArrayOfStrings
+     *
+     * @author Justin Busschau <jubu@nodesagency.com>
+     * @param array $inputArray
+     * @return array
+     */
+    private function ensureArrayOfStrings($inputArray) : array
+    {
+        foreach ($inputArray as &$element) {
+            $element = strval($element);
+        }
+
+        return $inputArray;
     }
 }
