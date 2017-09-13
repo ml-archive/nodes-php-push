@@ -238,11 +238,11 @@ class UrbanAirshipV3 extends AbstractProvider
             throw new MissingArgumentException('You have to setMessage() before sending push');
         }
 
-        if (!empty($this->getNamedUsers()) AND !empty($this->getAliases())) {
+        if (!empty($this->getNamedUsers()) && !empty($this->getAliases())) {
             throw new InvalidAudienceException('Send push to either named users or aliases - not both.');
         }
 
-        if (in_array('wns', $this->getPlatforms()) AND !empty($this->getNamedUsers())) {
+        if (in_array('wns', $this->getPlatforms()) && !empty($this->getNamedUsers())) {
             throw new InvalidAudienceException('Push to Named Users is not supported on Windows.');
         }
 
