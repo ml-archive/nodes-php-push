@@ -9,6 +9,7 @@ use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\MessageBag;
 use Nodes\Push\Contracts\ProviderInterface;
 use Nodes\Push\Exceptions\InvalidArgumentException;
+use Nodes\Push\Exceptions\InvalidAudienceException;
 use Nodes\Push\Exceptions\MissingArgumentException;
 use Nodes\Push\Exceptions\PushSizeLimitException;
 use Nodes\Push\Exceptions\SendPushFailedException;
@@ -235,6 +236,10 @@ class UrbanAirshipV3 extends AbstractProvider
     {
         if (!$this->getMessage()) {
             throw new MissingArgumentException('You have to setMessage() before sending push');
+        }
+
+        if (!empty($this->getNamedUsers()) AND !empty($this->getAliases())) {
+            throw new InvalidAudienceException('Send push to either named users or aliases - not both.');
         }
 
         // Check kb size

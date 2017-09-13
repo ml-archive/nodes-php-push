@@ -372,6 +372,16 @@ class UrbanAirshipV3Test extends TestCase
         $this->assertTrue(!empty($result[0]['ok']) && $result[0]['ok']);
     }
 
+    public function testSendToNamedUsersAndAliases()
+    {
+        $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
+        $urbanAirshipV3->setMessage('nodes/push php package - unit test - ' . __METHOD__);
+        $urbanAirshipV3->setNamedUser(uniqid());
+        $urbanAirshipV3->setAlias(uniqid());
+        $this->expectException(\Throwable::class);
+        $urbanAirshipV3->send();
+    }
+
     public function testSendProxy()
     {
         $urbanAirshipV3 = $this->getUrbanAirshipV3WithProxyProvider();
