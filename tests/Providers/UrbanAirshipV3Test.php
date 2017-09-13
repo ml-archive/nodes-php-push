@@ -288,15 +288,6 @@ class UrbanAirshipV3Test extends TestCase
         ], $requestData);
     }
 
-    public function testSendToNamedUserOnWindows()
-    {
-        $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
-        $urbanAirshipV3->setNamedUser(uniqid());
-        $urbanAirshipV3->setMessage('nodes/push php package - unittest - ' . __METHOD__);
-        $this->expectException(InvalidAudienceException::class);
-        $urbanAirshipV3->send();
-    }
-
     public function testGetRequestDataMessage()
     {
         $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();

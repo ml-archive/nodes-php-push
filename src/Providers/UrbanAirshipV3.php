@@ -242,10 +242,6 @@ class UrbanAirshipV3 extends AbstractProvider
             throw new InvalidAudienceException('Send push to either named users or aliases - not both.');
         }
 
-        if (in_array('wns', $this->getPlatforms()) && !empty($this->getNamedUsers())) {
-            throw new InvalidAudienceException('Push to Named Users is not supported on Windows.');
-        }
-
         // Check kb size
         if (mb_strlen(json_encode($this->buildIOSData())) > 2048) {
             throw new PushSizeLimitException(sprintf('Limit of ios is 2048b, %s was send',
