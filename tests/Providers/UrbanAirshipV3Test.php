@@ -5,6 +5,7 @@ namespace Nodes\Push\Tests\Providers;
 use Carbon\Carbon;
 use Nodes\Push\Constants\AndroidSettings;
 use Nodes\Push\Exceptions\InvalidArgumentException;
+use Nodes\Push\Exceptions\InvalidAudienceException;
 use Nodes\Push\Exceptions\MissingArgumentException;
 use Nodes\Push\Exceptions\PushSizeLimitException;
 use Nodes\Push\Exceptions\SendPushFailedException;
@@ -370,6 +371,16 @@ class UrbanAirshipV3Test extends TestCase
         $urbanAirshipV3->setMessage('nodes/push php package - unittest - ' . __METHOD__);
         $result = $urbanAirshipV3->send();
         $this->assertTrue(!empty($result[0]['ok']) && $result[0]['ok']);
+    }
+
+    public function testSendToNamedUsersAndAliases()
+    {
+        $urbanAirshipV3 = $this->getUrbanAirshipV3Provider();
+        $urbanAirshipV3->setMessage('nodes/push php package - unit test - ' . __METHOD__);
+        $urbanAirshipV3->setNamedUser(uniqid());
+        $urbanAirshipV3->setAlias(uniqid());
+        $this->expectException(InvalidAudienceException::class);
+        $urbanAirshipV3->send();
     }
 
     public function testSendProxy()
