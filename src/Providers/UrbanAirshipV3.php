@@ -189,13 +189,16 @@ class UrbanAirshipV3 extends AbstractProvider
                 if(in_array($e->getCode(), ['503', '504']) && $this->retries < self::MAX_RETRIES) {
                     $this->retries++;
 
-                    // Sleep 1, 2*3, 3*3 etc
-                    $sleepSeconds = ($this->retries > 1) ? $this->retries * 3 : 1;
+                    // Sleep 1, 2, 3
+                    $sleepSeconds = $this->retries ?: 1;
 
-                    sleep(1);
+                    sleep($sleepSeconds);
 
                     return $this->send();
                 }
+                
+                // Setting retries back, since the instance could be reused in a queue
+                $this->retries = 0;
 
                 throw (new SendPushFailedException(sprintf('[%s] - [%s] Could not send push message. Reason: %s', $this->appGroup, $appName,
                     $e->getMessage())))
