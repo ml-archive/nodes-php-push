@@ -78,7 +78,7 @@ php artisan vendor:publish --provider="Nodes\Push\ServiceProvider" --force
 push();
 ```
 
-###Example
+### Example
 ```
 push()->setMessage('test')
 ->setExtra([
