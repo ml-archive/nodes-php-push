@@ -300,7 +300,7 @@ class UrbanAirshipV3 extends AbstractProvider
                 'Accept'       => sprintf('application/vnd.urbanairship+json; version=3;'),
                 'Content-Type' => sprintf('application/json'),
             ],
-            'timeout'  => 30,
+            'timeout'  => 5,
         ]);
     }
 
